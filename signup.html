@@ -1,75 +1,77 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Signup</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <title>Signup</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-    <style>
-        html,
-        body {
-            height: 100%;
-        }
+        <style>
+            html,
+            body {
+                height: 100%;
+            }
 
-        body {
-            display: flex;
-            align-items: center;
-        }
+            body {
+                display: flex;
+                align-items: center;
+            }
 
-        .form {
-            max-width: 450px;
-        }
-    </style>
-</head>
+            .form {
+                max-width: 450px;
+            }
+        </style>
+    </head>
 
-<body>
-    <div class="container-sm form">
-        <form method="post">
-            <div class="row g-3">
-                <div class="form-group col-md-6">
-                    <label for="name">Enter name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+    <body>
+        <div class="container-sm form">
+            <form method="post">
+                <div class="row g-3">
+                    <div class="form-group col-md-6">
+                        <label for="name">Enter name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="surname">Enter surname</label>
+                        <input type="text" class="form-control" id="surname" name="surname" placeholder="Surname"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">Enter email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="year">Enter date of birth</label>
+                        <input type="date" class="form-control" id="year" name="year" placeholder="Year" required>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="password">Enter password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                            required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="repeatedPassword">Re-enter password</label>
+                        <input type="password" class="form-control" id="repeatedPassword" name="repeatedPassword"
+                            placeholder="Repeat password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success form-control" value="Submit"
+                            onclick="checkSignup()">
+                    </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="surname">Enter surname</label>
-                    <input type="text" class="form-control" id="surname" name="surname" placeholder="Surname" required>
-                </div>
+            </form>
+        </div>
 
-                <div class="form-group">
-                    <label for="username">Enter email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                </div>
+        <script type="text/javascript">
 
-                <div class="form-group">
-                    <label for="year">Enter date of birth</label>
-                    <input type="date" class="form-control" id="year" name="year" placeholder="Year" required>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label for="password">Enter password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"
-                        required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="repeatedPassword">Re-enter password</label>
-                    <input type="password" class="form-control" id="repeatedPassword" name="repeatedPassword"
-                        placeholder="Repeat password" required>
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary form-control" value="Submit" onclick="checkSignup()">
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <script type="text/javascript">
-
-    </script>
-</body>
+        </script>
+    </body>
 
 </html>
