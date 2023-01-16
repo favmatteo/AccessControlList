@@ -11,3 +11,9 @@ body {
 .form {
     max-width: 450px;
 }
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0px;
+}
