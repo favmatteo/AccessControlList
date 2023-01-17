@@ -21,10 +21,14 @@ if(isset($_POST['submit-btn'])){
         'displayName' => $name . " " . $surname,
     ];
     
+    $actionCodeSettings = [
+        'url' => 'http://localhost:8000/pages/confirm_email.html',
+    ];
     $createdUser = $auth->createUser($userProperties);
     if($createdUser) {
         echo "User created successfully, open the link on the email for confirm the account";
-        $auth->sendEmailVerificationLink($email);
+        $auth->sendEmailVerificationLink($email, $actionCodeSettings);
+        $auth->setCustomUserClaims($createdUser->uid, ['confirmedEmail' => 0]);
     }else{
         echo "User not created successfully";
     }
