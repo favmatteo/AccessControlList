@@ -8,7 +8,9 @@ if(isset($_POST['submit-btn'])){
 
 
     try{
+        // TODO: check if user confirm email
         $signInResult = $auth->signInWithEmailAndPassword($email, $password);
+        //print_r($signInResult->data());
         echo "Successfully login";
     }catch(Kreait\Firebase\Auth\SignIn\FailedToSignIn $e) {
         echo "Wrong email or password";

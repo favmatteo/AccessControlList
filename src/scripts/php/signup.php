@@ -15,16 +15,16 @@ if(isset($_POST['submit-btn'])){
 
     $userProperties = [
         'email' => $email,
+        'emailVerified' => false,
         'phoneNumber' => "+39" . $phone_number,
         'password' => $password,
-        'displayName' => $name . $surname,
+        'displayName' => $name . " " . $surname,
     ];
     
     $createdUser = $auth->createUser($userProperties);
     if($createdUser) {
-        echo "User created successfully";
-        //$link = $auth->getEmailVerificationLink($email);
-        //$auth->sendEmailVerificationLink($email);
+        echo "User created successfully, open the link on the email for confirm the account";
+        $auth->sendEmailVerificationLink($email);
     }else{
         echo "User not created successfully";
     }
