@@ -8,9 +8,10 @@ if(isset($_POST['submit-btn'])){
 
     try{
         $signInResult = $auth->signInWithEmailAndPassword($email, $password);
-        $claims = $auth->getUserByEmail($email)->customClaims;
-        if($claims['confirmedEmail']){
-            echo "Successfully login";
+        $user = $auth->getUserByEmail($email);
+        $emailVerified = $user->emailVerified;
+        if($emailVerified){
+            echo "Welcome";
         }else{
             echo "Check your email";
         }

@@ -7,7 +7,7 @@ use Kreait\Firebase\Auth;
 
 
 $factory = (new Factory)
-        ->withServiceAccount('accesscontrollist-acl-firebase-adminsdk-tea51-bfaa3e39a9.json')
+        ->withServiceAccount('.credentials.json')
         ->withDatabaseUri('https://accesscontrollist-acl-default-rtdb.europe-west1.firebasedatabase.app/');
 
 $database = $factory->createDatabase();
