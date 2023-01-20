@@ -24,6 +24,7 @@ if(isset($_POST['submit-btn'])){
     $actionCodeSettings = [
         'url' => 'http://localhost:8000/pages/confirm_email.html',
     ];
+    
     $createdUser = $auth->createUser($userProperties);
     if($createdUser) {
         echo "User created successfully, open the link on the email for confirm the account";
