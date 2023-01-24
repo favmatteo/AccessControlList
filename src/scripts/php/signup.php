@@ -11,8 +11,6 @@ if (isset($_POST['submit-btn'])) {
     $password = $_POST['password'];
     $repeated_password = $_POST['repeatedPassword'];
 
-    // TODO: Check if the password is the same
-
     if ($_POST['password'] == $_POST['repeatedPassword']) {
         $userProperties = [
             'email' => $email,

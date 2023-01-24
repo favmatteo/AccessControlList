@@ -11,13 +11,14 @@ if ($conn->connect_error) {
     echo "Connected to MySQL server successfully!";
 }
 
-function createTablesIfNotExists() {
+function createTablesIfNotExists($conn)
+{
     $SQL = [
         // Creation roles table
         "Roles" => "CREATE TABLE IF NOT EXISTS Roles (
             id_role INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             name_role VARCHAR(30) NOT NULL)",
-    
+
         // Creation User table
         "User" => "CREATE TABLE IF NOT EXISTS User (
                     id_user INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -26,10 +27,10 @@ function createTablesIfNotExists() {
                     id_role INT UNSIGNED NOT NULL,
                     FOREIGN KEY(id_role) REFERENCES Roles(id_role))",
     ];
-    
-    
+
+
     $db  = mysqli_select_db($conn, "acl");
-    foreach($SQL as $table=>$command){
+    foreach ($SQL as $table => $command) {
         if ($conn->query($command) === TRUE) {
             echo "<br>Table" . $table . "created successfully";
         } else {
