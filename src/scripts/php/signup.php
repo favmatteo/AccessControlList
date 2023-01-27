@@ -15,43 +15,46 @@ if (isset($_POST['submit-btn'])) {
     $password = $_POST['password'];
     $repeated_password = $_POST['repeatedPassword'];
 
-    if ($_POST['phone-number'] == 10) {
-        echo "the number is correct";
+    // Check if phone number is valid
+    $validPhoneNumber = true;
+    if($_POST['phone-number'] != 10){ 
+        echo "The number is not valid!<br>";
+        $validPhoneNumber = false;
+    }
 
-        if ($_POST['password'] == $_POST['repeatedPassword']) {
-            $userProperties = [
-                'email' => $email,
-                'emailVerified' => false,
-                'phoneNumber' => "+39" . $phone_number,
-                'password' => $password,
-                'displayName' => $name . " " . $surname,
-            ];
+    // Check if the password is the same
+    $validPassword = true;
+    if($_POST['password'] != $_POST['repeatedPassword']){
+        echo "Password should be the same!<br>";
+        $validPassword = false;
+    }
 
-            $users = $auth->listUsers();
-
-            $exist = false;
-            foreach ($users as $user) {
-                if ($user->email == $email) {
-                    $exist = true;
-                }
-            }
-
-
-            if (!$exist) {
-                $createdUser = $auth->createUser($userProperties);
-                if ($createdUser) {
-                    echo "User created successfully, open the link on the email for confirm the account";
-                    $auth->sendEmailVerificationLink($email);
-                } else {
-                    echo "User not created successfully";
-                }
-            } else {
-                echo "Email already used";
-            }
-        } else {
-            echo "the phone number isn't 10 characters";
+    // Check if email is available
+    $validEmail = true;
+    $users = $auth->listUsers();
+    foreach ($users as $user) {
+        if ($user->email == $email) {
+            echo "Email is already used!<br>";
+            $validEmail = false;
+            break;
         }
-    } else {
-        echo ("the passwords not match! re-enter the correct password.");
+    }
+
+    if ($validEmail && $validPhoneNumber && $validPassword) {
+        $userProperties = [
+            'email' => $email,
+            'emailVerified' => false,
+            'phoneNumber' => "+39" . $phone_number,
+            'password' => $password,
+            'displayName' => $name . " " . $surname,
+        ];
+
+        $createdUser = $auth->createUser($userProperties);
+        if ($createdUser) {
+            echo "User created successfully, open the link on the email for confirm the account";
+            $auth->sendEmailVerificationLink($email);
+        } else {
+            echo "User not created successfully";
+        }
     }
 }

@@ -1,94 +1,93 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Signup</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <title>Signup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="../css/signup.css">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@500&family=Passion+One&display=swap"
-            rel="stylesheet">
+    <link rel="stylesheet" href="../css/signup.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@500&family=Passion+One&display=swap"
+        rel="stylesheet">
 
-    </head>
+</head>
 
-    <body>
-        <!-- Start Navbar / Header -->
-        <nav class="navbar navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Open_Access_logo_PLoS_transparent.svg/1200px-Open_Access_logo_PLoS_transparent.svg.png"
-                        width="20" height="30" class="d-inline-block align-top" alt="Logo ACL">
-                    Access Control List
-                </a>
+<body>
+    <!-- Start Navbar / Header -->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Open_Access_logo_PLoS_transparent.svg/1200px-Open_Access_logo_PLoS_transparent.svg.png"
+                    width="20" height="30" class="d-inline-block align-top" alt="Logo ACL">
+                Access Control List
+            </a>
 
-                <div class="text-end">
-                    <a class="btn btn-warning" href="login.html">Login</a>
-                    <a class="btn btn-warning" href="signup.html">Signup</a>
+            <div class="text-end">
+                <a class="btn btn-warning" href="login.html">Login</a>
+                <a class="btn btn-warning" href="signup.html">Signup</a>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar / Header -->
+
+    <div class="container-sm form">
+        <p class="title m-5" style="font-family: 'Montserrat', sans-serif;">
+            Signup
+        </p>
+        <form method="post" action="../scripts/php/signup.php">
+            <div class="row g-3">
+                <div class="form-group col-md-6">
+                    <label for="name">Enter name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="surname">Enter surname</label>
+                    <input type="text" class="form-control" id="surname" name="surname" placeholder="Surname" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Enter email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="birth-date">Enter date of birth</label>
+                    <input type="date" class="form-control" id="birth-date" name="birth-date" placeholder="Year"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone-number" class="form-label">Enter phone number</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="prefix">+39</span>
+                        <input type="text" class="form-control" id="phone-number" name="phone-number"
+                            placeholder="Phone number" aria-describedby="phone-number" minlength="10">
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="password">Enter password</label>
+                    <input type="password" class="form-control" id="password" name="password" minlength="8"
+                        placeholder="Password" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="repeatedPassword">Re-enter password</label>
+                    <input type="password" class="form-control" id="repeatedPassword" name="repeatedPassword"
+                        minlength="8" placeholder="Repeat password" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-warning form-control" value="Submit" id="submit-btn"
+                        name="submit-btn">
                 </div>
             </div>
-        </nav>
-        <!-- End Navbar / Header -->
-
-        <div class="container-sm form">
-            <p class="title m-5" style="font-family: 'Montserrat', sans-serif;">
-                Signup
-            </p>
-            <form method="post" action="../scripts/php/signup.php">
-                <div class="row g-3">
-                    <div class="form-group col-md-6">
-                        <label for="name">Enter name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="surname">Enter surname</label>
-                        <input type="text" class="form-control" id="surname" name="surname" placeholder="Surname"
-                            required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="username">Enter email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="birth-date">Enter date of birth</label>
-                        <input type="date" class="form-control" id="birth-date" name="birth-date" placeholder="Year"
-                            required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone-number" class="form-label">Enter phone number</label>
-                        <div class="input-group">
-                            <span class="input-group-text" id="prefix">+39</span>
-                            <input type="text" class="form-control" id="phone-number" name="phone-number"
-                                placeholder="Phone number" aria-describedby="phone-number">
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="password">Enter password</label>
-                        <input type="password" class="form-control" id="password" name="password" minlength="8"
-                            placeholder="Password" required>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="repeatedPassword">Re-enter password</label>
-                        <input type="password" class="form-control" id="repeatedPassword" name="repeatedPassword"
-                            minlength="8" placeholder="Repeat password" required>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-warning form-control" value="Submit" id="submit-btn"
-                            name="submit-btn">
-                    </div>
-                </div>
-            </form>
-        </div>
-    </body>
+        </form>
+    </div>
+</body>
 
 </html>
