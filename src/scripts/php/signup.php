@@ -15,34 +15,41 @@ if (isset($_POST['submit-btn'])) {
     $password = $_POST['password'];
     $repeated_password = $_POST['repeatedPassword'];
 
-    if ($_POST['password'] == $_POST['repeatedPassword']) {
-        $userProperties = [
-            'email' => $email,
-            'emailVerified' => false,
-            'phoneNumber' => "+39" . $phone_number,
-            'password' => $password,
-            'displayName' => $name . " " . $surname,
-        ];
+    if ($_POST['phone-number'] == 10) {
+        echo "the number is correct";
 
-        $users = $auth->listUsers();
+        if ($_POST['password'] == $_POST['repeatedPassword']) {
+            $userProperties = [
+                'email' => $email,
+                'emailVerified' => false,
+                'phoneNumber' => "+39" . $phone_number,
+                'password' => $password,
+                'displayName' => $name . " " . $surname,
+            ];
 
-        $exist = false;
-        foreach ($users as $user) {
-            if ($user->email == $email) {
-                $exist = true;
+            $users = $auth->listUsers();
+
+            $exist = false;
+            foreach ($users as $user) {
+                if ($user->email == $email) {
+                    $exist = true;
+                }
             }
-        }
 
-        if (!$exist) {
-            $createdUser = $auth->createUser($userProperties);
-            if ($createdUser) {
-                echo "User created successfully, open the link on the email for confirm the account";
-                $auth->sendEmailVerificationLink($email);
+
+            if (!$exist) {
+                $createdUser = $auth->createUser($userProperties);
+                if ($createdUser) {
+                    echo "User created successfully, open the link on the email for confirm the account";
+                    $auth->sendEmailVerificationLink($email);
+                } else {
+                    echo "User not created successfully";
+                }
             } else {
-                echo "User not created successfully";
+                echo "Email already used";
             }
         } else {
-            echo "Email already used";
+            echo "the phone number isn't 10 characters";
         }
     } else {
         echo ("the passwords not match! re-enter the correct password.");
