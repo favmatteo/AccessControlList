@@ -4,6 +4,7 @@ session_start();
 use Kreait\Firebase\Exception\Auth\FailedToVerifySessionCookie;
 use Kreait\Firebase\Auth\SignIn\FailedToSignIn;
 use Kreait\Firebase\Exception\InvalidArgumentException;
+use Kreait\Firebase\Exception\Auth\EmailExists;
 
 include ('dbcon.php');
 include ('exceptions/confirmEmailException.php');
