@@ -27,9 +27,9 @@ try{
     // start cookie session (valid for 7 days)
     $oneWeek = new DateInterval('P7D');
     $token = $signInResult->asTokenResponse()['id_token'];
-    //print_r($token);
     $sessionCookieString = $auth->createSessionCookie($token, $oneWeek);
-    $verifiedSessionCookie = $auth->verifySessionCookie($sessionCookieString);
+    $_SESSION['session-cookie'] = $sessionCookieString;
+    echo "success";
 
 }catch(FailedToSignIn $e) {
     echo "<div class=\"alert alert-danger\" role=\"alert\">
