@@ -21,9 +21,14 @@
                 Access Control List
             </a>
 
-            <div class="text-end">
+            <div class="text-end" id="registration">
                 <a class="btn btn-warning" href="login.html">Login</a>
                 <a class="btn btn-warning" href="signup.html">Signup</a>
+            </div>
+
+            <div class="text-end" id="dashboard" style="display: none;">
+                <a class="btn btn-warning" href="dashboard.html">Dashboard</a>
+                <a class="btn btn-warning" role='button' id="logout-btn">Logout</a>
             </div>
         </div>
     </nav>
@@ -33,5 +38,38 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $.ajax({
+        url: "../scripts/php/check-user-logged.php",
+        type: "POST",
+        success: (res) => {
+            const json = JSON.parse(res);
+            const logged = json.logged;
+            if (logged) {
+                document.getElementById("registration").style.display = "none";
+                document.getElementById("dashboard").style.display = "block";
+            } else {
+                document.getElementById("registration").style.display = "block";
+                document.getElementById("dashboard").style.display = "none";
+            }
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(() => {
+        $("#logout-btn").click((e) => {
+            $.ajax({
+                url: "../scripts/php/logout.php",
+                type: "POST",
+                success: function (res) {
+                    window.location.href = "index.html";
+                }
+            });
+        });
+    });
+</script>
 
 </html>
