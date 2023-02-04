@@ -3,8 +3,10 @@
 use Kreait\Firebase\Auth\UserQuery;
 use Kreait\Firebase\Exception\Auth\EmailExists;
 
-session_start();
 include('dbcon.php');
+include('mysqlcon.php');
+session_start();
+
 
 $name = $_POST['name'];
 $surname = $_POST['surname'];
@@ -56,9 +58,23 @@ if ($validEmail && $validPhoneNumber && $validPassword) {
 
     $createdUser = $auth->createUser($userProperties);
     if ($createdUser) {
-        echo "<div class=\"alert alert-success\" role=\"alert\">
-                User created successfully, open the link on the email for confirm the account
-              </div>";
+        $user = $auth->getUserByEmail($email);
+
+        // Add user to the database
+        // TODO: modify the id_role
+        $SQL = "INSERT INTO acl.user (id_user, name, surname, email, id_role) VALUES ('$user->uid', '$name', '$surname', '$email', 1);";
+        // Execute the query
+        $result = $conn->query($SQL);
+        if ($result) {
+            echo "<div class=\"alert alert-success\" role=\"alert\">
+                    User created successfully, open the link on the email for confirm the account
+                  </div>";
+        } else {
+            echo "<div class=\"alert alert-warning\" role=\"alert\">
+                    User not created successfully try again
+                  </div>";
+        }
+
         $auth->sendEmailVerificationLink($email);
     } else {
         echo "<div class=\"alert alert-warning\" role=\"alert\">

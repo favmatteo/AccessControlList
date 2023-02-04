@@ -281,7 +281,7 @@ if(!isset($_SESSION['session-cookie'])){
                             </div>
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form method="post">
                                 <h6 class="heading-small text-muted mb-4">User information</h6>
                                 <div>
                                     <div class="row">
@@ -308,7 +308,7 @@ if(!isset($_SESSION['session-cookie'])){
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="invoice-date" class="form-control-label">Type</label>
+                                                <label for="invoice-type" class="form-control-label">Type</label>
                                                 <input type="text" id="invoice-type" class="form-control">
                                             </div>
                                         </div>
@@ -323,13 +323,22 @@ if(!isset($_SESSION['session-cookie'])){
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
-                                            <label for="invoice-user" class="form-control-label">User to assign the
+                                            <label for="invoice-customer" class="form-control-label">User to assign the
                                                 Invoice</label>
-                                            <select class="form-select" id="invoice-user">
-                                                <option selected>User</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
+                                            <select class="form-select" id="invoice-customer">
+                                                <?php
+                                                    include("../scripts/php/mysqlcon.php");
+                                                    $sql = "SELECT * FROM acl.customer";
+                                                    $result = $conn->query($sql);
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value='" . $row['id_customer'] . "'>" . ($row['first_name'] . " " . $row['surname'] . " - " . $row['email'])  . "</option>"; 
+                                                        }
+                                                    }else{
+                                                        echo "<option value='null'>----</option>"; 
+
+                                                    }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -341,7 +350,8 @@ if(!isset($_SESSION['session-cookie'])){
                                         </div>
                                     </div>
                                 </div>
-                                <input type="subit" class="btn btn-primary w-100" value="Create Invoice">
+                                <input type="subit" class="btn btn-primary w-100" id="create-invoice-btn"
+                                    value="Create Invoice">
                             </form>
                         </div>
 
@@ -354,105 +364,77 @@ if(!isset($_SESSION['session-cookie'])){
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h6 class="mb-0">Edit profile </h6>
+                                    <h6 class="mb-0">All Invoices</h6>
                                 </div>
                                 <div class="col-4 text-end">
                                     <a class="btn btn-sm btn-primary mb-0" role="button" onclick="hideAll()">Close</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <form>
-                                <h6 class="heading-small text-muted mb-4">User information</h6>
-                                <div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-username">Username</label>
-                                                <input type="text" id="input-username" class="form-control"
-                                                    placeholder="Username" value="lucky.jesse">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-email">Email
-                                                    address</label>
-                                                <input type="email" id="input-email" class="form-control"
-                                                    placeholder="jesse@example.com">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-first-name">First
-                                                    name</label>
-                                                <input type="text" id="input-first-name" class="form-control"
-                                                    placeholder="First name" value="Lucky">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-last-name">Last
-                                                    name</label>
-                                                <input type="text" id="input-last-name" class="form-control"
-                                                    placeholder="Last name" value="Jesse">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr class="horizontal dark my-4">
-                                <!-- Address -->
-                                <h6 class="heading-small text-muted mb-4">Contact information</h6>
-                                <div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-address">Address</label>
-                                                <input id="input-address" class="form-control"
-                                                    placeholder="Home Address"
-                                                    value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                                                    type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-city">City</label>
-                                                <input type="text" id="input-city" class="form-control"
-                                                    placeholder="City" value="New York">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-country">Country</label>
-                                                <input type="text" id="input-country" class="form-control"
-                                                    placeholder="Country" value="United States">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-country">Postal
-                                                    code</label>
-                                                <input type="number" id="input-postal-code" class="form-control"
-                                                    placeholder="Postal code">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr class="horizontal dark my-4">
-                                <!-- Description -->
-                                <h6 class="heading-small text-muted mb-4">About me</h6>
-                                <div">
-                                    <div class="form-group">
-                                        <label class="form-control-label">About Me</label>
-                                        <textarea rows="4" class="form-control"
-                                            placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 5.</textarea>
-                                    </div>
-                                </div">
-                            </form>
-                        </div>
+                        <table class="table draggable" draggable="true">
+                        <thead>
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Typology</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Created By</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                include("../scripts/php/mysqlcon.php");
+                                $sql = "SELECT * FROM acl.invoice";
+                                $result = $conn->query($sql);
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<tr>";
+                                        echo "<th scope='row'>" . $row['id_invoice'] . "</th>";
+                                        echo "<td>" . $row['date'] . "</td>";
+                                        echo "<td>" . $row['amount'] . "</td>";
+                                        echo "<td>" . $row['title'] . "</td>";
+                                        echo "<td>" . $row['typology'] . "</td>";
+                                        echo "<td>" . $row['description'] . "</td>";
+
+                                        // get customer name
+                                        $sql2 = "SELECT * FROM acl.customer WHERE id_customer = " . '"' . $row['id_customer']. '"';
+                                        $result2 = $conn->query($sql2);
+                                        if ($result2->num_rows > 0) {
+                                            $row2 = $result2->fetch_assoc();
+                                            echo "<td>" . $row2['first_name'] . " " . $row2['surname'] . "</td>";
+                                        }else{
+                                            echo "<td>----</td>";
+                                        }
+
+                                        // get user name
+                                        $sql2 = "SELECT * FROM acl.user WHERE id_user = " . '"' . $row['id_user']. '"';
+                                        $result2 = $conn->query($sql2);
+                                        if ($result2->num_rows > 0) {
+                                            $row2 = $result2->fetch_assoc();
+                                            echo "<td>" . $row2['name'] . " " . $row2['surname'] . "</td>";
+                                        }else{
+                                            echo "<td>----</td>";
+                                        }
+                                        echo "</tr>";
+                                    }
+                                }else{
+                                    echo "<tr>";
+                                    echo "<th scope='row'>----</th>";
+                                    echo "<td>----</td>";
+                                    echo "<td>----</td>";
+                                    echo "<td>----</td>";
+                                    echo "<td>----</td>";
+                                    echo "<td>----</td>";
+                                    echo "<td>----</td>";
+                                    echo "<td>----</td>";
+                                    echo "</tr>";
+                                }
+                            ?>
+                        </tbody>
+                      </table>
 
                     </div>
                 </div>
@@ -567,6 +549,12 @@ if(!isset($_SESSION['session-cookie'])){
                 </div>
             </div>
         </div>
+
+        <!-- Result from operation -->
+        <div class="row removable" id="results" style="display: none;">
+
+        </div>
+
         <!-- Footer -->
         <footer class="footer pt-3 pb-4">
             <div class="container-fluid">
@@ -593,6 +581,7 @@ if(!isset($_SESSION['session-cookie'])){
         const createInvoice = document.getElementById("create-invoice");
         const listInvoice = document.getElementById("list-invoice");
         const updateInvoice = document.getElementById("update-invoice");
+        const result = document.getElementById("results");
 
         function showCreateInvoice() {
             hideAll();
@@ -613,6 +602,7 @@ if(!isset($_SESSION['session-cookie'])){
             createInvoice.style.display = "none";
             listInvoice.style.display = "none";
             updateInvoice.style.display = "none";
+            result.style.display = "none";
         }
     </script>
 
@@ -626,8 +616,8 @@ if(!isset($_SESSION['session-cookie'])){
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $(".logout-btn").click(function (e) {
+        $(document).ready(() => {
+            $(".logout-btn").click((e) => {
                 $.ajax({
                     url: "../scripts/php/logout.php",
                     type: "POST",
@@ -637,6 +627,30 @@ if(!isset($_SESSION['session-cookie'])){
                 });
             });
         });
+    </script>
+
+    <!--Create invoice button ajax-->
+    <script>
+        $("#create-invoice-btn").click(() => {
+            $.ajax({
+                url: '../scripts/php/create-invoice.php',
+                type: 'POST',
+                data: {
+                    invoice_title: $("#invoice-title").val(),
+                    invoice_import: $("#invoice-import").val(),
+                    invoice_type: $("#invoice-type").val(),
+                    invoice_date: $("#invoice-date").val(),
+                    invoice_customer: $("#invoice-customer").val(),
+                    invoice_description: $("#invoice-description").val()
+                },
+                success: (res) => {
+                    hideAll();
+                    console.log(res);
+                    document.getElementById('results').style.display = "block";
+                    document.getElementById('results').innerHTML = res;
+                }
+            })
+        })
     </script>
 </body>
 
