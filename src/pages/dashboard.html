@@ -2,6 +2,7 @@
 # Check if user is logged, and if not, redirect to login page
 use Kreait\Firebase\Exception\Auth\FailedToVerifySessionCookie;
 include ('../scripts/php/dbcon.php');
+include("../scripts/php/mysqlcon.php");
 
 session_start();
 
@@ -17,6 +18,16 @@ if(!isset($_SESSION['session-cookie'])){
     $uid = $verifiedSessionCookie->claims()->get('sub');
     $user = $auth->getUser($uid);
     $_SESSION['user'] = $user;
+
+    # Get the role
+    $sql = "USE acl";
+    $conn->query($sql);
+    $sql = "SELECT roles.name FROM user JOIN roles ON user.id_role = roles.id_role WHERE user.id_user = '$uid'";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $_SESSION['role'] = $row['name'];
+
+    $_SESSION['isCarouselActive'] = true;
 }
 ?>
 
@@ -81,15 +92,7 @@ if(!isset($_SESSION['session-cookie'])){
                 </li>
                 <?php
                 // check if user is admin if it is show admin panel
-                include("../scripts/php/mysqlcon.php");
-
-                $sql = "USE acl";
-                $conn->query($sql);
-                $sql = "SELECT roles.name FROM user JOIN roles ON user.id_role = roles.id_role WHERE user.id_user = '$uid'";
-                $result = $conn->query($sql);
-                $row = $result->fetch_assoc();
-                $role = $row['name'];
-                if($role == "admin"){
+                if($_SESSION['role'] == "admin"){
                     echo '<li class="nav-item">
                     <a class="nav-link" href="admin.html">
                         <div
@@ -256,36 +259,60 @@ if(!isset($_SESSION['session-cookie'])){
                                 <div id="carouselImageSlide" class="carousel slide min-height-300 h-100"
                                     data-bs-ride="carousel">
                                     <div class="carousel-inner min-height-300 h-100">
-                                        <div class="carousel-item min-height-300 h-100 bg-cover active" role="button"
-                                            onclick="showCreateInvoice()" data-bs-interval="5000"
-                                            style="background: rgba(0, 128, 0, 0.5);">
-                                            <span class="mask bg-gradient-dark"></span>
-                                            <div
-                                                class="position-relative min-height-300 h-100 d-flex flex-column justify-content-end mt-auto p-4">
-                                                <h1 class="text-white font-weight-bolder mb-2 pt-2">Create Invoice</h1>
-                                                <p class="text-white text-sm mb-0">Create a invoice</p>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item min-height-300 h-100 bg-cover" data-bs-interval="3000"
-                                            role="button" onclick="showListInvoice()"
-                                            style="background: rgba(154, 205, 50, 0.7);">
-                                            <span class="mask bg-gradient-dark"></span>
-                                            <div
-                                                class="position-relative min-height-300 h-100 d-flex flex-column justify-content-end mt-auto p-4">
-                                                <h1 class="text-white font-weight-bolder mb-2 pt-2">List Invoice</h1>
-                                                <p class="text-white text-sm mb-0">Show all invoices</p>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item min-height-300 h-100 bg-cover" data-bs-interval="3000"
-                                            role="button" onclick="showUpdateInvoice()"
-                                            style="background: rgba(107, 142, 35, 0.3);">
-                                            <span class="mask bg-gradient-dark"></span>
-                                            <div
-                                                class="position-relative min-height-300 h-100 d-flex flex-column justify-content-end mt-auto p-4">
-                                                <h1 class="text-white font-weight-bolder mb-2 pt-2">Update Invoice</h1>
-                                                <p class="text-white text-sm mb-0">Update a invoice</p>
-                                            </div>
-                                        </div>
+                                        <?php
+                                        $role = $_SESSION['role'];
+                                        
+                                        if($role == 'admin' || $role == "commercial"){
+                                            $activate = $_SESSION['isCarouselActive'];
+                                            $_SESSION['isCarouselActive'] = false;                                          
+                                            echo '<div class="carousel-item min-height-300 h-100 bg-cover ' . ($activate ? "active" : "") . '" role="button"
+                                                onclick="showCreateInvoice()" data-bs-interval="5000"
+                                                style="background: rgba(0, 128, 0, 0.5);">
+                                                <span class="mask bg-gradient-dark"></span>
+                                                <div
+                                                    class="position-relative min-height-300 h-100 d-flex flex-column justify-content-end mt-auto p-4">
+                                                    <h1 class="text-white font-weight-bolder mb-2 pt-2">Create Invoice</h1>
+                                                    <p class="text-white text-sm mb-0">Create a invoice</p>
+                                                </div>
+                                            </div>';
+                                        }
+                                        ?>
+                                        <?php
+                                        $role = $_SESSION['role'];
+                                        
+                                        if($role == 'admin' || $role == "commercial" || $role == 'Area manager'){
+                                            $activate = $_SESSION['isCarouselActive'];
+                                            $_SESSION['isCarouselActive'] = false;                                          
+                                            echo '<div class="carousel-item min-height-300 h-100 bg-cover ' . ($activate ? "active" : "") . '" data-bs-interval="3000"
+                                                role="button" onclick="showListInvoice()"
+                                                style="background: rgba(154, 205, 50, 0.7);">
+                                                <span class="mask bg-gradient-dark"></span>
+                                                <div
+                                                    class="position-relative min-height-300 h-100 d-flex flex-column justify-content-end mt-auto p-4">
+                                                    <h1 class="text-white font-weight-bolder mb-2 pt-2">List Invoice</h1>
+                                                    <p class="text-white text-sm mb-0">Show all invoices</p>
+                                                </div>
+                                            </div>';
+                                        }
+                                        ?>
+                                        <?php
+                                        $role = $_SESSION['role'];
+                                        
+                                        if($role == 'admin' || $role == "commercial" || $role == 'Area manager' || $role == "Administration"){
+                                            $activate = $_SESSION['isCarouselActive'];
+                                            $_SESSION['isCarouselActive'] = false;                                          
+                                            echo '<div class="carousel-item min-height-300 h-100 bg-cover' . ($activate ? "active" : "") . '" data-bs-interval="3000"
+                                                role="button" onclick="showUpdateInvoice()"
+                                                style="background: rgba(107, 142, 35, 0.3);">
+                                                <span class="mask bg-gradient-dark"></span>
+                                                <div
+                                                    class="position-relative min-height-300 h-100 d-flex flex-column justify-content-end mt-auto p-4">
+                                                    <h1 class="text-white font-weight-bolder mb-2 pt-2">Update Invoice</h1>
+                                                    <p class="text-white text-sm mb-0">Update a invoice</p>
+                                                </div>
+                                            </div>';
+                                        }
+                                        ?>
                                     </div>
                                     <button class="carousel-control-prev ms-auto end-8 w-5" type="button"
                                         data-bs-target="#carouselImageSlide" data-bs-slide="prev">
