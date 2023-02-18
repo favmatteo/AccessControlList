@@ -2,7 +2,7 @@ FROM php:8.1-apache
 RUN apt-get update && apt-get upgrade -y
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 
-RUN apt-get update && apt-get install -y libapache2-mod-evasive
+RUN apt-get update && apt-get install -y sudo libapache2-mod-evasive
 
 COPY http/httpd.conf /usr/local/apache2/conf/httpd.conf
 COPY http/evasive.conf /etc/apache2/mods-available/evasive.conf
