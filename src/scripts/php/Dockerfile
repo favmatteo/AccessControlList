@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y libapache2-mod-evasive
 
 COPY http/httpd.conf /usr/local/apache2/conf/httpd.conf
 COPY http/evasive.conf /etc/apache2/mods-available/evasive.conf
+COPY http/localized-error-pages.conf /etc/apache2/conf-enabled/localized-error-pages.conf
 COPY http/ban_ip.sh /usr/bin/ban_ip.sh
 RUN chmod 777 /usr/bin/ban_ip.sh
 RUN mkdir -p /usr/log
