@@ -1,3 +1,7 @@
+<?php
+include_once("../scripts/php/lang.php");
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -28,8 +32,12 @@
       </a>
 
       <div class="text-end">
-        <a class="btn btn-warning" href="login.html">Login</a>
-        <a class="btn btn-warning" href="signup.html">Signup</a>
+        <a class="btn btn-warning" href="login.html">
+          <?php echo _('LOGIN')?>
+        </a>
+        <a class="btn btn-warning" href="signup.html">
+          <?php echo _('SIGNUP')?>
+        </a>
       </div>
     </div>
   </nav>
@@ -37,26 +45,39 @@
 
   <div class="container-sm form">
     <p class="title m-5" style="font-family: 'Montserrat', sans-serif;">
-      Login
+      <?php echo _('LOGIN')?>
     </p>
     <div id="login-res"></div>
     <form method="post" action="../scripts/php/login.php">
       <div class="row g-3">
 
         <div class="form-group">
-          <label for="username">Enter email</label>
+          <label for="username">
+            <?php
+            echo _("ENTER_EMAIL") 
+            ?>
+          </label>
           <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
         </div>
 
         <div class="form-group">
-          <label for="password">Enter password</label>
+          <label for="password">
+            <?php
+            echo _("ENTER_PASSWORD") 
+            ?>
+          </label>
           <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
         </div>
 
-        <a href="lost_password.html">Forgot password?</a>
+        <a href="lost_password.html">
+          <?php
+            echo _("FORGOT_PASSWORD") 
+          ?>
+        </a>
 
         <div class="form-group">
-          <input type="submit" class="btn btn-warning form-control" id="submit-btn" name="submit-btn" value="Submit">
+          <input type="submit" class="btn btn-warning form-control" id="submit-btn" name="submit-btn"
+            value="<?php echo _('SUBMIT')?>">
         </div>
       </div>
     </form>

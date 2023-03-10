@@ -14,3 +14,101 @@ msgstr ""
 # Test token 1
 msgid "HELLO_WORLD"
 msgstr "Ciao Mondo"
+
+# Login
+msgid "LOGIN"
+msgstr "Accedi"
+
+msgid "ENTER_EMAIL"
+msgstr "Inserisci email"
+
+msgid "EMAIL"
+msgstr "Email"
+
+msgid "ENTER_PASSWORD"
+msgstr "Inserisci password"
+
+msgid "PASSWORD"
+msgstr "Password"
+
+msgid "FORGOT_PASSWORD"
+msgstr "Password dimenticata? "
+
+msgid "SUBMIT"
+msgstr "Invia"
+
+# Signup
+msgid "SIGNUP"
+msgstr "Registrati"
+
+msgid "ENTER_NAME"
+msgstr "Inserisci nome"
+
+msgid "NAME"
+msgstr "Nome"
+
+msgid "ENTER_SURNAME"
+msgstr "Inserisci cognome"
+
+msgid "SURNAME"
+msgstr "Cognome"
+
+
+msgid "ENTER_DATE_OF_BIRTH"
+msgstr "Inserisci data di nascita"
+
+msgid "ENTER_PHONE_NUMBER"
+msgstr "Inserisci numero di telefono"
+
+msgid "PHONE_NUMBER"
+msgstr "Numero di telefono"
+
+msgid "RE_ENTER_PASSWORD"
+msgstr "Re-inserisci password"
+
+msgid "REPEAT_PASSWORD"
+msgstr "Ripeti password"
+
+# Dashboard
+msgid "CREATE_INVOICE"
+msgstr "Crea Fattura"
+
+msgid "CREATE_A_INVOICE"
+msgstr "Crea una fattura"
+
+msgid "LIST_INVOICE"
+msgstr "Mostra Fatture"
+
+msgid "LIST_ALL_INVOICE"
+msgstr "Mostra tutte le fatture"
+
+msgid "UPDATE_INVOICE"
+msgstr "Aggiorna Fattura"
+
+msgid "UPDATE_A_INVOICE"
+msgstr "Aggiorna una fattura"
+
+msgid "DASHBOARD"
+msgstr "Dashboard"
+
+msgid "ADMIN_PAGE"
+msgstr "Pagina admin"
+
+msgid "PROFILE"
+msgstr "Profilo"
+
+msgid "LOGOUT"
+msgstr "Esci"
+
+msgid "ACCOUNT"
+msgstr "Account"
+
+msgid "SETTINGS"
+msgstr "Impostazioni"
+
+# Lingue
+msgid "ENGLISH"
+msgstr "🇬🇧Inglese🇬🇧"
+
+msgid "ITALIAN"
+msgstr "🇮🇹ITALIAN🇮🇹"

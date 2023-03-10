@@ -1,3 +1,7 @@
+<?php
+include_once("../scripts/php/lang.php");
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -29,8 +33,8 @@
             </a>
 
             <div class="text-end">
-                <a class="btn btn-warning" href="login.html">Login</a>
-                <a class="btn btn-warning" href="signup.html">Signup</a>
+                <a class="btn btn-warning" href="login.html"><?php echo _('LOGIN')?></a>
+                <a class="btn btn-warning" href="signup.html"><?php echo _('SIGNUP')?></a>
             </div>
         </div>
     </nav>
@@ -38,55 +42,55 @@
 
     <div class="container-sm form">
         <p class="title m-5" style="font-family: 'Montserrat', sans-serif;">
-            Signup
+        <?php echo _('SIGNUP')?>
         </p>
         <div id="signup-form">
             <form method="post">
                 <div class="row g-3">
                     <div class="form-group col-md-6">
-                        <label for="name">Enter name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                        <label for="name"><?php echo _('ENTER_NAME')?></label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo _('NAME')?>" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="surname">Enter surname</label>
-                        <input type="text" class="form-control" id="surname" name="surname" placeholder="Surname"
+                        <label for="surname"><?php echo _('ENTER_SURNAME')?></label>
+                        <input type="text" class="form-control" id="surname" name="surname" placeholder="<?php echo _('SURNAME')?>"
                             required>
                     </div>
 
                     <div class="form-group">
-                        <label for="username">Enter email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                        <label for="username"><?php echo _('ENTER_EMAIL')?></label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="<?php echo _('EMAIL')?>" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="birthDate">Enter date of birth</label>
+                        <label for="birthDate"><?php echo _('ENTER_DATE_OF_BIRTH')?></label>
                         <input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="Year"
                             required>
                     </div>
 
                     <div class="form-group">
-                        <label for="phoneNumber" class="form-label">Enter phone number</label>
+                        <label for="phoneNumber" class="form-label"><?php echo _('ENTER_PHONE_NUMBER')?></label>
                         <div class="input-group">
                             <span class="input-group-text" id="prefix">+39</span>
                             <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
-                                placeholder="Phone number" aria-describedby="phoneNumber" minlength="10">
+                                placeholder="<?php echo _('PHONE_NUMBER')?>" aria-describedby="phoneNumber" minlength="10">
                         </div>
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="password">Enter password</label>
+                        <label for="password"><?php echo _('ENTER_PASSWORD')?></label>
                         <input type="password" class="form-control" id="password" name="password" minlength="8"
-                            placeholder="Password" required>
+                            placeholder="<?php echo _('PASSWORD')?>" required>
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="repeatedPassword">Re-enter password</label>
+                        <label for="repeatedPassword"><?php echo _('RE_ENTER_PASSWORD')?></label>
                         <input type="password" class="form-control" id="repeatedPassword" name="repeatedPassword"
-                            minlength="8" placeholder="Repeat password" required>
+                            minlength="8" placeholder="<?php echo _('REPEAT_PASSWORD')?>" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" class="btn btn-warning form-control" value="Submit" id="submit-btn"
+                        <input type="submit" class="btn btn-warning form-control" value="<?php echo _('SUBMIT')?>" id="submit-btn"
                             name="submit-btn">
                     </div>
 

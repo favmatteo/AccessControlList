@@ -1,10 +1,14 @@
+<?php
+include_once("../scripts/php/lang.php");
+?>
+
 <?php 
 # Check if user is logged, and if not, redirect to login page
 use Kreait\Firebase\Exception\Auth\FailedToVerifySessionCookie;
 include ('../scripts/php/dbcon.php');
 include("../scripts/php/mysqlcon.php");
 
-session_start();
+//session_start();
 
 if(!isset($_SESSION['session-cookie'])){
     die(header("location: login.html"));
@@ -116,7 +120,7 @@ if(!isset($_SESSION['session-cookie'])){
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Admin Page</span>
+                        <span class="nav-link-text ms-1">'. _('ADMIN_PAGE') .'</span>
                     </a>
                     </li>';
                 }
@@ -153,7 +157,7 @@ if(!isset($_SESSION['session-cookie'])){
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Profile</span>
+                        <span class="nav-link-text ms-1"><?php echo _('PROFILE') ?></span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -179,7 +183,7 @@ if(!isset($_SESSION['session-cookie'])){
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Logout</span>
+                        <span class="nav-link-text ms-1"><?php echo _('LOGOUT') ?></span>
                     </a>
                 </li>
             </ul>
@@ -224,22 +228,17 @@ if(!isset($_SESSION['session-cookie'])){
                                 </li>
                                 <li class="mb-1">
                                     <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <span>Account</span>
+                                        <span><?php echo _('ACCOUNT') ?></span>
                                     </a>
                                 </li>
                                 <li class="mb-1">
                                     <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <span>Settings</span>
-                                    </a>
-                                </li>
-                                <li class="mb-1">
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <span>Payments</span>
+                                        <span><?php echo _('SETTINGS') ?></span>
                                     </a>
                                 </li>
                                 <li class="mb-1">
                                     <a class="dropdown-item border-radius-md logout-btn" role="button">
-                                        <span>Logout</span>
+                                    <span><?php echo _('LOGOUT') ?></span>
                                     </a>
                                 </li>
                             </ul>
@@ -270,8 +269,8 @@ if(!isset($_SESSION['session-cookie'])){
                                                 <span class="mask bg-gradient-dark"></span>
                                                 <div
                                                     class="position-relative min-height-300 h-100 d-flex flex-column justify-content-end mt-auto p-4">
-                                                    <h1 class="text-white font-weight-bolder mb-2 pt-2">Create Invoice</h1>
-                                                    <p class="text-white text-sm mb-0">Create a invoice</p>
+                                                    <h1 class="text-white font-weight-bolder mb-2 pt-2">' . _('CREATE_INVOICE') . '</h1>
+                                                    <p class="text-white text-sm mb-0">' . _('CREATE_A_INVOICE') . '</p>
                                                 </div>
                                             </div>';
                                         }
@@ -288,8 +287,8 @@ if(!isset($_SESSION['session-cookie'])){
                                                 <span class="mask bg-gradient-dark"></span>
                                                 <div
                                                     class="position-relative min-height-300 h-100 d-flex flex-column justify-content-end mt-auto p-4">
-                                                    <h1 class="text-white font-weight-bolder mb-2 pt-2">List Invoice</h1>
-                                                    <p class="text-white text-sm mb-0">Show all invoices</p>
+                                                    <h1 class="text-white font-weight-bolder mb-2 pt-2">' . _('LIST_INVOICE') . '</h1>
+                                                    <p class="text-white text-sm mb-0">' . _('LIST_ALL_INVOICE') . '</p>
                                                 </div>
                                             </div>';
                                         }
@@ -306,8 +305,8 @@ if(!isset($_SESSION['session-cookie'])){
                                                 <span class="mask bg-gradient-dark"></span>
                                                 <div
                                                     class="position-relative min-height-300 h-100 d-flex flex-column justify-content-end mt-auto p-4">
-                                                    <h1 class="text-white font-weight-bolder mb-2 pt-2">Update Invoice</h1>
-                                                    <p class="text-white text-sm mb-0">Update a invoice</p>
+                                                    <h1 class="text-white font-weight-bolder mb-2 pt-2">' . _('UPDATE_INVOICE') . '</h1>
+                                                    <p class="text-white text-sm mb-0">' . _('UPDATE_A_INVOICE') . '</p>
                                                 </div>
                                             </div>';
                                         }
@@ -340,7 +339,7 @@ if(!isset($_SESSION['session-cookie'])){
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Create Invoice</h3>
+                                    <h3 class="mb-0"><?php echo _('CREATE_INVOICE') ?></h3>
                                 </div>
                                 <div class="col-4 text-end">
                                     <a class="btn btn-sm btn-primary mb-0" role="button" onclick="hideAll()">Close</a>
