@@ -94,6 +94,13 @@ include_once("../scripts/php/lang.php");
             success: function (res) {
             }
         });
+        $.ajax({
+            url: "../scripts/php/lang.php",
+            
+            success: function (res) {
+                console.log(res);
+            }
+        });
     }
 </script>
 
