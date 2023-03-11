@@ -13,108 +13,107 @@ msgstr ""
 
 # Test token 1
 msgid "HELLO_WORLD"
-msgstr "Ciao Mondo"
+msgstr "Hola Mundo"
 
 # Login
 msgid "LOGIN"
-msgstr "Accedi"
+msgstr "Iniciar sesión"
 
 msgid "ENTER_EMAIL"
-msgstr "Inserisci email"
+msgstr "Introduzca correo electrónico"
 
 msgid "EMAIL"
-msgstr "Email"
+msgstr "Correo electrónico"
 
 msgid "ENTER_PASSWORD"
-msgstr "Inserisci password"
+msgstr "Introduzca contraseña"
 
 msgid "PASSWORD"
-msgstr "Password"
+msgstr "Contraseña"
 
 msgid "FORGOT_PASSWORD"
-msgstr "Password dimenticata? "
+msgstr "¿Olvidó la contraseña?"
 
 msgid "SUBMIT"
-msgstr "Invia"
+msgstr "Enviar"
 
 # Signup
 msgid "SIGNUP"
-msgstr "Registrati"
+msgstr "Registrarse"
 
 msgid "ENTER_NAME"
-msgstr "Inserisci nome"
+msgstr "Introduzca nombre"
 
 msgid "NAME"
-msgstr "Nome"
+msgstr "Nombre"
 
 msgid "ENTER_SURNAME"
-msgstr "Inserisci cognome"
+msgstr "Introduzca apellido"
 
 msgid "SURNAME"
-msgstr "Cognome"
-
+msgstr "Apellido"
 
 msgid "ENTER_DATE_OF_BIRTH"
-msgstr "Inserisci data di nascita"
+msgstr "Introduzca fecha de nacimiento"
 
 msgid "ENTER_PHONE_NUMBER"
-msgstr "Inserisci numero di telefono"
+msgstr "Introduzca número de teléfono"
 
 msgid "PHONE_NUMBER"
-msgstr "Numero di telefono"
+msgstr "Número de teléfono"
 
 msgid "RE_ENTER_PASSWORD"
-msgstr "Re-inserisci password"
+msgstr "Vuelva a introducir la contraseña"
 
 msgid "REPEAT_PASSWORD"
-msgstr "Ripeti password"
+msgstr "Repetir contraseña"
 
 # Dashboard
 msgid "CREATE_INVOICE"
-msgstr "Crea Fattura"
+msgstr "Crear factura"
 
 msgid "CREATE_A_INVOICE"
-msgstr "Crea una fattura"
+msgstr "Crear una factura"
 
 msgid "LIST_INVOICE"
-msgstr "Mostra Fatture"
+msgstr "Mostrar facturas"
 
 msgid "LIST_ALL_INVOICE"
-msgstr "Mostra tutte le fatture"
+msgstr "Mostrar todas las facturas"
 
 msgid "UPDATE_INVOICE"
-msgstr "Aggiorna Fattura"
+msgstr "Actualizar factura"
 
 msgid "UPDATE_A_INVOICE"
-msgstr "Aggiorna una fattura"
+msgstr "Actualizar una factura"
 
 msgid "DASHBOARD"
-msgstr "Dashboard"
+msgstr "Panel de control"
 
 msgid "ADMIN_PAGE"
-msgstr "Pagina admin"
+msgstr "Página de administrador"
 
 msgid "PROFILE"
-msgstr "Profilo"
+msgstr "Perfil"
 
 msgid "LOGOUT"
-msgstr "Esci"
+msgstr "Cerrar sesión"
 
 msgid "ACCOUNT"
-msgstr "Account"
+msgstr "Cuenta"
 
 msgid "SETTINGS"
-msgstr "Impostazioni"
+msgstr "Configuración"
 
 # Lingue
 msgid "ENGLISH"
-msgstr "🇬🇧Inglese🇬🇧"
+msgstr "🇺🇸Inglés🇺🇸"
 
 msgid "ITALIAN"
 msgstr "🇮🇹Italiano🇮🇹"
 
 msgid "SPANISH"
-msgstr "🇪🇸Spagnolo🇪🇸"
+msgstr "🇪🇸Español🇪🇸"
 
 msgid "FRENCH"
-msgstr "🇫🇷Francese🇫🇷"
+msgstr "🇫🇷Francés🇫🇷"

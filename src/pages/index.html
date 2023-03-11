@@ -38,6 +38,8 @@ include_once("../scripts/php/lang.php");
             <select id="languageSelector" onchange="changeLanguage()">
                 <option <?php echo (isset($_SESSION['language']) && $_SESSION['language'] == 'en_US.utf8' ? 'selected' : '')?> value="en_US.utf8"><?php echo _('ENGLISH')?></option>
                 <option <?php echo (isset($_SESSION['language']) && $_SESSION['language'] == 'it_IT.utf8' ? 'selected' : '')?> value="it_IT.utf8"><?php echo _('ITALIAN')?></option>
+                <option <?php echo (isset($_SESSION['language']) && $_SESSION['language'] == 'es_ES.utf8' ? 'selected' : '')?> value="es_ES.utf8"><?php echo _('SPANISH')?></option>
+                <option <?php echo (isset($_SESSION['language']) && $_SESSION['language'] == 'fr_FR.utf8' ? 'selected' : '')?> value="fr_FR.utf8"><?php echo _('FRENCH')?></option>
             </select>
         </div>
     </nav>
@@ -80,6 +82,22 @@ include_once("../scripts/php/lang.php");
         });
     });
 </script>
+
+<script type="text/javascript">
+    const lang = document.getElementById('languageSelector').value;
+    console.log(lang);
+    $(window).load(function(){ /*This allows to execute your code after the  page is rendered fully */ 
+        $.ajax({
+            url: "../scripts/php/save-to-session.php",
+            type: "POST",
+            data: {
+                language: lang,
+            },
+            success: function (res) {
+            }
+        });
+    }) 
+</script> 
 
 <script>
     function changeLanguage() {
