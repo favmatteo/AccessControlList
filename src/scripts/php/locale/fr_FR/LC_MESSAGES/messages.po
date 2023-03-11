@@ -63,7 +63,7 @@ msgid "PHONE_NUMBER"
 msgstr "Numéro de téléphone"
 
 msgid "RE_ENTER_PASSWORD"
-msgstr "Entrez à nouveau votre mot de passe"
+msgstr "Retapez votre mot de passe"
 
 msgid "REPEAT_PASSWORD"
 msgstr "Répéter le mot de passe"
@@ -104,6 +104,57 @@ msgstr "Compte"
 
 msgid "SETTINGS"
 msgstr "Paramètres"
+
+msgid "USER_INFORMATION"
+msgstr "Informations Utilisateur"
+
+msgid "INVOICE_TITLE"
+msgstr "Titre de la facture"
+
+msgid "INVOICE_IMPORT"
+msgstr "Montant de la facture"
+
+msgid "INVOICE_TYPE"
+msgstr "Type de facture"
+
+msgid "INVOICE_DATE"
+msgstr "Date de facture"
+
+msgid "USER_ASSIGNED_INVOICE"
+msgstr "Utilisateur assigné à la facture"
+
+msgid "INVOICE_DESCRIPTION"
+msgstr "Description de la facture"
+
+msgid "CLOSE"
+msgstr "Fermer"
+
+msgid "ALL_INVOICE"
+msgstr "Toutes les factures"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "DATE"
+msgstr "Date"
+
+msgid "AMOUNT"
+msgstr "Montant"
+
+msgid "TITLE"
+msgstr "Titre"
+
+msgid "TYPE"
+msgstr "Type"
+
+msgid "DESCRIPTION"
+msgstr "Description"
+
+msgid "CUSTOMER"
+msgstr "Client"
+
+msgid "CREATED_BY"
+msgstr "Créé par"
 
 # Lingue
 msgid "ENGLISH"

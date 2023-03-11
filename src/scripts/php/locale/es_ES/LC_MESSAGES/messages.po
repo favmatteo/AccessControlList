@@ -105,6 +105,57 @@ msgstr "Cuenta"
 msgid "SETTINGS"
 msgstr "Configuración"
 
+msgid "USER_INFORMATION"
+msgstr "Información del usuario"
+
+msgid "INVOICE_TITLE"
+msgstr "Título de la factura"
+
+msgid "INVOICE_IMPORT"
+msgstr "Importe de la factura"
+
+msgid "INVOICE_TYPE"
+msgstr "Tipo de factura"
+
+msgid "INVOICE_DATE"
+msgstr "Fecha de la factura"
+
+msgid "USER_ASSIGNED_INVOICE"
+msgstr "Usuario asignado a la factura"
+
+msgid "INVOICE_DESCRIPTION"
+msgstr "Descripción de la factura"
+
+msgid "CLOSE"
+msgstr "Cerrar"
+
+msgid "ALL_INVOICE"
+msgstr "Todas las facturas"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "DATE"
+msgstr "Fecha"
+
+msgid "AMOUNT"
+msgstr "Monto"
+
+msgid "TITLE"
+msgstr "Título"
+
+msgid "TYPE"
+msgstr "Tipo"
+
+msgid "DESCRIPTION"
+msgstr "Descripción"
+
+msgid "CUSTOMER"
+msgstr "Cliente"
+
+msgid "CREATED_BY"
+msgstr "Creado por"
+
 # Lingue
 msgid "ENGLISH"
 msgstr "🇺🇸Inglés🇺🇸"

@@ -1,5 +1,5 @@
 <?php
-include_once("../scripts/php/lang.php");
+include("../scripts/php/lang.php");
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +20,9 @@ include_once("../scripts/php/lang.php");
 
 
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../scripts/js/change-language.js"></script>
 </head>
 
 <body>
@@ -33,8 +36,46 @@ include_once("../scripts/php/lang.php");
             </a>
 
             <div class="text-end">
-                <a class="btn btn-warning" href="login.html"><?php echo _('LOGIN')?></a>
-                <a class="btn btn-warning" href="signup.html"><?php echo _('SIGNUP')?></a>
+                <div class="d-flex align-items-center">
+                    <div id="registration">
+                        <a class="btn btn-warning" href="login.html">
+                            <?php echo _('LOGIN')?>
+                        </a>
+                        <a class="btn btn-warning" href="signup.html">
+                            <?php echo _('SIGNUP')?>
+                        </a>
+                    </div>
+
+                    <div id="dashboard" style="display: none;">
+                        <a class="btn btn-warning" href="dashboard.html">
+                            <?php echo _('DASHBOARD')?>
+                        </a>
+                        <a class="btn btn-warning" role='button' id="logout-btn">
+                            <?php echo _('LOGOUT')?>
+                        </a>
+                    </div>
+
+                    <div class="ms-3">
+                        <select class='form-control' id="languageSelector" onchange="changeLanguage()">
+                            <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='en_US.utf8'
+                                ? 'selected' : '' )?> value="en_US.utf8">
+                                <?php echo _('ENGLISH')?>
+                            </option>
+                            <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='it_IT.utf8'
+                                ? 'selected' : '' )?> value="it_IT.utf8">
+                                <?php echo _('ITALIAN')?>
+                            </option>
+                            <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='es_ES.utf8'
+                                ? 'selected' : '' )?> value="es_ES.utf8">
+                                <?php echo _('SPANISH')?>
+                            </option>
+                            <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='fr_FR.utf8'
+                                ? 'selected' : '' )?> value="fr_FR.utf8">
+                                <?php echo _('FRENCH')?>
+                            </option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -42,56 +83,73 @@ include_once("../scripts/php/lang.php");
 
     <div class="container-sm form">
         <p class="title m-5" style="font-family: 'Montserrat', sans-serif;">
-        <?php echo _('SIGNUP')?>
+            <?php echo _('SIGNUP')?>
         </p>
         <div id="signup-form">
             <form method="post">
                 <div class="row g-3">
                     <div class="form-group col-md-6">
-                        <label for="name"><?php echo _('ENTER_NAME')?></label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo _('NAME')?>" required>
+                        <label for="name">
+                            <?php echo _('ENTER_NAME')?>
+                        </label>
+                        <input type="text" class="form-control" id="name" name="name"
+                            placeholder="<?php echo _('NAME')?>" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="surname"><?php echo _('ENTER_SURNAME')?></label>
-                        <input type="text" class="form-control" id="surname" name="surname" placeholder="<?php echo _('SURNAME')?>"
-                            required>
+                        <label for="surname">
+                            <?php echo _('ENTER_SURNAME')?>
+                        </label>
+                        <input type="text" class="form-control" id="surname" name="surname"
+                            placeholder="<?php echo _('SURNAME')?>" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="username"><?php echo _('ENTER_EMAIL')?></label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="<?php echo _('EMAIL')?>" required>
+                        <label for="username">
+                            <?php echo _('ENTER_EMAIL')?>
+                        </label>
+                        <input type="email" class="form-control" id="email" name="email"
+                            placeholder="<?php echo _('EMAIL')?>" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="birthDate"><?php echo _('ENTER_DATE_OF_BIRTH')?></label>
+                        <label for="birthDate">
+                            <?php echo _('ENTER_DATE_OF_BIRTH')?>
+                        </label>
                         <input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="Year"
                             required>
                     </div>
 
                     <div class="form-group">
-                        <label for="phoneNumber" class="form-label"><?php echo _('ENTER_PHONE_NUMBER')?></label>
+                        <label for="phoneNumber" class="form-label">
+                            <?php echo _('ENTER_PHONE_NUMBER')?>
+                        </label>
                         <div class="input-group">
                             <span class="input-group-text" id="prefix">+39</span>
                             <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
-                                placeholder="<?php echo _('PHONE_NUMBER')?>" aria-describedby="phoneNumber" minlength="10">
+                                placeholder="<?php echo _('PHONE_NUMBER')?>" aria-describedby="phoneNumber"
+                                minlength="10">
                         </div>
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="password"><?php echo _('ENTER_PASSWORD')?></label>
+                        <label for="password">
+                            <?php echo _('ENTER_PASSWORD')?>
+                        </label>
                         <input type="password" class="form-control" id="password" name="password" minlength="8"
                             placeholder="<?php echo _('PASSWORD')?>" required>
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="repeatedPassword"><?php echo _('RE_ENTER_PASSWORD')?></label>
+                        <label for="repeatedPassword">
+                            <?php echo _('RE_ENTER_PASSWORD')?>
+                        </label>
                         <input type="password" class="form-control" id="repeatedPassword" name="repeatedPassword"
                             minlength="8" placeholder="<?php echo _('REPEAT_PASSWORD')?>" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" class="btn btn-warning form-control" value="<?php echo _('SUBMIT')?>" id="submit-btn"
-                            name="submit-btn">
+                        <input type="submit" class="btn btn-warning form-control" value="<?php echo _('SUBMIT')?>"
+                            id="submit-btn" name="submit-btn">
                     </div>
 
                 </div>
@@ -134,5 +192,6 @@ include_once("../scripts/php/lang.php");
         });
     });
 </script>
+
 
 </html>

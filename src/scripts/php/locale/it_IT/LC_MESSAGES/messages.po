@@ -106,6 +106,57 @@ msgstr "Account"
 msgid "SETTINGS"
 msgstr "Impostazioni"
 
+msgid "USER_INFORMATION"
+msgstr "Informazioni Utente"
+
+msgid "INVOICE_TITLE"
+msgstr "Titolo Fattura"
+
+msgid "INVOICE_IMPORT"
+msgstr "Importo Fattura"
+
+msgid "INVOICE_TYPE"
+msgstr "Tipo Fattura"
+
+msgid "INVOICE_DATE"
+msgstr "Data Fattura"
+
+msgid "USER_ASSIGNED_INVOICE"
+msgstr "Utente assegnato alla fattura"
+
+msgid "INVOICE_DESCRIPTION"
+msgstr "Descrizione Fattura"
+
+msgid "CLOSE"
+msgstr "Chiudi"
+
+msgid "ALL_INVOICE"
+msgstr "Tutte le fatture"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "DATE"
+msgstr "Data"
+
+msgid "AMOUNT"
+msgstr "Importo"
+
+msgid "TITLE"
+msgstr "Titolo"
+
+msgid "TYPE"
+msgstr "Tipo"
+
+msgid "DESCRIPTION"
+msgstr "Descrizione"
+
+msgid "CUSTOMER"
+msgstr "Cliente"
+
+msgid "CREATED_BY"
+msgstr "Creato da"
+
 # Lingue
 msgid "ENGLISH"
 msgstr "🇬🇧Inglese🇬🇧"

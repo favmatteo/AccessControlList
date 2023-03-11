@@ -105,6 +105,57 @@ msgstr "Account"
 msgid "SETTINGS"
 msgstr "Settings"
 
+msgid "USER_INFORMATION"
+msgstr "User Information"
+
+msgid "INVOICE_TITLE"
+msgstr "Invoice Title"
+
+msgid "INVOICE_IMPORT"
+msgstr "Invoice Amount"
+
+msgid "INVOICE_TYPE"
+msgstr "Invoice Type"
+
+msgid "INVOICE_DATE"
+msgstr "Invoice Date"
+
+msgid "USER_ASSIGNED_INVOICE"
+msgstr "User Assigned to Invoice"
+
+msgid "INVOICE_DESCRIPTION"
+msgstr "Invoice Description"
+
+msgid "CLOSE"
+msgstr "Close"
+
+msgid "ALL_INVOICE"
+msgstr "All Invoices"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "DATE"
+msgstr "Date"
+
+msgid "AMOUNT"
+msgstr "Amount"
+
+msgid "TITLE"
+msgstr "Title"
+
+msgid "TYPE"
+msgstr "Type"
+
+msgid "DESCRIPTION"
+msgstr "Description"
+
+msgid "CUSTOMER"
+msgstr "Customer"
+
+msgid "CREATED_BY"
+msgstr "Created By"
+
 # Lingue
 msgid "ENGLISH"
 msgstr "🇬🇧English🇬🇧"
