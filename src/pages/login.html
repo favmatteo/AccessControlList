@@ -72,6 +72,10 @@ include("../scripts/php/lang.php");
                 )?> value="fr_FR.utf8">
                 <?php echo _('FRENCH')?>
               </option>
+              <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='de_DE.utf8' ? 'selected' : ''
+                )?> value="de_DE.utf8">
+                <?php echo _('GERMAN')?>
+              </option>
             </select>
           </div>
         </div>

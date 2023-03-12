@@ -171,3 +171,6 @@ msgstr "🇪🇸Spanish🇪🇸"
 
 msgid "FRENCH"
 msgstr "🇫🇷French🇫🇷"
+
+msgid "GERMAN"
+msgstr "🇩🇪German🇩🇪"

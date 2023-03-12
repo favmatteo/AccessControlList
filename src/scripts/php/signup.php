@@ -62,7 +62,6 @@ if ($validEmail && $validPhoneNumber && $validPassword) {
         $defaultProfilePhoto = 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
 
         // Add user to the database
-        // TODO: modify the id_role
         $SQL = "INSERT INTO acl.user (id_user, name, surname, email, photo, id_role) VALUES ('$user->uid', '$name', '$surname', '$email', '$defaultProfilePhoto', 1);";
         // Execute the query
         $result = $conn->query($SQL);

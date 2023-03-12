@@ -11,167 +11,166 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.2.2\n"
 
-# Test token 1
+#Test token 1
 msgid "HELLO_WORLD"
-msgstr "Ciao Mondo"
+msgstr "Hallo Welt"
 
 # Login
 msgid "LOGIN"
-msgstr "Accedi"
+msgstr "Anmelden"
 
 msgid "ENTER_EMAIL"
-msgstr "Inserisci email"
+msgstr "E-Mail-Adresse eingeben"
 
 msgid "EMAIL"
-msgstr "Email"
+msgstr "E-Mail"
 
 msgid "ENTER_PASSWORD"
-msgstr "Inserisci password"
+msgstr "Passwort eingeben"
 
 msgid "PASSWORD"
-msgstr "Password"
+msgstr "Passwort"
 
 msgid "FORGOT_PASSWORD"
-msgstr "Password dimenticata? "
+msgstr "Passwort vergessen?"
 
 msgid "SUBMIT"
-msgstr "Invia"
+msgstr "Absenden"
 
 # Signup
 msgid "SIGNUP"
-msgstr "Registrati"
+msgstr "Registrieren"
 
 msgid "ENTER_NAME"
-msgstr "Inserisci nome"
+msgstr "Name eingeben"
 
 msgid "NAME"
-msgstr "Nome"
+msgstr "Name"
 
 msgid "ENTER_SURNAME"
-msgstr "Inserisci cognome"
+msgstr "Nachname eingeben"
 
 msgid "SURNAME"
-msgstr "Cognome"
-
+msgstr "Nachname"
 
 msgid "ENTER_DATE_OF_BIRTH"
-msgstr "Inserisci data di nascita"
+msgstr "Geburtsdatum eingeben"
 
 msgid "ENTER_PHONE_NUMBER"
-msgstr "Inserisci numero di telefono"
+msgstr "Telefonnummer eingeben"
 
 msgid "PHONE_NUMBER"
-msgstr "Numero di telefono"
+msgstr "Telefonnummer"
 
 msgid "RE_ENTER_PASSWORD"
-msgstr "Re-inserisci password"
+msgstr "Passwort erneut eingeben"
 
 msgid "REPEAT_PASSWORD"
-msgstr "Ripeti password"
+msgstr "Passwort wiederholen"
 
 # Dashboard
 msgid "CREATE_INVOICE"
-msgstr "Crea Fattura"
+msgstr "Rechnung erstellen"
 
 msgid "CREATE_A_INVOICE"
-msgstr "Crea una fattura"
+msgstr "Eine Rechnung erstellen"
 
 msgid "LIST_INVOICE"
-msgstr "Mostra Fatture"
+msgstr "Rechnungsliste"
 
 msgid "LIST_ALL_INVOICE"
-msgstr "Mostra tutte le fatture"
+msgstr "Alle Rechnungen auflisten"
 
 msgid "UPDATE_INVOICE"
-msgstr "Aggiorna Fattura"
+msgstr "Rechnung aktualisieren"
 
 msgid "UPDATE_A_INVOICE"
-msgstr "Aggiorna una fattura"
+msgstr "Eine Rechnung aktualisieren"
 
 msgid "DASHBOARD"
 msgstr "Dashboard"
 
 msgid "ADMIN_PAGE"
-msgstr "Pagina admin"
+msgstr "Admin-Seite"
 
 msgid "PROFILE"
-msgstr "Profilo"
+msgstr "Profil"
 
 msgid "LOGOUT"
-msgstr "Esci"
+msgstr "Abmelden"
 
 msgid "ACCOUNT"
-msgstr "Account"
+msgstr "Konto"
 
 msgid "SETTINGS"
-msgstr "Impostazioni"
+msgstr "Einstellungen"
 
 msgid "USER_INFORMATION"
-msgstr "Informazioni Utente"
+msgstr "Benutzerinformationen"
 
 msgid "INVOICE_TITLE"
-msgstr "Titolo Fattura"
+msgstr "Rechnungstitel"
 
 msgid "INVOICE_IMPORT"
-msgstr "Importo Fattura"
+msgstr "Rechnungsbetrag"
 
 msgid "INVOICE_TYPE"
-msgstr "Tipo Fattura"
+msgstr "Rechnungstyp"
 
 msgid "INVOICE_DATE"
-msgstr "Data Fattura"
+msgstr "Rechnungsdatum"
 
 msgid "USER_ASSIGNED_INVOICE"
-msgstr "Utente assegnato alla fattura"
+msgstr "Benutzer, dem die Rechnung zugewiesen wurde"
 
 msgid "INVOICE_DESCRIPTION"
-msgstr "Descrizione Fattura"
+msgstr "Rechnungsbeschreibung"
 
 msgid "CLOSE"
-msgstr "Chiudi"
+msgstr "Schließen"
 
 msgid "ALL_INVOICE"
-msgstr "Tutte le fatture"
+msgstr "Alle Rechnungen"
 
 msgid "ID"
 msgstr "ID"
 
 msgid "DATE"
-msgstr "Data"
+msgstr "Datum"
 
 msgid "AMOUNT"
-msgstr "Importo"
+msgstr "Betrag"
 
 msgid "TITLE"
-msgstr "Titolo"
+msgstr "Titel"
 
 msgid "TYPE"
-msgstr "Tipo"
+msgstr "Typ"
 
 msgid "DESCRIPTION"
-msgstr "Descrizione"
+msgstr "Beschreibung"
 
 msgid "CUSTOMER"
-msgstr "Cliente"
+msgstr "Kunde"
 
 msgid "CREATED_BY"
-msgstr "Creato da"
+msgstr "Erstellt von"
 
 msgid "WELCOME"
-msgstr "Benvenuto"
+msgstr "Willkommen"
 
 # Lingue
 msgid "ENGLISH"
-msgstr "🇬🇧Inglese🇬🇧"
+msgstr "🇬🇧Englisch🇬🇧"
 
 msgid "ITALIAN"
-msgstr "🇮🇹Italiano🇮🇹"
+msgstr "🇮🇹Italienisch🇮🇹"
 
 msgid "SPANISH"
-msgstr "🇪🇸Spagnolo🇪🇸"
+msgstr "🇪🇸Spanisch🇪🇸"
 
 msgid "FRENCH"
-msgstr "🇫🇷Francese🇫🇷"
+msgstr "🇫🇷Französisch🇫🇷"
 
 msgid "GERMAN"
-msgstr "🇩🇪Tedesco🇩🇪"
+msgstr "🇩🇪Deutsch🇩🇪"
