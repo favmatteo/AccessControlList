@@ -29,6 +29,12 @@ if(!isset($_SESSION['session-cookie'])){
     $row = $result->fetch_assoc();
     $_SESSION['role'] = $row['name'];
 
+    // get the photo
+    $sql = "SELECT photo FROM user WHERE id_user = '$uid'";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $_SESSION['photoProfile'] = $row['photo'];
+
     $_SESSION['isCarouselActive'] = true;
 }
 ?>
@@ -46,6 +52,8 @@ if(!isset($_SESSION['session-cookie'])){
         rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdn.statically.io/gh/Loopple/loopple-public-assets/main/asteria-dashboard/css/nucleo-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <link rel="stylesheet" href="../css/theme.css">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
@@ -131,7 +139,7 @@ if(!isset($_SESSION['session-cookie'])){
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder">Account pages</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="javascript:;">
+                    <a class="nav-link" href="profile.html">
                         <div
                             class="icon icon-shape icon-sm p-0 text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="14px" height="14px" viewBox="0 0 46 42" version="1.1"
@@ -212,47 +220,15 @@ if(!isset($_SESSION['session-cookie'])){
                             </a>
                         </li>
                         <li class="nav-item dropdown d-flex ps-sm-2 align-items-center position-relative">
-                            <hr class="vertical dark my-0 start-0">
+                            <h6 style='position: relative; top: 5px; margin-left: 5px;'>
+                                <?php echo _('WELCOME') . ' ' . $_SESSION['user']->displayName ?>
+                            </h6>
                             <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuUser"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                                <img src="<?php echo $_SESSION['photoProfile'] ?>"
                                     class="avatar avatar-sm shadow-sm mx-2" alt="avatar">
                             </a>
-                            <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n2"
-                                aria-labelledby="dropdownMenuUser">
-                                <li class="position-relative">
-                                    <div class="dropdown-header pt-0">
-                                        <h6 class="mb-0">
-                                            <?php echo $_SESSION['user']->displayName ?>
-                                        </h6>
-                                        <p class="mb-0 text-sm">
-                                            <?php echo $_SESSION['user']->email ?>
-                                        </p>
-                                    </div>
-                                    <hr class="horizontal dark mt-1 mb-2">
-                                </li>
-                                <li class="mb-1">
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <span>
-                                            <?php echo _('ACCOUNT') ?>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="mb-1">
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <span>
-                                            <?php echo _('SETTINGS') ?>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="mb-1">
-                                    <a class="dropdown-item border-radius-md logout-btn" role="button">
-                                        <span>
-                                            <?php echo _('LOGOUT') ?>
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
+
                         </li>
                     </ul>
                 </div>
@@ -570,117 +546,67 @@ if(!isset($_SESSION['session-cookie'])){
                                     <?php echo _('USER_INFORMATION') ?>
                                 </h6>
                                 <div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-username">Username</label>
-                                                <input type="text" id="input-username" class="form-control"
-                                                    placeholder="Username" value="lucky.jesse">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-email">Email
-                                                    address</label>
-                                                <input type="email" id="input-email" class="form-control"
-                                                    placeholder="jesse@example.com">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-first-name">First
-                                                    name</label>
-                                                <input type="text" id="input-first-name" class="form-control"
-                                                    placeholder="First name" value="Lucky">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-last-name">Last
-                                                    name</label>
-                                                <input type="text" id="input-last-name" class="form-control"
-                                                    placeholder="Last name" value="Jesse">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr class="horizontal dark my-4">
-                                <!-- Address -->
-                                <h6 class="heading-small text-muted mb-4">Contact information</h6>
-                                <div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-address">Address</label>
-                                                <input id="input-address" class="form-control"
-                                                    placeholder="Home Address"
-                                                    value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                                                    type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-city">City</label>
-                                                <input type="text" id="input-city" class="form-control"
-                                                    placeholder="City" value="New York">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-country">Country</label>
-                                                <input type="text" id="input-country" class="form-control"
-                                                    placeholder="Country" value="United States">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-country">Postal
-                                                    code</label>
-                                                <input type="number" id="input-postal-code" class="form-control"
-                                                    placeholder="Postal code">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr class="horizontal dark my-4">
-                                <!-- Description -->
-                                <h6 class="heading-small text-muted mb-4">About me</h6>
-                                <div">
-                                    <div class="form-group">
-                                        <label class="form-control-label">About Me</label>
-                                        <textarea rows="4" class="form-control"
-                                            placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 5.</textarea>
-                                    </div>
-                                </div">
-                            </form>
-                        </div>
+                                    <select class="form-control" id="invoice-select"
+                                        onchange="changeUpdateInvoiceInformation()">
+                                        <option>Select</option>
 
+                                        <?php
+                                    include("../scripts/php/mysqlcon.php");
+                                    // get all invoice
+                                    $sql = "SELECT * FROM acl.invoice";
+                                    $result = $conn->query($sql);
+                                    $sql = "SELECT * FROM acl.invoice";
+                                    $result = $conn->query($sql);
+                                    if ($result->num_rows > 0) {
+                                        echo 'ciao';
+                                        // create a select with all invoice
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "<option value='" . $row['id_invoice'] . "'>" . $row['id_invoice'] . ' ' . $row['title'] . "</option>";
+                                        }
+                                    }
+                                    ?>
+
+                                    </select>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-6">
+                                            <input class="form-control" type="text" placeholder="New title"
+                                                id="invoice-title-update">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input class="form-control" type="number" placeholder="New amount"
+                                                id="invoice-amount-update" min="0">
+                                        </div>
+
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-6">
+                                            <input class="form-control" type="text" placeholder="New type"
+                                                id="invoice-typology-update">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <textarea class="form-control" type="text" placeholder="New description"
+                                                rows="1" id="invoice-description-update"></textarea>
+                                        </div>
+                                    </div>
+
+
+                                    <input type="button" class="btn btn-primary w-100 mt-2" id="update-invoice-btn"
+                                        value="Update">
+                                </div>
+                        </div>
+                        </form>
                     </div>
+
                 </div>
             </div>
         </div>
-
         <!-- Result from operation -->
         <div class="row removable" id="results" style="display: none;">
 
         </div>
+    </div>
 
-        <!-- Footer -->
-        <footer class="footer pt-3 pb-4">
-            <div class="container-fluid">
-                <div class="row align-items-center justify-content-lg-between">
-                    <div class="col-lg-6 mb-lg-0 mb-4">
-                        <div class="copyright text-center text-sm text-muted text-lg-start">
-                            © 2023, ACL
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+
     </div>
     <script src="https://loopple.s3.eu-west-3.amazonaws.com/asteria-dashboard/js/core/bootstrap.min.js"></script>
     <script
@@ -690,6 +616,7 @@ if(!isset($_SESSION['session-cookie'])){
     <script
         src="https://rawcdn.githack.com/Loopple/loopple-public-assets/f5029eba0dafd952ecdbf8fbbdd0aa9ae0d0abc1/asteria-dashboard/js/plugins/swiper.min.js"></script>
     <script src="https://loopple.s3.eu-west-3.amazonaws.com/asteria-dashboard/js/asteria-dashboard.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
         const createInvoice = document.getElementById("create-invoice");
@@ -728,7 +655,6 @@ if(!isset($_SESSION['session-cookie'])){
         document.getElementById('invoice-date').value = dd + '/' + mm + '/' + yyyy;
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(() => {
             $(".logout-btn").click((e) => {
@@ -766,6 +692,40 @@ if(!isset($_SESSION['session-cookie'])){
                 }
             })
         })
+    </script>
+
+    <script>
+        function changeUpdateInvoiceInformation() {
+            const id = document.getElementById('invoice-select').value;
+            const title_invoice = document.getElementById('invoice-title-update');
+            const amount_invoice = document.getElementById('invoice-amount-update');
+            const typology_invoice = document.getElementById('invoice-typology-update');
+            const description_invoice = document.getElementById('invoice-description-update');
+
+            $.ajax({
+                url: '../scripts/php/get-information-invoice.php',
+                type: 'POST',
+                data: {
+                    invoice_id: id,
+                },
+                success: (res) => {
+                    res = JSON.parse(res);
+                    console.log(res);
+                    title_invoice.value = res.title;
+                    amount_invoice.value = res.amount;
+                    typology_invoice.value = res.typology;
+                    description_invoice.value = res.description;
+                }
+            })
+            console.log(id);
+
+        }
+    </script>
+
+    <!--Update invoice button ajax-->
+    <script>
+
+
     </script>
 </body>
 

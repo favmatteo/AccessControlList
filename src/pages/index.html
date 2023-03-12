@@ -116,7 +116,7 @@ include("../scripts/php/lang.php");
 <script type="text/javascript">
     const lang = document.getElementById('languageSelector').value;
     console.log(lang);
-    $(window).load(function () { /*This allows to execute your code after the  page is rendered fully */
+    $(window).load(function () {
         $.ajax({
             url: "../scripts/php/save-to-session.php",
             type: "POST",

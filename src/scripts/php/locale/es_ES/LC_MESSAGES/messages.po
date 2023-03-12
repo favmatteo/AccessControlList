@@ -156,6 +156,9 @@ msgstr "Cliente"
 msgid "CREATED_BY"
 msgstr "Creado por"
 
+msgid "WELCOME"
+msgstr "Bienvenido"
+
 # Lingue
 msgid "ENGLISH"
 msgstr "🇺🇸Inglés🇺🇸"

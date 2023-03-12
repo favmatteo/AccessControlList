@@ -12,6 +12,7 @@ CREATE TABLE
         name VARCHAR(50) NOT NULL,
         surname VARCHAR(50) NOT NULL,
         email VARCHAR(50) NOT NULL,
+        photo TEXT NOT NULL,
         id_role INT UNSIGNED NOT NULL,
         FOREIGN KEY (id_role) REFERENCES roles(id_role)
     );
