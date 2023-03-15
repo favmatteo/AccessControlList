@@ -47,6 +47,9 @@ if(!isset($_SESSION['session-cookie'])){
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../scripts/js/ajax/profile.js"></script>
+
 
 </head>
 
@@ -246,45 +249,7 @@ if(!isset($_SESSION['session-cookie'])){
     <script src="https://loopple.s3.eu-west-3.amazonaws.com/asteria-dashboard/js/asteria-dashboard.min.js"></script>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(() => {
-            $(".logout-btn").click((e) => {
-                $.ajax({
-                    url: "../scripts/php/logout.php",
-                    type: "POST",
-                    success: function (res) {
-                        window.location.href = "index.html";
-                    }
-                });
-            });
-        });
-    </script>
 
-    <script>
-        function changePhotoButton(userId) {
-            const photoLink = document.getElementById("photo-link").value;
-            const results = document.getElementById('results');
-            $.ajax({
-                url: "../scripts/php/update-photo.php",
-                type: "POST",
-                data: {
-                    userId: userId,
-                    photo: photoLink
-                },
-                success: function (res) {
-                    console.log(res);
-                    if (res == "success") {
-                        results.style.display = "block";
-                        results.innerHTML = "<div class='alert alert-success' role='alert'>Photo updated successfully! (RELOAD PAGE)</div>";
-                    } else {
-                        results.style.display = "block";
-                        results.innerHTML = "<div class='alert alert-danger' role='alert'>Error updating photo!</div>";
-                    }
-                }
-            });
-        }
-    </script>
 </body>
 
 </html>
