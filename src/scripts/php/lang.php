@@ -10,7 +10,6 @@ error_reporting(E_ALL);
 
 if(!isset($_SESSION['language'])){
     $language = 'en_US.utf8';
-    $_SESSION['language'] = $language;
 }else{
     $language = $_SESSION['language'];
 }
