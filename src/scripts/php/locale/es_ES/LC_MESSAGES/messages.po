@@ -1,0 +1,215 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.2.2\n"
+
+# Test token 1
+msgid "HELLO_WORLD"
+msgstr "Hola Mundo"
+
+# Login
+msgid "LOGIN"
+msgstr "Iniciar sesión"
+
+msgid "ENTER_EMAIL"
+msgstr "Introduzca correo electrónico"
+
+msgid "EMAIL"
+msgstr "Correo electrónico"
+
+msgid "ENTER_PASSWORD"
+msgstr "Introduzca contraseña"
+
+msgid "PASSWORD"
+msgstr "Contraseña"
+
+msgid "FORGOT_PASSWORD"
+msgstr "¿Olvidó la contraseña?"
+
+msgid "SUBMIT"
+msgstr "Enviar"
+
+# Signup
+msgid "SIGNUP"
+msgstr "Registrarse"
+
+msgid "ENTER_NAME"
+msgstr "Introduzca nombre"
+
+msgid "NAME"
+msgstr "Nombre"
+
+msgid "ENTER_SURNAME"
+msgstr "Introduzca apellido"
+
+msgid "SURNAME"
+msgstr "Apellido"
+
+msgid "ENTER_DATE_OF_BIRTH"
+msgstr "Introduzca fecha de nacimiento"
+
+msgid "ENTER_PHONE_NUMBER"
+msgstr "Introduzca número de teléfono"
+
+msgid "PHONE_NUMBER"
+msgstr "Número de teléfono"
+
+msgid "RE_ENTER_PASSWORD"
+msgstr "Vuelva a introducir la contraseña"
+
+msgid "REPEAT_PASSWORD"
+msgstr "Repetir contraseña"
+
+# Dashboard
+msgid "CREATE_INVOICE"
+msgstr "Crear factura"
+
+msgid "CREATE_A_INVOICE"
+msgstr "Crear una factura"
+
+msgid "LIST_INVOICE"
+msgstr "Mostrar facturas"
+
+msgid "LIST_ALL_INVOICE"
+msgstr "Mostrar todas las facturas"
+
+msgid "UPDATE_INVOICE"
+msgstr "Actualizar factura"
+
+msgid "UPDATE_A_INVOICE"
+msgstr "Actualizar una factura"
+
+msgid "DASHBOARD"
+msgstr "Panel de control"
+
+msgid "ADMIN_PAGE"
+msgstr "Página de administrador"
+
+msgid "PROFILE"
+msgstr "Perfil"
+
+msgid "LOGOUT"
+msgstr "Cerrar sesión"
+
+msgid "ACCOUNT"
+msgstr "Cuenta"
+
+msgid "SETTINGS"
+msgstr "Configuración"
+
+msgid "USER_INFORMATION"
+msgstr "Información del usuario"
+
+msgid "INVOICE_TITLE"
+msgstr "Título de la factura"
+
+msgid "INVOICE_IMPORT"
+msgstr "Importe de la factura"
+
+msgid "INVOICE_TYPE"
+msgstr "Tipo de factura"
+
+msgid "INVOICE_DATE"
+msgstr "Fecha de la factura"
+
+msgid "USER_ASSIGNED_INVOICE"
+msgstr "Usuario asignado a la factura"
+
+msgid "INVOICE_DESCRIPTION"
+msgstr "Descripción de la factura"
+
+msgid "CLOSE"
+msgstr "Cerrar"
+
+msgid "ALL_INVOICE"
+msgstr "Todas las facturas"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "DATE"
+msgstr "Fecha"
+
+msgid "AMOUNT"
+msgstr "Monto"
+
+msgid "TITLE"
+msgstr "Título"
+
+msgid "TYPE"
+msgstr "Tipo"
+
+msgid "DESCRIPTION"
+msgstr "Descripción"
+
+msgid "CUSTOMER"
+msgstr "Cliente"
+
+msgid "CREATED_BY"
+msgstr "Creado por"
+
+msgid "WELCOME"
+msgstr "Bienvenido"
+
+msgid "SELECT"
+msgstr "Seleccionar"
+
+msgid "CHANGE_TITLE"
+msgstr "Cambiar título"
+
+msgid "CHANGE_AMOUNT"
+msgstr "Cambiar cantidad"
+
+msgid "CHANGE_TYPE"
+msgstr "Cambiar tipo"
+
+msgid "CHANGE_DESCRIPTION"
+msgstr "Cambiar descripción"
+
+msgid "DELETE"
+msgstr "Eliminar"
+
+msgid "UPDATE"
+msgstr "Actualizar"
+
+msgid "NEW_TITLE"
+msgstr "Nuevo título"
+
+msgid "NEW_AMOUNT"
+msgstr "Nuevo monto"
+
+msgid "NEW_TYPE"
+msgstr "Nuevo tipo"
+
+msgid "NEW_DESCRIPTION"
+msgstr "Nueva descripción"
+
+msgid "ACCOUNT_PAGES"
+msgstr "Páginas de cuenta"
+
+msgid "LINK_PHOTO"
+msgstr "Enlace de foto"
+
+# Lingue
+msgid "ENGLISH"
+msgstr "🇺🇸Inglés🇺🇸"
+
+msgid "ITALIAN"
+msgstr "🇮🇹Italiano🇮🇹"
+
+msgid "SPANISH"
+msgstr "🇪🇸Español🇪🇸"
+
+msgid "FRENCH"
+msgstr "🇫🇷Francés🇫🇷"
+
+msgid "GERMAN"
+msgstr "🇩🇪Alemán🇩🇪"

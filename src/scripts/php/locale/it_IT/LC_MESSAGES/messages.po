@@ -1,0 +1,216 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.2.2\n"
+
+# Test token 1
+msgid "HELLO_WORLD"
+msgstr "Ciao Mondo"
+
+# Login
+msgid "LOGIN"
+msgstr "Accedi"
+
+msgid "ENTER_EMAIL"
+msgstr "Inserisci email"
+
+msgid "EMAIL"
+msgstr "Email"
+
+msgid "ENTER_PASSWORD"
+msgstr "Inserisci password"
+
+msgid "PASSWORD"
+msgstr "Password"
+
+msgid "FORGOT_PASSWORD"
+msgstr "Password dimenticata? "
+
+msgid "SUBMIT"
+msgstr "Invia"
+
+# Signup
+msgid "SIGNUP"
+msgstr "Registrati"
+
+msgid "ENTER_NAME"
+msgstr "Inserisci nome"
+
+msgid "NAME"
+msgstr "Nome"
+
+msgid "ENTER_SURNAME"
+msgstr "Inserisci cognome"
+
+msgid "SURNAME"
+msgstr "Cognome"
+
+
+msgid "ENTER_DATE_OF_BIRTH"
+msgstr "Inserisci data di nascita"
+
+msgid "ENTER_PHONE_NUMBER"
+msgstr "Inserisci numero di telefono"
+
+msgid "PHONE_NUMBER"
+msgstr "Numero di telefono"
+
+msgid "RE_ENTER_PASSWORD"
+msgstr "Re-inserisci password"
+
+msgid "REPEAT_PASSWORD"
+msgstr "Ripeti password"
+
+# Dashboard
+msgid "CREATE_INVOICE"
+msgstr "Crea Fattura"
+
+msgid "CREATE_A_INVOICE"
+msgstr "Crea una fattura"
+
+msgid "LIST_INVOICE"
+msgstr "Mostra Fatture"
+
+msgid "LIST_ALL_INVOICE"
+msgstr "Mostra tutte le fatture"
+
+msgid "UPDATE_INVOICE"
+msgstr "Aggiorna Fattura"
+
+msgid "UPDATE_A_INVOICE"
+msgstr "Aggiorna una fattura"
+
+msgid "DASHBOARD"
+msgstr "Dashboard"
+
+msgid "ADMIN_PAGE"
+msgstr "Pagina admin"
+
+msgid "PROFILE"
+msgstr "Profilo"
+
+msgid "LOGOUT"
+msgstr "Esci"
+
+msgid "ACCOUNT"
+msgstr "Account"
+
+msgid "SETTINGS"
+msgstr "Impostazioni"
+
+msgid "USER_INFORMATION"
+msgstr "Informazioni Utente"
+
+msgid "INVOICE_TITLE"
+msgstr "Titolo Fattura"
+
+msgid "INVOICE_IMPORT"
+msgstr "Importo Fattura"
+
+msgid "INVOICE_TYPE"
+msgstr "Tipo Fattura"
+
+msgid "INVOICE_DATE"
+msgstr "Data Fattura"
+
+msgid "USER_ASSIGNED_INVOICE"
+msgstr "Utente assegnato alla fattura"
+
+msgid "INVOICE_DESCRIPTION"
+msgstr "Descrizione Fattura"
+
+msgid "CLOSE"
+msgstr "Chiudi"
+
+msgid "ALL_INVOICE"
+msgstr "Tutte le fatture"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "DATE"
+msgstr "Data"
+
+msgid "AMOUNT"
+msgstr "Importo"
+
+msgid "TITLE"
+msgstr "Titolo"
+
+msgid "TYPE"
+msgstr "Tipo"
+
+msgid "DESCRIPTION"
+msgstr "Descrizione"
+
+msgid "CUSTOMER"
+msgstr "Cliente"
+
+msgid "CREATED_BY"
+msgstr "Creato da"
+
+msgid "WELCOME"
+msgstr "Benvenuto"
+
+msgid "SELECT"
+msgstr "Seleziona"
+
+msgid "CHANGE_TITLE"
+msgstr "Cambia titolo"
+
+msgid "CHANGE_AMOUNT"
+msgstr "Cambia importo"
+
+msgid "CHANGE_TYPE"
+msgstr "Cambia tipo"
+
+msgid "CHANGE_DESCRIPTION"
+msgstr "Cambia descrizione"
+
+msgid "DELETE"
+msgstr "Elimina"
+
+msgid "UPDATE"
+msgstr "Aggiorna"
+
+msgid "NEW_TITLE"
+msgstr "Nuovo titolo"
+
+msgid "NEW_AMOUNT"
+msgstr "Nuovo importo"
+
+msgid "NEW_TYPE"
+msgstr "Nuovo tipo"
+
+msgid "NEW_DESCRIPTION"
+msgstr "Nuova descrizione"
+
+msgid "ACCOUNT_PAGES"
+msgstr "Pagine account"
+
+msgid "LINK_PHOTO"
+msgstr "Link foto"
+
+# Lingue
+msgid "ENGLISH"
+msgstr "🇬🇧Inglese🇬🇧"
+
+msgid "ITALIAN"
+msgstr "🇮🇹Italiano🇮🇹"
+
+msgid "SPANISH"
+msgstr "🇪🇸Spagnolo🇪🇸"
+
+msgid "FRENCH"
+msgstr "🇫🇷Francese🇫🇷"
+
+msgid "GERMAN"
+msgstr "🇩🇪Tedesco🇩🇪"

@@ -1,0 +1,751 @@
+<?php 
+include("../scripts/php/lang.php");
+
+# Check if user is logged, and if not, redirect to login page
+use Kreait\Firebase\Exception\Auth\FailedToVerifySessionCookie;
+include ('../scripts/php/dbcon.php');
+include("../scripts/php/mysqlcon.php");
+
+//session_start();
+
+if(!isset($_SESSION['session-cookie'])){
+    die(header("location: login.html"));
+} else {
+    $sessionCookieString = $_SESSION['session-cookie'];
+    try {
+        $verifiedSessionCookie = $auth->verifySessionCookie($sessionCookieString);
+    } catch (FailedToVerifySessionCookie $e) {
+        die(header("location: login.html"));
+    }
+    $uid = $verifiedSessionCookie->claims()->get('sub');
+    $user = $auth->getUser($uid);
+    $_SESSION['user'] = $user;
+
+    # Get the role
+    $sql = "USE acl";
+    $conn->query($sql);
+    $sql = "SELECT roles.name FROM user JOIN roles ON user.id_role = roles.id_role WHERE user.id_user = '$uid'";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $_SESSION['role'] = $row['name'];
+
+    // get the photo
+    $sql = "SELECT photo FROM user WHERE id_user = '$uid'";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $_SESSION['photoProfile'] = $row['photo'];
+
+    $_SESSION['isCarouselActive'] = true;
+}
+?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Dashboard</title>
+
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdn.statically.io/gh/Loopple/loopple-public-assets/main/asteria-dashboard/css/nucleo-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+
+
+</head>
+
+<body class="g-sidenav-show">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-end fixed-start loopple-fixed-start"
+        id="sidenav-main">
+        <div class="sidenav-header">
+            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-xl-none"
+                aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand m-0" href="index.html">
+                <img src="../assets/favicon.ico">
+                <span class="ms-1 font-weight-bold">ACL</span>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="javascript:;">
+                        <div
+                            class="icon icon-shape icon-sm p-0 text-center me-2 d-flex align-items-center justify-content-center">
+                            <svg width="14px" height="14px" viewBox="0 0 47 40" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF"
+                                        fill-rule="nonzero">
+                                        <g transform="translate(1716.000000, 291.000000)">
+                                            <g transform="translate(0.000000, 148.000000)">
+                                                <path class="color-background opacity-6"
+                                                    d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z">
+                                                </path>
+                                                <path class="color-background"
+                                                    d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <span class="nav-link-text ms-1">
+                            <?php echo _('DASHBOARD') ?>
+                        </span>
+                    </a>
+                </li>
+                <?php
+                // check if user is admin if it is show admin panel
+                if($_SESSION['role'] == "admin"){
+                    echo '<li class="nav-item">
+                    <a class="nav-link" href="admin.html">
+                        <div
+                            class="icon icon-shape icon-sm p-0 text-center me-2 d-flex align-items-center justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
+                                <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z"/>
+                            </svg>
+                        </div>
+                        <span class="nav-link-text ms-1">' . _('ADMIN_PAGE') . '</span>
+                    </a>
+                    </li>';
+                }
+                
+                
+                ?>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder"><?php echo _('ACCOUNT_PAGES') ?></h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.html">
+                        <div
+                            class="icon icon-shape icon-sm p-0 text-center me-2 d-flex align-items-center justify-content-center">
+                            <svg width="14px" height="14px" viewBox="0 0 46 42" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <title>customer-support</title>
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF"
+                                        fill-rule="nonzero">
+                                        <g transform="translate(1716.000000, 291.000000)">
+                                            <g transform="translate(1.000000, 0.000000)">
+                                                <path class="color-background opacity-6"
+                                                    d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z">
+                                                </path>
+                                                <path class="color-background"
+                                                    d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z">
+                                                </path>
+                                                <path class="color-background"
+                                                    d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <span class="nav-link-text ms-1">
+                            <?php echo _('PROFILE') ?>
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link logout-btn" role="button">
+                        <div
+                            class="icon icon-shape icon-sm p-0 text-center me-2 d-flex align-items-center justify-content-center">
+                            <svg width="14px" height="14px" viewBox="0 0 40 44" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <title>document</title>
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g transform="translate(-1870.000000, -591.000000)" fill="#FFFFFF"
+                                        fill-rule="nonzero">
+                                        <g transform="translate(1716.000000, 291.000000)">
+                                            <g transform="translate(154.000000, 300.000000)">
+                                                <path class="color-background opacity-6"
+                                                    d="M40,40 L36.3636364,40 L36.3636364,3.63636364 L5.45454545,3.63636364 L5.45454545,0 L38.1818182,0 C39.1854545,0 40,0.814545455 40,1.81818182 L40,40 Z">
+                                                </path>
+                                                <path class="color-background"
+                                                    d="M30.9090909,7.27272727 L1.81818182,7.27272727 C0.814545455,7.27272727 0,8.08727273 0,9.09090909 L0,41.8181818 C0,42.8218182 0.814545455,43.6363636 1.81818182,43.6363636 L30.9090909,43.6363636 C31.9127273,43.6363636 32.7272727,42.8218182 32.7272727,41.8181818 L32.7272727,9.09090909 C32.7272727,8.08727273 31.9127273,7.27272727 30.9090909,7.27272727 Z M18.1818182,34.5454545 L7.27272727,34.5454545 L7.27272727,30.9090909 L18.1818182,30.9090909 L18.1818182,34.5454545 Z M25.4545455,27.2727273 L7.27272727,27.2727273 L7.27272727,23.6363636 L25.4545455,23.6363636 L25.4545455,27.2727273 Z M25.4545455,20 L7.27272727,20 L7.27272727,16.3636364 L25.4545455,16.3636364 L25.4545455,20 Z">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <span class="nav-link-text ms-1">
+                            <?php echo _('LOGOUT') ?>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <div class="main-content" id="panel">
+        <nav class="navbar navbar-main navbar-expand-lg px-0 start-100 position-sticky blur shadow-none top-0 z-index-6"
+            id="navbarTop" navbar-scroll="true">
+            <div class="container-fluid py-2 px-5">
+
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <ul class="navbar-nav ms-auto justify-content-end">
+
+                        <li class="nav-item position-relative d-xl-none ps-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown d-flex ps-sm-2 align-items-center position-relative">
+                            <h6 style='position: relative; top: 5px; margin-left: 5px;'>
+                                <?php echo _('WELCOME') . ' ' . $_SESSION['user']->displayName ?>
+                            </h6>
+                            <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuUser"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="<?php echo $_SESSION['photoProfile'] ?>"
+                                    class="avatar avatar-sm shadow-sm mx-2" alt="avatar">
+                            </a>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid pt-3">
+            <div class="row removable">
+                <div class="col-lg-12">
+                    <div class="card min-height-300 h-100">
+                        <div class="overflow-hidden position-relative border-radius-lg min-height-300 h-100">
+                            <div
+                                class="card-body position-relative z-index-1 d-flex flex-column min-height-300 h-100 p-0">
+                                <div id="carouselImageSlide" class="carousel slide min-height-300 h-100"
+                                    data-bs-ride="carousel">
+                                    <div class="carousel-inner min-height-300 h-100">
+                                        <?php
+                                        $role = $_SESSION['role'];
+                                        
+                                        if($role == 'admin' || $role == "commercial"){
+                                            $activate = $_SESSION['isCarouselActive'];
+                                            $_SESSION['isCarouselActive'] = false;                                          
+                                            echo '<div class="carousel-item min-height-300 h-100 bg-cover ' . ($activate ? "active" : "") . '" role="button"
+                                                onclick="showCreateInvoice()" data-bs-interval="5000"
+                                                style="background: rgba(0, 128, 0, 0.5);">
+                                                <span class="mask bg-gradient-dark"></span>
+                                                <div
+                                                    class="position-relative min-height-300 h-100 d-flex flex-column justify-content-end mt-auto p-4">
+                                                    <h1 class="text-white font-weight-bolder mb-2 pt-2">' . _('CREATE_INVOICE') . '</h1>
+                                                    <p class="text-white text-sm mb-0">' . _('CREATE_A_INVOICE') . '</p>
+                                                </div>
+                                            </div>';
+                                        }
+                                        ?>
+                                        <?php
+                                        $role = $_SESSION['role'];
+                                        
+                                        if($role == 'admin' || $role == "commercial" || $role == 'Area manager'){
+                                            $activate = $_SESSION['isCarouselActive'];
+                                            $_SESSION['isCarouselActive'] = false;                                          
+                                            echo '<div class="carousel-item min-height-300 h-100 bg-cover ' . ($activate ? "active" : "") . '" data-bs-interval="3000"
+                                                role="button" onclick="showListInvoice()"
+                                                style="background: rgba(154, 205, 50, 0.7);">
+                                                <span class="mask bg-gradient-dark"></span>
+                                                <div
+                                                    class="position-relative min-height-300 h-100 d-flex flex-column justify-content-end mt-auto p-4">
+                                                    <h1 class="text-white font-weight-bolder mb-2 pt-2">' . _('LIST_INVOICE') . '</h1>
+                                                    <p class="text-white text-sm mb-0">' . _('LIST_ALL_INVOICE') . '</p>
+                                                </div>
+                                            </div>';
+                                        }
+                                        ?>
+                                        <?php
+                                        $role = $_SESSION['role'];
+                                        
+                                        if($role == 'admin' || $role == "commercial" || $role == 'Area manager' || $role == "Administration"){
+                                            $activate = $_SESSION['isCarouselActive'];
+                                            $_SESSION['isCarouselActive'] = false;                                          
+                                            echo '<div class="carousel-item min-height-300 h-100 bg-cover' . ($activate ? "active" : "") . '" data-bs-interval="3000"
+                                                role="button" onclick="showUpdateInvoice()"
+                                                style="background: rgba(107, 142, 35, 0.3);">
+                                                <span class="mask bg-gradient-dark"></span>
+                                                <div
+                                                    class="position-relative min-height-300 h-100 d-flex flex-column justify-content-end mt-auto p-4">
+                                                    <h1 class="text-white font-weight-bolder mb-2 pt-2">' . _('UPDATE_INVOICE') . '</h1>
+                                                    <p class="text-white text-sm mb-0">' . _('UPDATE_A_INVOICE') . '</p>
+                                                </div>
+                                            </div>';
+                                        }
+                                        ?>
+                                    </div>
+                                    <button class="carousel-control-prev ms-auto end-8 w-5" type="button"
+                                        data-bs-target="#carouselImageSlide" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon position-absolute top-4 right-10"
+                                            aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next w-5 end-3" type="button"
+                                        data-bs-target="#carouselImageSlide" data-bs-slide="next">
+                                        <span
+                                            class="carousel-control-next-icon position-absolute top-4 right-10 text-sm"
+                                            aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row removable" id="create-invoice" style="display: none;">
+                <div class="col-lg-12">
+                    <div class="card mb-4 mt-4">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">
+                                        <?php echo _('CREATE_INVOICE') ?>
+                                    </h3>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a class="btn btn-sm btn-primary mb-0" role="button" onclick="hideAll()">
+                                        <?php echo _('CLOSE') ?>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form method="post">
+                                <h6 class="heading-small text-muted mb-4">
+                                    <?php echo _('USER_INFORMATION') ?>
+                                </h6>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="invoice-title" class="form-control-label">
+                                                    <?php echo _('INVOICE_TITLE') ?>
+                                                </label>
+                                                <input type="text" id="invoice-title" class="form-control"
+                                                    placeholder="<?php echo _('INVOICE_TITLE') ?>">
+                                            </div>
+                                        </div>
+                                        <div class=" col-lg-6">
+                                            <div class="form-group">
+                                                <label for="invoice-import" class="form-control-label">
+                                                    <?php echo _('INVOICE_IMPORT') ?>
+                                                </label>
+                                                <div class="input-group mb-3">
+                                                    <input type="number" id="invoice-import" name="invoice-import"
+                                                        class="form-control" min="0" value="0">
+                                                    <span class="input-group-text" id="basic-addon1">€</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="invoice-type" class="form-control-label">
+                                                    <?php echo _('TYPE') ?>
+                                                </label>
+                                                <input type="text" id="invoice-type" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class=" col-lg-6">
+                                            <div class="form-group">
+                                                <label for="invoice-date" class="form-control-label">
+                                                    <?php echo _('INVOICE_DATE') ?>
+                                                </label>
+                                                <input type="text" name="invoice-date" id="invoice-date"
+                                                    class="form-control" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label for="invoice-customer" class="form-control-label">
+                                                <?php echo _('USER_ASSIGNED_INVOICE') ?>
+                                            </label>
+                                            <select class="form-select" id="invoice-customer">
+                                                <?php
+                                                    include("../scripts/php/mysqlcon.php");
+                                                    $sql = "SELECT * FROM acl.customer";
+                                                    $result = $conn->query($sql);
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value='" . $row['id_customer'] . "'>" . ($row['first_name'] . " " . $row['surname'] . " - " . $row['email'])  . "</option>"; 
+                                                        }
+                                                    }else{
+                                                        echo "<option value='null'>----</option>";
+                                                                                                  
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label for="invoice-description" class="form-control-label">
+                                                <?php echo _('DESCRIPTION') ?>
+                                            </label>
+                                            <textarea class="form-control" id="invoice-description" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="button" class="btn btn-primary w-100" id="create-invoice-btn"
+                                    value="<?php echo _('CREATE_INVOICE') ?>">
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class=" row removable" id="list-invoice" style="display: none;">
+                <div class="col-lg-12">
+                    <div class="card mb-4 mt-4">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h6 class="mb-0">
+                                        <?php echo _('ALL_INVOICE') ?>
+                                    </h6>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a class="btn btn-sm btn-primary mb-0" role="button" onclick="hideAll()">
+                                        <?php echo _('CLOSE') ?>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">
+                                            <?php echo _('ID') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?php echo _('DATE') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?php echo _('AMOUNT') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?php echo _('TITLE') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?php echo _('TYPE') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?php echo _('DESCRIPTION') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?php echo _('CUSTOMER') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?php echo _('CREATED_BY') ?>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    include("../scripts/php/mysqlcon.php");
+                                    $sql = "SELECT * FROM acl.invoice";
+                                    $result = $conn->query($sql);
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "<tr>";
+                                            echo "<th scope='row'>" . $row['id_invoice'] . "</th>";
+                                            echo "<td>" . $row['date'] . "</td>";
+                                            echo "<td>" . $row['amount'] . "</td>";
+                                            echo "<td>" . $row['title'] . "</td>";
+                                            echo "<td>" . $row['typology'] . "</td>";
+                                            echo "<td>" . $row['description'] . "</td>";
+
+                                            // get customer name
+                                            $sql2 = "SELECT * FROM acl.customer WHERE id_customer = " . '"' . $row['id_customer']. '"';
+                                            $result2 = $conn->query($sql2);
+                                            if ($result2->num_rows > 0) {
+                                                $row2 = $result2->fetch_assoc();
+                                                echo "<td>" . $row2['first_name'] . " " . $row2['surname'] . "</td>";
+                                            }else{
+                                                echo "<td>----</td>";
+                                            }
+
+                                            // get user name
+                                            $sql2 = "SELECT * FROM acl.user WHERE id_user = " . '"' . $row['id_user']. '"';
+                                            $result2 = $conn->query($sql2);
+                                            if ($result2->num_rows > 0) {
+                                                $row2 = $result2->fetch_assoc();
+                                                echo "<td>" . $row2['name'] . " " . $row2['surname'] . "</td>";
+                                            }else{
+                                                echo "<td>----</td>";
+                                            }
+                                            echo "</tr>";
+                                        }
+                                    }else{
+                                        echo "<tr>";
+                                        echo "<th scope='row'>----</th>";
+                                        echo "<td>----</td>";
+                                        echo "<td>----</td>";
+                                        echo "<td>----</td>";
+                                        echo "<td>----</td>";
+                                        echo "<td>----</td>";
+                                        echo "<td>----</td>";
+                                        echo "<td>----</td>";
+                                        echo "</tr>";
+                                    }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row removable" id="update-invoice" style="display: none;">
+                <div class="col-lg-12">
+                    <div class="card mb-4 mt-4">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h6 class="mb-0"><?php echo _('UPDATE_INVOICE') ?></h6>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a class="btn btn-sm btn-primary mb-0" role="button" onclick="hideAll()">
+                                        <?php echo _('CLOSE') ?>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" card-body">
+                            <form>
+                                <h6 class="heading-small text-muted mb-4">
+                                    <?php echo _('USER_INFORMATION') ?>
+                                </h6>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <select class="form-control" id="invoice-select"
+                                                onchange="changeUpdateInvoiceInformation()">
+                                                <option>
+                                                    <?php echo _('SELECT') ?>
+                                                </option>
+
+                                                <?php
+                                            include("../scripts/php/mysqlcon.php");
+                                            // get all invoice
+                                            $sql = "SELECT * FROM acl.invoice";
+                                            $result = $conn->query($sql);
+                                            $sql = "SELECT * FROM acl.invoice";
+                                            $result = $conn->query($sql);
+                                            if ($result->num_rows > 0) {
+                                                // create a select with all invoice
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo "<option value='" . $row['id_invoice'] . "'>" . $row['id_invoice'] . ' ' . $row['title'] . "</option>";
+                                                }
+                                            }
+                                            ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <input type="button" class="btn btn-danger w-100" id="delete-invoice-btn"
+                                                value="<?php echo _('DELETE') ?>">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-6">
+                                            <label for="invoice-title-update" class="form-control-label"><?php echo _('CHANGE_TITLE') ?></label>
+                                            <input class="form-control" type="text" placeholder="<?php echo _('NEW_TITLE') ?>"
+                                                id="invoice-title-update">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label for="invoice-amout-update" class="form-control-label"><?php echo _('CHANGE_AMOUNT') ?></label>
+                                            <input class="form-control" type="number" placeholder="<?php echo _('NEW_AMOUNT') ?>"
+                                                id="invoice-amount-update" min="0">
+                                        </div>
+
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-6">
+                                            <label for="invoice-typology-update" class="form-control-label"><?php echo _('CHANGE_TYPE') ?></label>
+                                            <input class="form-control" type="text" placeholder="<?php echo _('NEW_TYPE') ?>"
+                                                id="invoice-typology-update">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label for="invoice-description-update" class="form-control-label"><?php echo _('CHANGE_DESCRIPTION') ?></label>
+                                            <textarea class="form-control" type="text" placeholder="<?php echo _('NEW_DESCRIPTION') ?>"
+                                                rows="1" id="invoice-description-update"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <input type="button" class="btn btn-primary w-100 mt-3" id="update-invoice-btn"
+                                        value="<?php echo _('UPDATE') ?>">
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Result from operation -->
+        <div class="row removable" id="results" style="display: none;">
+
+        </div>
+    </div>
+
+
+    </div>
+    <script src="https://loopple.s3.eu-west-3.amazonaws.com/asteria-dashboard/js/core/bootstrap.min.js"></script>
+    <script
+        src="https://rawcdn.githack.com/Loopple/loopple-public-assets/f5029eba0dafd952ecdbf8fbbdd0aa9ae0d0abc1/asteria-dashboard/js/plugins/chartjs.min.js"></script>
+    <script
+        src="https://rawcdn.githack.com/Loopple/loopple-public-assets/1f72f0b962eae981381ec8ccac9cd18d65d3bbe6/asteria-dashboard/js/plugins/apexcharts.js"></script>
+    <script
+        src="https://rawcdn.githack.com/Loopple/loopple-public-assets/f5029eba0dafd952ecdbf8fbbdd0aa9ae0d0abc1/asteria-dashboard/js/plugins/swiper.min.js"></script>
+    <script src="https://loopple.s3.eu-west-3.amazonaws.com/asteria-dashboard/js/asteria-dashboard.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        const createInvoice = document.getElementById("create-invoice");
+        const listInvoice = document.getElementById("list-invoice");
+        const updateInvoice = document.getElementById("update-invoice");
+        const result = document.getElementById("results");
+
+        function showCreateInvoice() {
+            hideAll();
+            createInvoice.style.display = "block";
+        }
+
+        function showListInvoice() {
+            hideAll();
+            listInvoice.style.display = "block";
+        }
+
+        function showUpdateInvoice() {
+            hideAll();
+            updateInvoice.style.display = "block";
+        }
+
+        function hideAll() {
+            createInvoice.style.display = "none";
+            listInvoice.style.display = "none";
+            updateInvoice.style.display = "none";
+            result.style.display = "none";
+        }
+    </script>
+
+    <script>
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyy = today.getFullYear();
+        document.getElementById('invoice-date').value = dd + '/' + mm + '/' + yyyy;
+    </script>
+
+    <script>
+        $(document).ready(() => {
+            $(".logout-btn").click((e) => {
+                $.ajax({
+                    url: "../scripts/php/logout.php",
+                    type: "POST",
+                    success: function (res) {
+                        window.location.href = "index.html";
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!--Create invoice button ajax-->
+    <script>
+        $("#create-invoice-btn").click(() => {
+            $.ajax({
+                url: '../scripts/php/create-invoice.php',
+                type: 'POST',
+                data: {
+                    invoice_title: $("#invoice-title").val(),
+                    invoice_import: $("#invoice-import").val(),
+                    invoice_type: $("#invoice-type").val(),
+                    invoice_date: $("#invoice-date").val(),
+                    invoice_customer: $("#invoice-customer").val(),
+                    invoice_description: $("#invoice-description").val()
+                },
+                success: (res) => {
+                    hideAll();
+                    console.log(res);
+                    alert("Invoice created successfully!");
+                    location.reload();
+                }
+            })
+        })
+    </script>
+
+    <script>
+        function changeUpdateInvoiceInformation() {
+            const id = document.getElementById('invoice-select').value;
+            const title_invoice = document.getElementById('invoice-title-update');
+            const amount_invoice = document.getElementById('invoice-amount-update');
+            const typology_invoice = document.getElementById('invoice-typology-update');
+            const description_invoice = document.getElementById('invoice-description-update');
+
+            $.ajax({
+                url: '../scripts/php/get-information-invoice.php',
+                type: 'POST',
+                data: {
+                    invoice_id: id,
+                },
+                success: (res) => {
+                    res = JSON.parse(res);
+                    console.log(res);
+                    title_invoice.value = res.title;
+                    amount_invoice.value = res.amount;
+                    typology_invoice.value = res.typology;
+                    description_invoice.value = res.description;
+                }
+            })
+            console.log(id);
+
+        }
+    </script>
+
+    <!--Update invoice button ajax-->
+    <script>
+
+
+    </script>
+
+    <!-- Delete invoice button ajax -->
+    <script>
+        $("#delete-invoice-btn").click(() => {
+            $.ajax({
+                url: '../scripts/php/delete-invoice.php',
+                type: 'POST',
+                data: {
+                    invoice_id: $("#invoice-select").val(),
+                },
+                success: (res) => {
+                    hideAll();
+                    console.log(res);
+                    alert(res)
+                    location.reload();
+                },
+                error: (err) => {
+                    console.log(err);
+                    alert("Error deleting invoice");
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
