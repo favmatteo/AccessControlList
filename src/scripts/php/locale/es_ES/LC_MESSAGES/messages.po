@@ -159,6 +159,45 @@ msgstr "Creado por"
 msgid "WELCOME"
 msgstr "Bienvenido"
 
+msgid "SELECT"
+msgstr "Seleccionar"
+
+msgid "CHANGE_TITLE"
+msgstr "Cambiar título"
+
+msgid "CHANGE_AMOUNT"
+msgstr "Cambiar cantidad"
+
+msgid "CHANGE_TYPE"
+msgstr "Cambiar tipo"
+
+msgid "CHANGE_DESCRIPTION"
+msgstr "Cambiar descripción"
+
+msgid "DELETE"
+msgstr "Eliminar"
+
+msgid "UPDATE"
+msgstr "Actualizar"
+
+msgid "NEW_TITLE"
+msgstr "Nuevo título"
+
+msgid "NEW_AMOUNT"
+msgstr "Nuevo monto"
+
+msgid "NEW_TYPE"
+msgstr "Nuevo tipo"
+
+msgid "NEW_DESCRIPTION"
+msgstr "Nueva descripción"
+
+msgid "ACCOUNT_PAGES"
+msgstr "Páginas de cuenta"
+
+msgid "LINK_PHOTO"
+msgstr "Enlace de foto"
+
 # Lingue
 msgid "ENGLISH"
 msgstr "🇺🇸Inglés🇺🇸"

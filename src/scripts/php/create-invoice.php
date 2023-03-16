@@ -19,6 +19,7 @@ $invoice_customer = $_POST['invoice_customer'];
 
 $user = $_SESSION['user'];
 // Convert data dd-mm-yyyy to mysql date
+$date = str_replace('/', '-', $date);
 $date = date("Y-m-d", strtotime($date));
 
 $SQL = "INSERT INTO acl.invoice (date, amount, title, typology, description, id_user, id_customer) VALUES ('$date', '$amount', '$title', '$typology', '$description', '$user->uid', $invoice_customer);";

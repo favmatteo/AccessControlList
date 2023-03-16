@@ -5,7 +5,6 @@ if(isset($_POST['userId']) && isset($_POST['photo'])) {
     $userId = $_POST['userId'];
     $photo = $_POST['photo'];
     
-    // escape user input to prevent SQL injection
     $userId = mysqli_real_escape_string($conn, $userId);
     $photo = mysqli_real_escape_string($conn, $photo);
     
@@ -18,6 +17,4 @@ if(isset($_POST['userId']) && isset($_POST['photo'])) {
     }else{
         echo "success";
     }
-} else {
-    echo "Missing required parameters";
 }
