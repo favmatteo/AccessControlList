@@ -17,10 +17,10 @@ services:
     image: mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: Capyz0ra@1920
       MYSQL_DATABASE: acl
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
+      MYSQL_USER: user
+      MYSQL_PASSWORD: Capyz0ra@1920
     ports:
       - "9906:3306"
 
