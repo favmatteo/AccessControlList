@@ -720,8 +720,25 @@ if(!isset($_SESSION['session-cookie'])){
 
     <!--Update invoice button ajax-->
     <script>
-
-
+        $("#update-invoice-btn").click(() => {
+            $.ajax({
+                url: '../scripts/php/update-invoice.php',
+                type: 'POST',
+                data: {
+                    invoice_id: $("#invoice-select").val(),
+                    invoice_title: $("#invoice-title-update").val(),
+                    invoice_amount: $("#invoice-amount-update").val(),
+                    invoice_typology: $("#invoice-typology-update").val(),
+                    invoice_description: $("#invoice-description-update").val()
+                },
+                success: (res) => {
+                    hideAll();
+                    console.log(res);
+                    alert("Invoice updated successfully!");
+                    location.reload();
+                }
+            })
+        })
     </script>
 
     <!-- Delete invoice button ajax -->
@@ -739,10 +756,6 @@ if(!isset($_SESSION['session-cookie'])){
                     alert(res)
                     location.reload();
                 },
-                error: (err) => {
-                    console.log(err);
-                    alert("Error deleting invoice");
-                }
             })
         })
     </script>
