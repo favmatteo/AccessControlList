@@ -198,6 +198,9 @@ msgstr "Páginas de cuenta"
 msgid "LINK_PHOTO"
 msgstr "Enlace de foto"
 
+msgid "RESET_PASSWORD"
+msgstr "Restablecer la contraseña"
+
 # Lingue
 msgid "ENGLISH"
 msgstr "🇺🇸Inglés🇺🇸"

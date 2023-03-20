@@ -199,6 +199,9 @@ msgstr "Pagine account"
 msgid "LINK_PHOTO"
 msgstr "Link foto"
 
+msgid "RESET_PASSWORD"
+msgstr "Reimposta password"
+
 # Lingue
 msgid "ENGLISH"
 msgstr "🇬🇧Inglese🇬🇧"
