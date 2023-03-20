@@ -121,7 +121,9 @@ if(!isset($_SESSION['session-cookie'])){
                 
                 ?>
                 <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder"><?php echo _('ACCOUNT_PAGES') ?></h6>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder">
+                        <?php echo _('ACCOUNT_PAGES') ?>
+                    </h6>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="profile.html">
@@ -231,10 +233,9 @@ if(!isset($_SESSION['session-cookie'])){
                                     <div class="carousel-inner min-height-300 h-100">
                                         <?php
                                         $role = $_SESSION['role'];
-                                        
                                         if($role == 'admin' || $role == "commercial"){
                                             $activate = $_SESSION['isCarouselActive'];
-                                            $_SESSION['isCarouselActive'] = false;                                          
+                                            $_SESSION['isCarouselActive'] = false;    
                                             echo '<div class="carousel-item min-height-300 h-100 bg-cover ' . ($activate ? "active" : "") . '" role="button"
                                                 onclick="showCreateInvoice()" data-bs-interval="5000"
                                                 style="background: rgba(0, 128, 0, 0.5);">
@@ -472,7 +473,7 @@ if(!isset($_SESSION['session-cookie'])){
                                             echo "<td>" . $row['description'] . "</td>";
 
                                             // get customer name
-                                            $sql2 = "SELECT * FROM acl.customer WHERE id_customer = " . '"' . $row['id_customer']. '"';
+                                            $sql2 = "SELECT * FROM acl.customer WHERE id_customer = " . "'" . $row['id_customer']. "'";
                                             $result2 = $conn->query($sql2);
                                             if ($result2->num_rows > 0) {
                                                 $row2 = $result2->fetch_assoc();
@@ -482,7 +483,7 @@ if(!isset($_SESSION['session-cookie'])){
                                             }
 
                                             // get user name
-                                            $sql2 = "SELECT * FROM acl.user WHERE id_user = " . '"' . $row['id_user']. '"';
+                                            $sql2 = "SELECT * FROM acl.user WHERE id_user = " . "'" . $row['id_user']. "'";
                                             $result2 = $conn->query($sql2);
                                             if ($result2->num_rows > 0) {
                                                 $row2 = $result2->fetch_assoc();
@@ -517,7 +518,9 @@ if(!isset($_SESSION['session-cookie'])){
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h6 class="mb-0"><?php echo _('UPDATE_INVOICE') ?></h6>
+                                    <h6 class="mb-0">
+                                        <?php echo _('UPDATE_INVOICE') ?>
+                                    </h6>
                                 </div>
                                 <div class="col-4 text-end">
                                     <a class="btn btn-sm btn-primary mb-0" role="button" onclick="hideAll()">
@@ -563,27 +566,37 @@ if(!isset($_SESSION['session-cookie'])){
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-lg-6">
-                                            <label for="invoice-title-update" class="form-control-label"><?php echo _('CHANGE_TITLE') ?></label>
-                                            <input class="form-control" type="text" placeholder="<?php echo _('NEW_TITLE') ?>"
-                                                id="invoice-title-update">
+                                            <label for="invoice-title-update" class="form-control-label">
+                                                <?php echo _('CHANGE_TITLE') ?>
+                                            </label>
+                                            <input class="form-control" type="text"
+                                                placeholder="<?php echo _('NEW_TITLE') ?>" id="invoice-title-update">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label for="invoice-amout-update" class="form-control-label"><?php echo _('CHANGE_AMOUNT') ?></label>
-                                            <input class="form-control" type="number" placeholder="<?php echo _('NEW_AMOUNT') ?>"
-                                                id="invoice-amount-update" min="0">
+                                            <label for="invoice-amout-update" class="form-control-label">
+                                                <?php echo _('CHANGE_AMOUNT') ?>
+                                            </label>
+                                            <input class="form-control" type="number"
+                                                placeholder="<?php echo _('NEW_AMOUNT') ?>" id="invoice-amount-update"
+                                                min="0">
                                         </div>
 
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-lg-6">
-                                            <label for="invoice-typology-update" class="form-control-label"><?php echo _('CHANGE_TYPE') ?></label>
-                                            <input class="form-control" type="text" placeholder="<?php echo _('NEW_TYPE') ?>"
-                                                id="invoice-typology-update">
+                                            <label for="invoice-typology-update" class="form-control-label">
+                                                <?php echo _('CHANGE_TYPE') ?>
+                                            </label>
+                                            <input class="form-control" type="text"
+                                                placeholder="<?php echo _('NEW_TYPE') ?>" id="invoice-typology-update">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label for="invoice-description-update" class="form-control-label"><?php echo _('CHANGE_DESCRIPTION') ?></label>
-                                            <textarea class="form-control" type="text" placeholder="<?php echo _('NEW_DESCRIPTION') ?>"
-                                                rows="1" id="invoice-description-update"></textarea>
+                                            <label for="invoice-description-update" class="form-control-label">
+                                                <?php echo _('CHANGE_DESCRIPTION') ?>
+                                            </label>
+                                            <textarea class="form-control" type="text"
+                                                placeholder="<?php echo _('NEW_DESCRIPTION') ?>" rows="1"
+                                                id="invoice-description-update"></textarea>
                                         </div>
                                     </div>
 
