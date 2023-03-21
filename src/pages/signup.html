@@ -10,13 +10,10 @@ include("../scripts/php/lang.php");
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Signup</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
     <link rel="stylesheet" href="../css/signup.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@500&family=Passion+One&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@500&family=Passion+One&display=swap" rel="stylesheet">
 
 
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
@@ -31,8 +28,7 @@ include("../scripts/php/lang.php");
     <nav class="navbar navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Open_Access_logo_PLoS_transparent.svg/1200px-Open_Access_logo_PLoS_transparent.svg.png"
-                    width="20" height="30" class="d-inline-block align-top" alt="Logo ACL">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Open_Access_logo_PLoS_transparent.svg/1200px-Open_Access_logo_PLoS_transparent.svg.png" width="20" height="30" class="d-inline-block align-top" alt="Logo ACL">
                 Access Control List
             </a>
 
@@ -40,43 +36,43 @@ include("../scripts/php/lang.php");
                 <div class="d-flex align-items-center">
                     <div id="registration">
                         <a class="btn btn-warning" href="login.html">
-                            <?php echo _('LOGIN')?>
+                            <?php echo _('LOGIN') ?>
                         </a>
                         <a class="btn btn-warning" href="signup.html">
-                            <?php echo _('SIGNUP')?>
+                            <?php echo _('SIGNUP') ?>
                         </a>
                     </div>
 
                     <div id="dashboard" style="display: none;">
                         <a class="btn btn-warning" href="dashboard.html">
-                            <?php echo _('DASHBOARD')?>
+                            <?php echo _('DASHBOARD') ?>
                         </a>
                         <a class="btn btn-warning" role='button' id="logout-btn">
-                            <?php echo _('LOGOUT')?>
+                            <?php echo _('LOGOUT') ?>
                         </a>
                     </div>
 
                     <div class="ms-3">
                         <select class='form-control' id="languageSelector" onchange="changeLanguage()">
-                            <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='en_US.utf8'
-                                ? 'selected' : '' )?> value="en_US.utf8">
-                                <?php echo _('ENGLISH')?>
+                            <option <?php echo (isset($_SESSION['language']) && $_SESSION['language'] == 'en_US.utf8'
+                                        ? 'selected' : '') ?> value="en_US.utf8">
+                                <?php echo _('ENGLISH') ?>
                             </option>
-                            <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='it_IT.utf8'
-                                ? 'selected' : '' )?> value="it_IT.utf8">
-                                <?php echo _('ITALIAN')?>
+                            <option <?php echo (isset($_SESSION['language']) && $_SESSION['language'] == 'it_IT.utf8'
+                                        ? 'selected' : '') ?> value="it_IT.utf8">
+                                <?php echo _('ITALIAN') ?>
                             </option>
-                            <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='es_ES.utf8'
-                                ? 'selected' : '' )?> value="es_ES.utf8">
-                                <?php echo _('SPANISH')?>
+                            <option <?php echo (isset($_SESSION['language']) && $_SESSION['language'] == 'es_ES.utf8'
+                                        ? 'selected' : '') ?> value="es_ES.utf8">
+                                <?php echo _('SPANISH') ?>
                             </option>
-                            <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='fr_FR.utf8'
-                                ? 'selected' : '' )?> value="fr_FR.utf8">
-                                <?php echo _('FRENCH')?>
+                            <option <?php echo (isset($_SESSION['language']) && $_SESSION['language'] == 'fr_FR.utf8'
+                                        ? 'selected' : '') ?> value="fr_FR.utf8">
+                                <?php echo _('FRENCH') ?>
                             </option>
-                            <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='de_DE.utf8'
-                                ? 'selected' : '' )?> value="de_DE.utf8">
-                                <?php echo _('GERMAN')?>
+                            <option <?php echo (isset($_SESSION['language']) && $_SESSION['language'] == 'de_DE.utf8'
+                                        ? 'selected' : '') ?> value="de_DE.utf8">
+                                <?php echo _('GERMAN') ?>
                             </option>
                         </select>
                     </div>
@@ -88,73 +84,64 @@ include("../scripts/php/lang.php");
 
     <div class="container-sm form">
         <p class="title m-5" style="font-family: 'Montserrat', sans-serif;">
-            <?php echo _('SIGNUP')?>
+            <?php echo _('SIGNUP') ?>
         </p>
         <div id="signup-form">
             <form method="post">
                 <div class="row g-3">
                     <div class="form-group col-md-6">
                         <label for="name">
-                            <?php echo _('ENTER_NAME')?>
+                            <?php echo _('ENTER_NAME') ?>
                         </label>
-                        <input type="text" class="form-control" id="name" name="name"
-                            placeholder="<?php echo _('NAME')?>" required>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo _('NAME') ?>" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="surname">
-                            <?php echo _('ENTER_SURNAME')?>
+                            <?php echo _('ENTER_SURNAME') ?>
                         </label>
-                        <input type="text" class="form-control" id="surname" name="surname"
-                            placeholder="<?php echo _('SURNAME')?>" required>
+                        <input type="text" class="form-control" id="surname" name="surname" placeholder="<?php echo _('SURNAME') ?>" required>
                     </div>
 
                     <div class="form-group">
                         <label for="username">
-                            <?php echo _('ENTER_EMAIL')?>
+                            <?php echo _('ENTER_EMAIL') ?>
                         </label>
-                        <input type="email" class="form-control" id="email" name="email"
-                            placeholder="<?php echo _('EMAIL')?>" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="<?php echo _('EMAIL') ?>" required>
                     </div>
 
                     <div class="form-group">
                         <label for="birthDate">
-                            <?php echo _('ENTER_DATE_OF_BIRTH')?>
+                            <?php echo _('ENTER_DATE_OF_BIRTH') ?>
                         </label>
-                        <input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="Year"
-                            required>
+                        <input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="Insert date" required>
                     </div>
 
                     <div class="form-group">
                         <label for="phoneNumber" class="form-label">
-                            <?php echo _('ENTER_PHONE_NUMBER')?>
+                            <?php echo _('ENTER_PHONE_NUMBER') ?>
                         </label>
                         <div class="input-group">
                             <span class="input-group-text" id="prefix">+39</span>
-                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
-                                placeholder="<?php echo _('PHONE_NUMBER')?>" aria-describedby="phoneNumber"
-                                minlength="10">
+                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="<?php echo _('PHONE_NUMBER') ?>" aria-describedby="phoneNumber" minlength="10">
                         </div>
                     </div>
 
                     <div class="form-group col-md-6">
                         <label for="password">
-                            <?php echo _('ENTER_PASSWORD')?>
+                            <?php echo _('ENTER_PASSWORD') ?>
                         </label>
-                        <input type="password" class="form-control" id="password" name="password" minlength="8"
-                            placeholder="<?php echo _('PASSWORD')?>" required>
+                        <input type="password" class="form-control" id="password" name="password" minlength="8" placeholder="<?php echo _('PASSWORD') ?>" required>
                     </div>
 
                     <div class="form-group col-md-6">
                         <label for="repeatedPassword">
-                            <?php echo _('RE_ENTER_PASSWORD')?>
+                            <?php echo _('RE_ENTER_PASSWORD') ?>
                         </label>
-                        <input type="password" class="form-control" id="repeatedPassword" name="repeatedPassword"
-                            minlength="8" placeholder="<?php echo _('REPEAT_PASSWORD')?>" required>
+                        <input type="password" class="form-control" id="repeatedPassword" name="repeatedPassword" minlength="8" placeholder="<?php echo _('REPEAT_PASSWORD') ?>" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" class="btn btn-warning form-control" value="<?php echo _('SUBMIT')?>"
-                            id="submit-btn" name="submit-btn">
+                        <input type="submit" class="btn btn-warning form-control" value="<?php echo _('SUBMIT') ?>" id="submit-btn" name="submit-btn">
                     </div>
 
                 </div>

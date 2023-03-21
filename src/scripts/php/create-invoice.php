@@ -5,7 +5,7 @@ require('mysqlcon.php');
 
 session_start();
 
-if(!$success_connection){
+if (!$success_connection) {
     echo "Error: " . $SQL . "<br>" . $conn->error;
     return;
 }
