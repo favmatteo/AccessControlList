@@ -426,7 +426,11 @@ if (!isset($_SESSION['session-cookie'])) {
                                 <tbody>
                                     <?php
                                     include("../scripts/php/mysqlcon.php");
-                                    $sql = "SELECT * FROM acl.invoice";
+                                    if($_SESSION['role'] == 'commercial'){
+                                        $sql = "SELECT * FROM acl.invoice WHERE invoice.id_user = '" . $_SESSION['user']->uid . "'";
+                                    }else{
+                                        $sql = "SELECT * FROM acl.invoice";
+                                    }
                                     $result = $conn->query($sql);
                                     if ($result->num_rows > 0) {
                                         while ($row = $result->fetch_assoc()) {
@@ -510,10 +514,11 @@ if (!isset($_SESSION['session-cookie'])) {
 
                                                 <?php
                                                 include("../scripts/php/mysqlcon.php");
-                                                // get all invoice
-                                                $sql = "SELECT * FROM acl.invoice";
-                                                $result = $conn->query($sql);
-                                                $sql = "SELECT * FROM acl.invoice";
+                                                if($_SESSION['role'] == 'commercial'){
+                                                    $sql = "SELECT * FROM acl.invoice WHERE invoice.id_user = '" . $_SESSION['user']->uid . "'";
+                                                }else{
+                                                    $sql = "SELECT * FROM acl.invoice";
+                                                }
                                                 $result = $conn->query($sql);
                                                 if ($result->num_rows > 0) {
                                                     // create a select with all invoice
