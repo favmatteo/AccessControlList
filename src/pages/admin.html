@@ -30,6 +30,9 @@ if (!isset($_SESSION['session-cookie'])) {
     if ($role != "admin") {
         die(header("location: dashboard.html"));
     }
+    if(!isset($_SESSION['user-per-page'])){
+        $_SESSION['user-per-page'] = 10;
+    }
 }
 ?>
 
@@ -212,13 +215,16 @@ if (!isset($_SESSION['session-cookie'])) {
         </nav>
         <main class="content">
             <div class="container-fluid pt-3">
+                
                 <?php
                 include("../scripts/php/mysqlcon.php");
-                $limit_per_page = 5;
+                $limit_per_page = $_SESSION['user-per-page'];
 
                 $sql = "SELECT * FROM acl.user ORDER BY name, surname";
                 $result = $conn->query($sql);
                 $counter = mysqli_num_rows($result);
+                echo '<div class="row">';
+                echo '<div class="col-11">';
                 echo '<ul class="nav nav-tabs" id="myTab" role="tablist">';
                 for($i = 1; $i < $counter / $limit_per_page + 1; $i++){
                     echo "<li class='nav-item' role='presentation'>
@@ -226,6 +232,16 @@ if (!isset($_SESSION['session-cookie'])) {
                         </li>";
                 }
                 echo '</ul>';
+                echo '</div>';
+                echo '<div class="col-1 align-self-center">';
+                echo '<select name="user-per-page" id="user-per-page" onchange="onUserPerPageChange()">
+                <option value="5"' .  ($_SESSION['user-per-page'] == 5 ? " selected " : "") . '>5</option>
+                <option value="10"' .  ($_SESSION['user-per-page'] == 10 ? " selected " : "") . '>10</option>
+                <option value="15"' .  ($_SESSION['user-per-page'] == 15 ? " selected " : "") . '>15</option>
+                </select>';
+                echo '</div>';
+                echo '</div>';
+                
                 
                 $sql2 = "SELECT * FROM acl.roles";
                 $result2 = $conn->query($sql2);
@@ -280,7 +296,7 @@ if (!isset($_SESSION['session-cookie'])) {
                 }
                 
                 ?>
-                <button type="button" class="btn btn-primary w-100 form-button" name="submit" id="submit"
+                <button type="button" class="btn btn-primary w-100 form-button mt-2" name="submit" id="submit"
                     onclick="submitForm()">
                     <?php echo _('UPDATE') ?>
                 </button>

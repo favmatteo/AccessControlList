@@ -40,3 +40,17 @@ function onRolesChange(user_info) {
     user_to_change_role[user_info.id] = user_info.role;
     console.log(user_to_change_role);
 }
+
+function onUserPerPageChange() {
+    const user_per_page = document.getElementById('user-per-page').value;
+    $.ajax({
+        url: "../scripts/php/save-to-session.php",
+        type: "POST",
+        data: {
+            user_per_page: user_per_page,
+        },
+        success: function (res) {
+            location.reload();
+        }
+    });
+}
