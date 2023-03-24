@@ -31,6 +31,7 @@ function submitForm() {
     }
     if (len > 0) {
         alert("Roles have been updated");
+        location.reload();
     }
 }
 

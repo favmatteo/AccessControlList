@@ -47,7 +47,7 @@ if (!isset($_SESSION['session-cookie'])) {
     <link rel="stylesheet"
         href="https://cdn.statically.io/gh/Loopple/loopple-public-assets/main/asteria-dashboard/css/nucleo-icons.css">
     <link rel="stylesheet" href="../css/theme.css">
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/admin.css">
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -214,17 +214,34 @@ if (!isset($_SESSION['session-cookie'])) {
             <div class="container-fluid pt-3">
                 <?php
                 include("../scripts/php/mysqlcon.php");
-                $sql = "SELECT * FROM acl.user";
-                $result = $conn->query($sql);
+                $limit_per_page = 5;
 
+                $sql = "SELECT * FROM acl.user ORDER BY name, surname";
+                $result = $conn->query($sql);
+                $counter = mysqli_num_rows($result);
+                echo '<ul class="nav nav-tabs" id="myTab" role="tablist">';
+                for($i = 1; $i < $counter / $limit_per_page + 1; $i++){
+                    echo "<li class='nav-item' role='presentation'>
+                            <button class='nav-link' id='pills-home-tab' data-bs-toggle='pill' data-bs-target='#tab{$i}' type='button' role='tab' aria-controls='pills-home' aria-selected='true'>{$i}</button>
+                        </li>";
+                }
+                echo '</ul>';
+                
                 $sql2 = "SELECT * FROM acl.roles";
                 $result2 = $conn->query($sql2);
 
-
+                echo '<div class="tab-content" id="myTabContent">';
                 if ($result->num_rows > 0) {
+                    $counter_per_pages = 0;
+                    $counter = 0;
+                    
                     while ($row = $result->fetch_assoc()) {
-                        echo '<div class="container-fluid pb-3">';
-                        echo '<form id="form">';
+                        if($counter_per_pages % $limit_per_page == 0){
+                            $counter++;
+                            echo "<div class='tab-pane fade' id='tab{$counter}' role='tabpanel' aria-labelledby='pills-{$counter}-tab'>";
+                        }
+                        $counter_per_pages++;
+                        echo '<div class="container-fluid pt-3">';
                         echo "
                             <div class='row removable'>
                                 <div class='col-lg-6'>
@@ -237,7 +254,7 @@ if (!isset($_SESSION['session-cookie'])) {
                                     </div>
                                 </div>
                             ";
-
+                            
                         $sql2 = "SELECT * FROM acl.roles";
                         $result2 = $conn->query($sql2);
                         if ($result2->num_rows > 0) {
@@ -250,19 +267,27 @@ if (!isset($_SESSION['session-cookie'])) {
                                     echo "<option " . ($uid == $row['id_user'] ? 'disabled' : '') . " value='{$row2['id_role']}'>{$row2['name']}</option>";
                             }
                         }
-                        echo "</select>
-                                </div>
-                            </div>";
+                        echo "</select></div></div></div>";
 
-                        echo '</div>';
+                        if($counter_per_pages % $limit_per_page == 0){
+                            echo "</div>";
+                        }
+
+
+
                     }
+                    echo '</div>';
                 }
                 
                 ?>
-                <input type="button" class="btn btn-primary w-100 form-button" name="submit" id="submit" value="<?php echo _('UPDATE') ?>" onclick="submitForm()">
-                </form>;
+                <button type="button" class="btn btn-primary w-100 form-button" name="submit" id="submit"
+                    onclick="submitForm()">
+                    <?php echo _('UPDATE') ?>
+                </button>
+                </form>
 
             </div>
+
         </main>
 
         <!-- Result from operation -->
@@ -281,6 +306,10 @@ if (!isset($_SESSION['session-cookie'])) {
         src="https://rawcdn.githack.com/Loopple/loopple-public-assets/f5029eba0dafd952ecdbf8fbbdd0aa9ae0d0abc1/asteria-dashboard/js/plugins/swiper.min.js"></script>
     <script src="https://loopple.s3.eu-west-3.amazonaws.com/asteria-dashboard/js/asteria-dashboard.min.js"></script>
 
+    <script>
+        document.getElementById('tab1').classList.add('active');
+        document.getElementById('tab1').classList.add('show');
+    </script>
 </body>
 
 </html>
