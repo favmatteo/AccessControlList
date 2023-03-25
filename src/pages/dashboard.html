@@ -54,6 +54,9 @@ if (!isset($_SESSION['session-cookie'])) {
     <link rel="stylesheet"
         href="https://cdn.statically.io/gh/Loopple/loopple-public-assets/main/asteria-dashboard/css/nucleo-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+
 
     <link rel="stylesheet" href="../css/theme.css">
     <link rel="stylesheet" href="../css/dashboard.css">
@@ -428,7 +431,7 @@ if (!isset($_SESSION['session-cookie'])) {
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover" id="invoice-table">
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">
@@ -633,6 +636,9 @@ if (!isset($_SESSION['session-cookie'])) {
     <script src="https://loopple.s3.eu-west-3.amazonaws.com/asteria-dashboard/js/asteria-dashboard.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+
     <script>
         const createInvoice = document.getElementById("create-invoice");
         const listInvoice = document.getElementById("list-invoice");
@@ -776,6 +782,36 @@ if (!isset($_SESSION['session-cookie'])) {
                 },
             })
         })
+    </script>
+
+    <script>
+    $(document).ready(function() {
+        $('#invoice-table').DataTable({
+            paging: true,
+            responsive: true,
+            pageLength: 10,
+            lengthMenu: [5, 10, 15],
+            scrollX:        true,
+            scrollCollapse: true,
+            fixedColumns:   {
+                leftColumns: 1,
+                rightColumns: 1
+            },
+            buttons: {
+                className: 'btn btn-primary',
+            },
+            language: {
+                searchPlaceholder: 'Search',
+                "info": "<i class='fa fa-info-circle'></i> _START_ - _END_ of _TOTAL_",
+                "infoEmpty": "<i class='fa fa-info-circle'></i> 0 of 0",
+                "infoFiltered": "<i class='fa fa-filter'></i> (Filter from _MAX_ total)",
+                paginate: {
+                    previous: '<i class="fas fa-angle-left"></i>',
+                    next: '<i class="fas fa-angle-right"></i>'
+                },
+            },
+        });
+    });
     </script>
 </body>
 

@@ -30,9 +30,6 @@ if (!isset($_SESSION['session-cookie'])) {
     if ($role != "admin") {
         die(header("location: dashboard.html"));
     }
-    if(!isset($_SESSION['user-per-page'])){
-        $_SESSION['user-per-page'] = 10;
-    }
 }
 ?>
 
@@ -49,12 +46,15 @@ if (!isset($_SESSION['session-cookie'])) {
         rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdn.statically.io/gh/Loopple/loopple-public-assets/main/asteria-dashboard/css/nucleo-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+
     <link rel="stylesheet" href="../css/theme.css">
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../scripts/js/ajax/admin.js"></script>
+    <script src="../scripts/js/admin.js"></script>
 </head>
 
 <body class="g-sidenav-show">
@@ -215,95 +215,57 @@ if (!isset($_SESSION['session-cookie'])) {
         </nav>
         <main class="content">
             <div class="container-fluid pt-3">
-                
-                <?php
-                include("../scripts/php/mysqlcon.php");
-                $limit_per_page = $_SESSION['user-per-page'];
+                <div class="table-responsive">
+                    <table class="table" id="user-table">
+                        <thead>
+                            <tr>
+                                <th> <?php echo _('NAME') ?> </th>
+                                <th> <?php echo _('ROLE') ?> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        include("../scripts/php/mysqlcon.php");
+                        $sql = "SELECT * FROM acl.user";
+                        $result = $conn->query($sql);
 
-                $sql = "SELECT * FROM acl.user ORDER BY name, surname";
-                $result = $conn->query($sql);
-                $counter = mysqli_num_rows($result);
-                echo '<div class="row">';
-                echo '<div class="col-8">';
-                echo '<ul class="nav nav-tabs border-bottom-0" id="myTab" role="tablist">';
-                for($i = 1; $i < $counter / $limit_per_page + 1; $i++){
-                    echo "<li class='nav-item' role='presentation'>
-                            <button class='nav-link' id='pills-home-tab' data-bs-toggle='pill' data-bs-target='#tab{$i}' type='button' role='tab' aria-controls='pills-home' aria-selected='true'>{$i}</button>
-                        </li>";
-                }
-                echo '</ul>';
-                echo '</div>';
-                echo '<div class="col-4 align-self-center">';
-                echo '<select name="user-per-page" id="user-per-page" onchange="onUserPerPageChange()">
-                <option value="5"' .  ($_SESSION['user-per-page'] == 5 ? " selected " : "") . '>5</option>
-                <option value="10"' .  ($_SESSION['user-per-page'] == 10 ? " selected " : "") . '>10</option>
-                <option value="15"' .  ($_SESSION['user-per-page'] == 15 ? " selected " : "") . '>15</option>
-                </select>';
-                echo '</div>';
-                echo '</div>';
-                
-                
-                $sql2 = "SELECT * FROM acl.roles";
-                $result2 = $conn->query($sql2);
-
-                echo '<div class="tab-content" id="myTabContent">';
-                if ($result->num_rows > 0) {
-                    $counter_per_pages = 0;
-                    $counter = 0;
-                    
-                    while ($row = $result->fetch_assoc()) {
-                        if($counter_per_pages % $limit_per_page == 0){
-                            $counter++;
-                            echo "<div class='tab-pane fade' id='tab{$counter}' role='tabpanel' aria-labelledby='pills-{$counter}-tab'>";
-                        }
-                        $counter_per_pages++;
-                        echo '<div class="container-fluid pt-3">';
-                        echo "
-                            <div class='row removable'>
-                                <div class='col-lg-6'>
-                                    <div class='form-group'>
-                                        <div class='input-group'>
-                                            <span type='text'>
-                                            {$row['name']} {$row['surname']}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            ";
-                            
                         $sql2 = "SELECT * FROM acl.roles";
                         $result2 = $conn->query($sql2);
-                        if ($result2->num_rows > 0) {
-                            echo "<div class='col-lg-6'>
-                                    <select class='form-select' onchange='onRolesChange({id: \"" . $row['id_user'] . "\", role: this.value})'>";
-                            while ($row2 = $result2->fetch_assoc()) {
-                                if ($row['id_role'] == $row2['id_role'])
-                                    echo "<option selected value='{$row2['id_role']}'>{$row2['name']}</option>";
-                                else
-                                    echo "<option " . ($uid == $row['id_user'] ? 'disabled' : '') . " value='{$row2['id_role']}'>{$row2['name']}</option>";
+
+
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<tr><td>';
+                                echo "{$row['name']} {$row['surname']}";
+                                echo '</td>';
+
+                                $sql2 = "SELECT * FROM acl.roles";
+                                $result2 = $conn->query($sql2);
+                                if ($result2->num_rows > 0) {
+                                    echo "<td>
+                                            <select class='form-select' onchange='onRolesChange({id: \"" . $row['id_user'] . "\", role: this.value})'>";
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                        if ($row['id_role'] == $row2['id_role'])
+                                            echo "<option selected value='{$row2['id_role']}'>{$row2['name']}</option>";
+                                        else
+                                            echo "<option " . ($uid == $row['id_user'] ? 'disabled' : '') . " value='{$row2['id_role']}'>{$row2['name']}</option>";
+                                    }
+                                }
+                                echo "</select>
+                                        </td></tr>";
                             }
                         }
-                        echo "</select></div></div></div>";
+                        
 
-                        if($counter_per_pages % $limit_per_page == 0){
-                            echo "</div>";
-                        }
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+                            <input type="button" class="btn btn-primary w-100 form-button" name="submit" id="submit"
+                                value="<?php echo _('UPDATE') ?>" onclick="submitForm()">
+                            </form>;
 
-
-
-                    }
-                    echo '</div>';
-                }
-                
-                ?>
-                <button type="button" class="btn btn-primary w-100 form-button mt-2" name="submit" id="submit"
-                    onclick="submitForm()">
-                    <?php echo _('UPDATE') ?>
-                </button>
-                </form>
-
-            </div>
-
+                </div>
         </main>
 
         <!-- Result from operation -->
@@ -321,11 +283,9 @@ if (!isset($_SESSION['session-cookie'])) {
     <script
         src="https://rawcdn.githack.com/Loopple/loopple-public-assets/f5029eba0dafd952ecdbf8fbbdd0aa9ae0d0abc1/asteria-dashboard/js/plugins/swiper.min.js"></script>
     <script src="https://loopple.s3.eu-west-3.amazonaws.com/asteria-dashboard/js/asteria-dashboard.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
-    <script>
-        document.getElementById('tab1').classList.add('active');
-        document.getElementById('tab1').classList.add('show');
-    </script>
 </body>
 
 </html>

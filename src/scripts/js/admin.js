@@ -41,16 +41,24 @@ function onRolesChange(user_info) {
     console.log(user_to_change_role);
 }
 
-function onUserPerPageChange() {
-    const user_per_page = document.getElementById('user-per-page').value;
-    $.ajax({
-        url: "../scripts/php/save-to-session.php",
-        type: "POST",
-        data: {
-            user_per_page: user_per_page,
+$(document).ready(function () {
+    $('#user-table').DataTable({
+        paging: true,
+        responsive: true,
+        pageLength: 10,
+        lengthMenu: [5, 10, 15],
+        buttons: {
+            className: 'btn btn-primary',
         },
-        success: function (res) {
-            location.reload();
-        }
+        language: {
+            searchPlaceholder: 'Search',
+            "info": "<i class='fa fa-info-circle'></i> _START_ - _END_ of _TOTAL_",
+            "infoEmpty": "<i class='fa fa-info-circle'></i> 0 of 0",
+            "infoFiltered": "<i class='fa fa-filter'></i> (Filter from _MAX_ total)",
+            paginate: {
+                previous: '<i class="fas fa-angle-left"></i>',
+                next: '<i class="fas fa-angle-right"></i>'
+            },
+        },
     });
-}
+});

@@ -201,7 +201,10 @@ msgstr "Link Photo"
 msgid "RESET_PASSWORD"
 msgstr "Reset Password"
 
-# Lingue
+msgid "ROLE"
+msgstr "Role"
+
+# Languages
 msgid "ENGLISH"
 msgstr "🇬🇧English🇬🇧"
 
