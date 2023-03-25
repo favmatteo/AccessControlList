@@ -346,3 +346,42 @@ VALUES (
         'ul. Vitosha 36',
         41
     );
+
+
+INSERT INTO invoice (date, amount, title, typology, description, id_user, id_customer)
+VALUES
+('2022-01-02', 150, 'Acquisto forniture ufficio', 'Forniture', 'Acquisto di penne, matite e quaderni per l\'ufficio', 'k1BFDkMVypfXSFxw8R9ckVJF4rJ2', 3),
+('2022-01-03', 75, 'Servizi di consulenza legale', 'Servizi', 'Assistenza legale per questioni fiscali', 'vjdESfuKP8YdOO5cpsOvBUjjT6G3', 14),
+('2022-01-04', 250, 'Acquisto macchinari', 'Macchinari', 'Acquisto di macchinari per la produzione di elementi metallici', 'RLCSM04i0HRSWSucaILmYVtux4o2', 27),
+('2022-01-05', 50, 'Manutenzione impianto elettrico', 'Manutenzione', 'Riparazione di un guasto nell\'impianto elettrico', 'U2Yz5pauGhWbfMQ1T4JftBeJPyy2', 6),
+('2022-01-06', 120, 'Pulizie ufficio', 'Servizi', 'Pulizia dell\'ufficio e svuotamento cestini', 'k1BFDkMVypfXSFxw8R9ckVJF4rJ2', 11),
+('2022-01-07', 175, 'Acquisto materiali edili', 'Materiali', 'Acquisto di mattoni, cemento e altri materiali per una ristrutturazione', 'U2Yz5pauGhWbfMQ1T4JftBeJPyy2', 22),
+('2022-01-08', 90, 'Servizio di riparazione computer', 'Servizi', 'Riparazione di un computer in ufficio', 'vjdESfuKP8YdOO5cpsOvBUjjT6G3', 8),
+('2022-01-09', 80, 'Rifornimento magazzino', 'Forniture', 'Acquisto di prodotti per il magazzino', 'RLCSM04i0HRSWSucaILmYVtux4o2', 17),
+('2022-01-10', 200, 'Acquisto mobili', 'Arredamento', 'Acquisto di scrivanie e sedie per l\'ufficio', 'k1BFDkMVypfXSFxw8R9ckVJF4rJ2', 7),
+('2022-01-11', 65, 'Servizio di trasporto merci', 'Trasporti', 'Trasporto di merci da un magazzino all\'altro', 'vjdESfuKP8YdOO5cpsOvBUjjT6G3', 5),
+('2022-05-12', 80, 'Fattura servizi marketing', 'Servizi', 'Servizio di marketing per la promozione di un evento', 'U2Yz5pauGhWbfMQ1T4JftBeJPyy2', 12),
+('2022-01-25', 50, 'Fattura acquisto forniture ufficio', 'Forniture', 'Acquisto di forniture per l\'ufficio', 'vjdESfuKP8YdOO5cpsOvBUjjT6G3', 5),
+('2021-12-03', 120, 'Fattura consulenza legale', 'Consulenza', 'Consulenza legale per questioni contrattuali', 'RLCSM04i0HRSWSucaILmYVtux4o2', 23),
+('2021-11-15', 200, 'Fattura acquisto materiale elettrico', 'Materiali', 'Acquisto di materiale elettrico per lavori di ristrutturazione', 'k1BFDkMVypfXSFxw8R9ckVJF4rJ2', 17),
+('2022-02-07', 70, 'Fattura servizi di pulizia', 'Servizi', 'Servizio di pulizia per uffici e locali commerciali', 'vjdESfuKP8YdOO5cpsOvBUjjT6G3', 8),
+('2022-02-19', 150, 'Fattura manutenzione macchinari', 'Manutenzione', 'Servizio di manutenzione per macchinari industriali', 'U2Yz5pauGhWbfMQ1T4JftBeJPyy2', 25),
+('2022-03-04', 90, 'Fattura acquisto mobili ufficio', 'Arredamento', 'Acquisto di mobili per arredamento ufficio', 'k1BFDkMVypfXSFxw8R9ckVJF4rJ2', 4),
+('2021-12-10', 100, 'Fattura acquisto forniture informatiche', 'Forniture', 'Acquisto di forniture informatiche per l\'ufficio', 'U2Yz5pauGhWbfMQ1T4JftBeJPyy2', 10),
+('2022-02-02', 80, 'Fattura servizi di marketing', 'Servizi', 'Servizio di marketing per la promozione di un nuovo prodotto', 'k1BFDkMVypfXSFxw8R9ckVJF4rJ2', 19),
+('2022-01-06', 60, 'Fattura servizi di consulenza fiscale', 'Consulenza', 'Servizio di consulenza fiscale per la dichiarazione dei redditi', 'vjdESfuKP8YdOO5cpsOvBUjjT6G3', 6),
+('2022-02-15', 200, 'Fattura consulenza', 'Servizi', 'Servizi di consulenza aziendale', 'k1BFDkMVypfXSFxw8R9ckVJF4rJ2', 10),
+('2022-01-30', 500, 'Fattura manutenzione impianto elettrico', 'Servizi', 'Manutenzione ordinaria impianto elettrico', 'vjdESfuKP8YdOO5cpsOvBUjjT6G3', 17),
+('2022-02-20', 1000, 'Fattura progettazione software', 'Servizi', 'Sviluppo software personalizzato', 'U2Yz5pauGhWbfMQ1T4JftBeJPyy2', 6),
+('2022-02-28', 700, 'Fattura manutenzione macchinari', 'Servizi', 'Manutenzione ordinaria macchinari', 'RLCSM04i0HRSWSucaILmYVtux4o2', 12),
+('2022-03-02', 1500, 'Fattura acquisto componentistica', 'Materiali', 'Acquisto componenti elettronici', 'k1BFDkMVypfXSFxw8R9ckVJF4rJ2', 23),
+('2022-02-10', 800, 'Fattura manutenzione impianto idraulico', 'Servizi', 'Manutenzione ordinaria impianto idraulico', 'U2Yz5pauGhWbfMQ1T4JftBeJPyy2', 7),
+('2022-03-03', 300, 'Fattura consulenza legale', 'Servizi', 'Servizi di consulenza legale', 'RLCSM04i0HRSWSucaILmYVtux4o2', 8),
+('2022-02-27', 2000, 'Fattura progettazione architettonica', 'Servizi', 'Progettazione architettonica di un edificio', 'k1BFDkMVypfXSFxw8R9ckVJF4rJ2', 4),
+('2022-03-12', 1200, 'Fattura manutenzione software', 'Servizi', 'Manutenzione ordinaria software', 'vjdESfuKP8YdOO5cpsOvBUjjT6G3', 16),
+('2022-03-08', 400, 'Fattura acquisto forniture ufficio', 'Materiali', 'Acquisto forniture per ufficio', 'U2Yz5pauGhWbfMQ1T4JftBeJPyy2', 1),
+('2022-09-01', 250, 'Riparazione computer', 'Assistenza tecnica', 'Sostituzione scheda madre', 'U2Yz5pauGhWbfMQ1T4JftBeJPyy2', 8),
+('2022-09-01', 250, 'Riparazione computer', 'Assistenza tecnica', 'Sostituzione scheda madre', 'U2Yz5pauGhWbfMQ1T4JftBeJPyy2', 8),
+('2022-11-30', 500, 'Manutenzione impianto elettrico', 'Manutenzione', 'Controllo impianto elettrico', 'vjdESfuKP8YdOO5cpsOvBUjjT6G3', 12),
+('2022-12-10', 1500, 'Realizzazione video promozionale', 'Video produzione', 'Creazione di un video promozionale per un prodotto', 'k1BFDkMVypfXSFxw8R9ckVJF4rJ2', 15),
+('2022-08-01', 100, 'Manutenzione caldaia', 'Manutenzione', 'Controllo e pulizia caldaia', 'vjdESfuKP8YdOO5cpsOvBUjjT6G3', 5);

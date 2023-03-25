@@ -46,7 +46,9 @@ if (!isset($_SESSION['session-cookie'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard</title>
+    <title>
+        <?php echo _('DASHBOARD') ?>
+    </title>
 
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap"
@@ -327,9 +329,6 @@ if (!isset($_SESSION['session-cookie'])) {
                         </div>
                         <div class="card-body">
                             <form method="post">
-                                <h6 class="heading-small text-muted mb-4">
-                                    <?php echo _('USER_INFORMATION') ?>
-                                </h6>
                                 <div>
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -536,9 +535,6 @@ if (!isset($_SESSION['session-cookie'])) {
                         </div>
                         <div class=" card-body">
                             <form>
-                                <h6 class="heading-small text-muted mb-4">
-                                    <?php echo _('USER_INFORMATION') ?>
-                                </h6>
                                 <div>
                                     <div class="row">
                                         <div class="col-lg-10">
@@ -783,34 +779,34 @@ if (!isset($_SESSION['session-cookie'])) {
     </script>
 
     <script>
-    $(document).ready(function() {
-        $('#invoice-table').DataTable({
-            paging: true,
-            responsive: true,
-            pageLength: 10,
-            lengthMenu: [5, 10, 15],
-            scrollX:        true,
-            fixedHeader:    true,
-            autoWidth:      true,        
-            fixedColumns:   {
-                leftColumns: 1,
-                rightColumns: 1
-            },
-            buttons: {
-                className: 'btn btn-primary',
-            },
-            language: {
-                searchPlaceholder: 'Search',
-                "info": "<i class='fa fa-info-circle'></i> _START_ - _END_ of _TOTAL_",
-                "infoEmpty": "<i class='fa fa-info-circle'></i> 0 of 0",
-                "infoFiltered": "<i class='fa fa-filter'></i> (Filter from _MAX_ total)",
-                paginate: {
-                    previous: '<i class="fas fa-angle-left"></i>',
-                    next: '<i class="fas fa-angle-right"></i>'
+        $(document).ready(function () {
+            $('#invoice-table').DataTable({
+                paging: true,
+                responsive: true,
+                pageLength: 10,
+                lengthMenu: [5, 10, 15],
+                scrollX: true,
+                fixedHeader: true,
+                autoWidth: true,
+                fixedColumns: {
+                    leftColumns: 1,
+                    rightColumns: 1
                 },
-            },
+                buttons: {
+                    className: 'btn btn-primary',
+                },
+                language: {
+                    searchPlaceholder: 'Search',
+                    "info": "<i class='fa fa-info-circle'></i> _START_ - _END_ of _TOTAL_",
+                    "infoEmpty": "<i class='fa fa-info-circle'></i> 0 of 0",
+                    "infoFiltered": "<i class='fa fa-filter'></i> (Filter from _MAX_ total)",
+                    paginate: {
+                        previous: '<i class="fas fa-angle-left"></i>',
+                        next: '<i class="fas fa-angle-right"></i>'
+                    },
+                },
+            });
         });
-    });
 
     </script>
 

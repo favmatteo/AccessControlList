@@ -39,7 +39,9 @@ if (!isset($_SESSION['session-cookie'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard</title>
+    <title>
+        <?php echo _('ADMIN_PAGE') ?>
+    </title>
 
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap"
@@ -218,12 +220,16 @@ if (!isset($_SESSION['session-cookie'])) {
                     <table class="table" id="user-table">
                         <thead>
                             <tr>
-                                <th> <?php echo _('NAME') ?> </th>
-                                <th> <?php echo _('ROLE') ?> </th>
+                                <th>
+                                    <?php echo _('NAME') ?>
+                                </th>
+                                <th>
+                                    <?php echo _('ROLE') ?>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php
+                            <?php
                         include("../scripts/php/mysqlcon.php");
                         $sql = "SELECT * FROM acl.user";
                         $result = $conn->query($sql);
@@ -264,7 +270,7 @@ if (!isset($_SESSION['session-cookie'])) {
                     value="<?php echo _('UPDATE') ?>" onclick="submitForm()">
                 </form>
 
-                </div>
+            </div>
         </main>
 
         <!-- Result from operation -->
