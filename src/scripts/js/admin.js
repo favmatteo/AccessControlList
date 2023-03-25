@@ -47,6 +47,11 @@ $(document).ready(function () {
         responsive: true,
         pageLength: 10,
         lengthMenu: [5, 10, 15],
+        columnDefs: [{
+            targets: [1],
+            orderable: false,
+            searchable: false
+        }],
         buttons: {
             className: 'btn btn-primary',
         },
