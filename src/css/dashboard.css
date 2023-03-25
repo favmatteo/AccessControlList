@@ -149,3 +149,80 @@
     white-space: nowrap;
     border-radius: 6px;
 }
+
+#invoice-table_length>label {
+    font-size: 0;
+}
+
+#invoice-table_length>label::before {
+    content: "";
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 5px;
+}
+
+#invoice-table_length>label::after {
+    content: "";
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 5px;
+}
+
+
+#invoice-table_length>label>select {
+    background-color: #02a352;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 14px;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+
+#invoice-table_length select {
+    margin-left: 0;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #555;
+    font-size: 14px;
+    font-weight: normal;
+    background-color: #fff;
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#invoice-table_length select:focus {
+    outline: none;
+    border-color: #66afe9;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#invoice-table_length select option {
+    color: #555;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+#invoice-table_length>label>select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+#invoice-table_length>label>select::-ms-expand {
+    display: none;
+}
+
+
+#invoice-table_filter label {
+    font-size: 0;
+}

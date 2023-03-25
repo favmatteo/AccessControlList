@@ -13,7 +13,7 @@ body {
 }
 
 .navbar {
-    position: fixed;
+    position: absolute;
     width: 100%;
     top: 0px;
 }
@@ -21,4 +21,16 @@ body {
 .title {
     font-size: 60px;
     text-align: center;
+}
+
+@media (max-height: 768px) {
+    .title {
+        padding-top: 300px;
+    }
+}
+
+@media (max-height: 500px) {
+    .title {
+        padding-top: 500px;
+    }
 }

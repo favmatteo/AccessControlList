@@ -1,12 +1,13 @@
-<?php 
+<?php
 include("../scripts/php/lang.php");
 
 # Check if user is logged, and if not, redirect to login page
 use Kreait\Firebase\Exception\Auth\FailedToVerifySessionCookie;
-include ('../scripts/php/dbcon.php');
+
+include('../scripts/php/dbcon.php');
 include("../scripts/php/mysqlcon.php");
 
-if(!isset($_SESSION['session-cookie'])){
+if (!isset($_SESSION['session-cookie'])) {
     die(header("location: login.html"));
 } else {
     $sessionCookieString = $_SESSION['session-cookie'];
@@ -26,7 +27,6 @@ if(!isset($_SESSION['session-cookie'])){
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     $role = $row['name'];
-    
 }
 ?>
 
@@ -36,7 +36,9 @@ if(!isset($_SESSION['session-cookie'])){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard</title>
+    <title>
+        <?php echo _('PROFILE') ?>
+    </title>
 
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap"
@@ -48,7 +50,7 @@ if(!isset($_SESSION['session-cookie'])){
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../scripts/js/ajax/profile.js"></script>
+    <script src="../scripts/js/profile.js"></script>
 
 
 </head>
@@ -89,12 +91,14 @@ if(!isset($_SESSION['session-cookie'])){
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Dashboard</span>
+                        <span class="nav-link-text ms-1">
+                            <?php echo _('DASHBOARD') ?>
+                        </span>
                     </a>
                 </li>
                 <?php
                 // check if user is admin if it is show admin panel
-                if($_SESSION['role'] == "admin"){
+                if ($_SESSION['role'] == "admin") {
                     echo '<li class="nav-item">
                     <a class="nav-link" href="admin.html">
                         <div
@@ -107,8 +111,8 @@ if(!isset($_SESSION['session-cookie'])){
                     </a>
                     </li>';
                 }
-                
-                
+
+
                 ?>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder">
@@ -142,7 +146,9 @@ if(!isset($_SESSION['session-cookie'])){
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1"><?php echo _('PROFILE') ?></span>
+                        <span class="nav-link-text ms-1">
+                            <?php echo _('PROFILE') ?>
+                        </span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -169,7 +175,9 @@ if(!isset($_SESSION['session-cookie'])){
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1"><?php echo _('LOGOUT') ?></span>
+                        <span class="nav-link-text ms-1">
+                            <?php echo _('LOGOUT') ?>
+                        </span>
                     </a>
                 </li>
             </ul>
@@ -210,13 +218,15 @@ if(!isset($_SESSION['session-cookie'])){
             <div class="container-fluid pt-3">
                 <form>
                     <div class="mb-3">
-                        <label for="photo-link-label" class="form-label"><?php echo _('LINK_PHOTO') ?></label>
+                        <label for="photo-link-label" class="form-label">
+                            <?php echo _('LINK_PHOTO') ?>
+                        </label>
                         <input type="text" class="form-control" id="photo-link"
                             placeholder="https://cdn-icons-png.flaticon.com/512/149/149071.png">
                     </div>
                     <?php $userId = $_SESSION['user']->uid; ?>
-                    <input type="button" class="btn btn-primary w-100 form-button" name="submit" value="<?php echo _('LINK_PHOTO') ?>"
-                        onclick="changePhotoButton('<?php echo $userId ?>')">
+                    <input type="button" class="btn btn-primary w-100 form-button" name="submit"
+                        value="<?php echo _('SUBMIT') ?>" onclick="changePhotoButton('<?php echo $userId ?>')">
                 </form>
                 <!-- Result from operation -->
                 <div class="row removable" id="results" style="display: none;">

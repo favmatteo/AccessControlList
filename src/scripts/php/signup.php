@@ -18,7 +18,7 @@ $repeated_password = $_POST['repeatedPassword'];
 
 // Check if phone number is valid
 $validPhoneNumber = true;
-if(strlen($phone_number) != 10){ 
+if (strlen($phone_number) != 10) {
     echo "<div class=\"alert alert-danger\" role=\"alert\">
             The number is not valid!
           </div>";
@@ -27,7 +27,7 @@ if(strlen($phone_number) != 10){
 
 // Check if the password is the same
 $validPassword = true;
-if($_POST['password'] != $_POST['repeatedPassword']){
+if ($_POST['password'] != $_POST['repeatedPassword']) {
     echo "<div class=\"alert alert-danger\" role=\"alert\">
             Password should be the same!
           </div>";
@@ -82,4 +82,3 @@ if ($validEmail && $validPhoneNumber && $validPassword) {
               </div>";
     }
 }
-

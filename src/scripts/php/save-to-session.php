@@ -2,4 +2,6 @@
 
 session_start();
 
-$_SESSION['language'] = $_POST['language'];
+if(isset($_POST['language'])){
+    $_SESSION['language'] = $_POST['language'];
+}

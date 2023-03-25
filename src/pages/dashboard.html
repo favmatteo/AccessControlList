@@ -1,14 +1,15 @@
-<?php 
+<?php
 include("../scripts/php/lang.php");
 
 # Check if user is logged, and if not, redirect to login page
 use Kreait\Firebase\Exception\Auth\FailedToVerifySessionCookie;
-include ('../scripts/php/dbcon.php');
+
+include('../scripts/php/dbcon.php');
 include("../scripts/php/mysqlcon.php");
 
 //session_start();
 
-if(!isset($_SESSION['session-cookie'])){
+if (!isset($_SESSION['session-cookie'])) {
     die(header("location: login.html"));
 } else {
     $sessionCookieString = $_SESSION['session-cookie'];
@@ -45,14 +46,17 @@ if(!isset($_SESSION['session-cookie'])){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard</title>
+    <title>
+        <?php echo _('DASHBOARD') ?>
+    </title>
 
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap"
         rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdn.statically.io/gh/Loopple/loopple-public-assets/main/asteria-dashboard/css/nucleo-icons.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+
 
     <link rel="stylesheet" href="../css/theme.css">
     <link rel="stylesheet" href="../css/dashboard.css">
@@ -104,7 +108,7 @@ if(!isset($_SESSION['session-cookie'])){
                 </li>
                 <?php
                 // check if user is admin if it is show admin panel
-                if($_SESSION['role'] == "admin"){
+                if ($_SESSION['role'] == "admin") {
                     echo '<li class="nav-item">
                     <a class="nav-link" href="admin.html">
                         <div
@@ -117,11 +121,13 @@ if(!isset($_SESSION['session-cookie'])){
                     </a>
                     </li>';
                 }
-                
-                
+
+
                 ?>
                 <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder"><?php echo _('ACCOUNT_PAGES') ?></h6>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder">
+                        <?php echo _('ACCOUNT_PAGES') ?>
+                    </h6>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="profile.html">
@@ -231,10 +237,9 @@ if(!isset($_SESSION['session-cookie'])){
                                     <div class="carousel-inner min-height-300 h-100">
                                         <?php
                                         $role = $_SESSION['role'];
-                                        
-                                        if($role == 'admin' || $role == "commercial"){
+                                        if ($role == 'admin' || $role == "commercial") {
                                             $activate = $_SESSION['isCarouselActive'];
-                                            $_SESSION['isCarouselActive'] = false;                                          
+                                            $_SESSION['isCarouselActive'] = false;
                                             echo '<div class="carousel-item min-height-300 h-100 bg-cover ' . ($activate ? "active" : "") . '" role="button"
                                                 onclick="showCreateInvoice()" data-bs-interval="5000"
                                                 style="background: rgba(0, 128, 0, 0.5);">
@@ -249,10 +254,10 @@ if(!isset($_SESSION['session-cookie'])){
                                         ?>
                                         <?php
                                         $role = $_SESSION['role'];
-                                        
-                                        if($role == 'admin' || $role == "commercial" || $role == 'Area manager'){
+
+                                        if ($role == 'admin' || $role == "commercial" || $role == 'Area manager') {
                                             $activate = $_SESSION['isCarouselActive'];
-                                            $_SESSION['isCarouselActive'] = false;                                          
+                                            $_SESSION['isCarouselActive'] = false;
                                             echo '<div class="carousel-item min-height-300 h-100 bg-cover ' . ($activate ? "active" : "") . '" data-bs-interval="3000"
                                                 role="button" onclick="showListInvoice()"
                                                 style="background: rgba(154, 205, 50, 0.7);">
@@ -267,10 +272,10 @@ if(!isset($_SESSION['session-cookie'])){
                                         ?>
                                         <?php
                                         $role = $_SESSION['role'];
-                                        
-                                        if($role == 'admin' || $role == "commercial" || $role == 'Area manager' || $role == "Administration"){
+
+                                        if ($role == 'admin' || $role == "commercial" || $role == 'Area manager' || $role == "Administration") {
                                             $activate = $_SESSION['isCarouselActive'];
-                                            $_SESSION['isCarouselActive'] = false;                                          
+                                            $_SESSION['isCarouselActive'] = false;
                                             echo '<div class="carousel-item min-height-300 h-100 bg-cover' . ($activate ? "active" : "") . '" data-bs-interval="3000"
                                                 role="button" onclick="showUpdateInvoice()"
                                                 style="background: rgba(107, 142, 35, 0.3);">
@@ -324,9 +329,6 @@ if(!isset($_SESSION['session-cookie'])){
                         </div>
                         <div class="card-body">
                             <form method="post">
-                                <h6 class="heading-small text-muted mb-4">
-                                    <?php echo _('USER_INFORMATION') ?>
-                                </h6>
                                 <div>
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -377,17 +379,16 @@ if(!isset($_SESSION['session-cookie'])){
                                             </label>
                                             <select class="form-select" id="invoice-customer">
                                                 <?php
-                                                    include("../scripts/php/mysqlcon.php");
-                                                    $sql = "SELECT * FROM acl.customer";
-                                                    $result = $conn->query($sql);
-                                                    if ($result->num_rows > 0) {
-                                                        while ($row = $result->fetch_assoc()) {
-                                                            echo "<option value='" . $row['id_customer'] . "'>" . ($row['first_name'] . " " . $row['surname'] . " - " . $row['email'])  . "</option>"; 
-                                                        }
-                                                    }else{
-                                                        echo "<option value='null'>----</option>";
-                                                                                                  
+                                                include("../scripts/php/mysqlcon.php");
+                                                $sql = "SELECT * FROM acl.customer";
+                                                $result = $conn->query($sql);
+                                                if ($result->num_rows > 0) {
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        echo "<option value='" . $row['id_customer'] . "'>" . ($row['first_name'] . " " . $row['surname'] . " - " . $row['email'])  . "</option>";
                                                     }
+                                                } else {
+                                                    echo "<option value='null'>----</option>";
+                                                }
                                                 ?>
                                             </select>
                                         </div>
@@ -427,7 +428,7 @@ if(!isset($_SESSION['session-cookie'])){
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover" id="invoice-table" style="width:100%">
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">
@@ -459,7 +460,11 @@ if(!isset($_SESSION['session-cookie'])){
                                 <tbody>
                                     <?php
                                     include("../scripts/php/mysqlcon.php");
-                                    $sql = "SELECT * FROM acl.invoice";
+                                    if($_SESSION['role'] == 'commercial'){
+                                        $sql = "SELECT * FROM acl.invoice WHERE invoice.id_user = '" . $_SESSION['user']->uid . "'";
+                                    }else{
+                                        $sql = "SELECT * FROM acl.invoice";
+                                    }
                                     $result = $conn->query($sql);
                                     if ($result->num_rows > 0) {
                                         while ($row = $result->fetch_assoc()) {
@@ -472,27 +477,27 @@ if(!isset($_SESSION['session-cookie'])){
                                             echo "<td>" . $row['description'] . "</td>";
 
                                             // get customer name
-                                            $sql2 = "SELECT * FROM acl.customer WHERE id_customer = " . '"' . $row['id_customer']. '"';
+                                            $sql2 = "SELECT * FROM acl.customer WHERE id_customer = " . "'" . $row['id_customer'] . "'";
                                             $result2 = $conn->query($sql2);
                                             if ($result2->num_rows > 0) {
                                                 $row2 = $result2->fetch_assoc();
                                                 echo "<td>" . $row2['first_name'] . " " . $row2['surname'] . "</td>";
-                                            }else{
+                                            } else {
                                                 echo "<td>----</td>";
                                             }
 
                                             // get user name
-                                            $sql2 = "SELECT * FROM acl.user WHERE id_user = " . '"' . $row['id_user']. '"';
+                                            $sql2 = "SELECT * FROM acl.user WHERE id_user = " . "'" . $row['id_user'] . "'";
                                             $result2 = $conn->query($sql2);
                                             if ($result2->num_rows > 0) {
                                                 $row2 = $result2->fetch_assoc();
                                                 echo "<td>" . $row2['name'] . " " . $row2['surname'] . "</td>";
-                                            }else{
+                                            } else {
                                                 echo "<td>----</td>";
                                             }
                                             echo "</tr>";
                                         }
-                                    }else{
+                                    } else {
                                         echo "<tr>";
                                         echo "<th scope='row'>----</th>";
                                         echo "<td>----</td>";
@@ -504,7 +509,7 @@ if(!isset($_SESSION['session-cookie'])){
                                         echo "<td>----</td>";
                                         echo "</tr>";
                                     }
-                                ?>
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
@@ -517,7 +522,9 @@ if(!isset($_SESSION['session-cookie'])){
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h6 class="mb-0"><?php echo _('UPDATE_INVOICE') ?></h6>
+                                    <h6 class="mb-0">
+                                        <?php echo _('UPDATE_INVOICE') ?>
+                                    </h6>
                                 </div>
                                 <div class="col-4 text-end">
                                     <a class="btn btn-sm btn-primary mb-0" role="button" onclick="hideAll()">
@@ -528,9 +535,6 @@ if(!isset($_SESSION['session-cookie'])){
                         </div>
                         <div class=" card-body">
                             <form>
-                                <h6 class="heading-small text-muted mb-4">
-                                    <?php echo _('USER_INFORMATION') ?>
-                                </h6>
                                 <div>
                                     <div class="row">
                                         <div class="col-lg-10">
@@ -541,19 +545,20 @@ if(!isset($_SESSION['session-cookie'])){
                                                 </option>
 
                                                 <?php
-                                            include("../scripts/php/mysqlcon.php");
-                                            // get all invoice
-                                            $sql = "SELECT * FROM acl.invoice";
-                                            $result = $conn->query($sql);
-                                            $sql = "SELECT * FROM acl.invoice";
-                                            $result = $conn->query($sql);
-                                            if ($result->num_rows > 0) {
-                                                // create a select with all invoice
-                                                while ($row = $result->fetch_assoc()) {
-                                                    echo "<option value='" . $row['id_invoice'] . "'>" . $row['id_invoice'] . ' ' . $row['title'] . "</option>";
+                                                include("../scripts/php/mysqlcon.php");
+                                                if($_SESSION['role'] == 'commercial'){
+                                                    $sql = "SELECT * FROM acl.invoice WHERE invoice.id_user = '" . $_SESSION['user']->uid . "'";
+                                                }else{
+                                                    $sql = "SELECT * FROM acl.invoice";
                                                 }
-                                            }
-                                            ?>
+                                                $result = $conn->query($sql);
+                                                if ($result->num_rows > 0) {
+                                                    // create a select with all invoice
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        echo "<option value='" . $row['id_invoice'] . "'>" . $row['id_invoice'] . ' ' . $row['title'] . "</option>";
+                                                    }
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                         <div class="col-lg-2">
@@ -563,27 +568,37 @@ if(!isset($_SESSION['session-cookie'])){
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-lg-6">
-                                            <label for="invoice-title-update" class="form-control-label"><?php echo _('CHANGE_TITLE') ?></label>
-                                            <input class="form-control" type="text" placeholder="<?php echo _('NEW_TITLE') ?>"
-                                                id="invoice-title-update">
+                                            <label for="invoice-title-update" class="form-control-label">
+                                                <?php echo _('CHANGE_TITLE') ?>
+                                            </label>
+                                            <input class="form-control" type="text"
+                                                placeholder="<?php echo _('NEW_TITLE') ?>" id="invoice-title-update">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label for="invoice-amout-update" class="form-control-label"><?php echo _('CHANGE_AMOUNT') ?></label>
-                                            <input class="form-control" type="number" placeholder="<?php echo _('NEW_AMOUNT') ?>"
-                                                id="invoice-amount-update" min="0">
+                                            <label for="invoice-amout-update" class="form-control-label">
+                                                <?php echo _('CHANGE_AMOUNT') ?>
+                                            </label>
+                                            <input class="form-control" type="number"
+                                                placeholder="<?php echo _('NEW_AMOUNT') ?>" id="invoice-amount-update"
+                                                min="0">
                                         </div>
 
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-lg-6">
-                                            <label for="invoice-typology-update" class="form-control-label"><?php echo _('CHANGE_TYPE') ?></label>
-                                            <input class="form-control" type="text" placeholder="<?php echo _('NEW_TYPE') ?>"
-                                                id="invoice-typology-update">
+                                            <label for="invoice-typology-update" class="form-control-label">
+                                                <?php echo _('CHANGE_TYPE') ?>
+                                            </label>
+                                            <input class="form-control" type="text"
+                                                placeholder="<?php echo _('NEW_TYPE') ?>" id="invoice-typology-update">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label for="invoice-description-update" class="form-control-label"><?php echo _('CHANGE_DESCRIPTION') ?></label>
-                                            <textarea class="form-control" type="text" placeholder="<?php echo _('NEW_DESCRIPTION') ?>"
-                                                rows="1" id="invoice-description-update"></textarea>
+                                            <label for="invoice-description-update" class="form-control-label">
+                                                <?php echo _('CHANGE_DESCRIPTION') ?>
+                                            </label>
+                                            <textarea class="form-control" type="text"
+                                                placeholder="<?php echo _('NEW_DESCRIPTION') ?>" rows="1"
+                                                id="invoice-description-update"></textarea>
                                         </div>
                                     </div>
 
@@ -614,6 +629,9 @@ if(!isset($_SESSION['session-cookie'])){
         src="https://rawcdn.githack.com/Loopple/loopple-public-assets/f5029eba0dafd952ecdbf8fbbdd0aa9ae0d0abc1/asteria-dashboard/js/plugins/swiper.min.js"></script>
     <script src="https://loopple.s3.eu-west-3.amazonaws.com/asteria-dashboard/js/asteria-dashboard.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
         const createInvoice = document.getElementById("create-invoice");
@@ -720,8 +738,25 @@ if(!isset($_SESSION['session-cookie'])){
 
     <!--Update invoice button ajax-->
     <script>
-
-
+        $("#update-invoice-btn").click(() => {
+            $.ajax({
+                url: '../scripts/php/update-invoice.php',
+                type: 'POST',
+                data: {
+                    invoice_id: $("#invoice-select").val(),
+                    invoice_title: $("#invoice-title-update").val(),
+                    invoice_amount: $("#invoice-amount-update").val(),
+                    invoice_typology: $("#invoice-typology-update").val(),
+                    invoice_description: $("#invoice-description-update").val()
+                },
+                success: (res) => {
+                    hideAll();
+                    console.log(res);
+                    alert("Invoice updated successfully!");
+                    location.reload();
+                }
+            })
+        })
     </script>
 
     <!-- Delete invoice button ajax -->
@@ -739,13 +774,42 @@ if(!isset($_SESSION['session-cookie'])){
                     alert(res)
                     location.reload();
                 },
-                error: (err) => {
-                    console.log(err);
-                    alert("Error deleting invoice");
-                }
             })
         })
     </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#invoice-table').DataTable({
+                paging: true,
+                responsive: true,
+                pageLength: 10,
+                lengthMenu: [5, 10, 15],
+                scrollX: true,
+                fixedHeader: true,
+                autoWidth: true,
+                fixedColumns: {
+                    leftColumns: 1,
+                    rightColumns: 1
+                },
+                buttons: {
+                    className: 'btn btn-primary',
+                },
+                language: {
+                    searchPlaceholder: 'Search',
+                    "info": "<i class='fa fa-info-circle'></i> _START_ - _END_ of _TOTAL_",
+                    "infoEmpty": "<i class='fa fa-info-circle'></i> 0 of 0",
+                    "infoFiltered": "<i class='fa fa-filter'></i> (Filter from _MAX_ total)",
+                    paginate: {
+                        previous: '<i class="fas fa-angle-left"></i>',
+                        next: '<i class="fas fa-angle-right"></i>'
+                    },
+                },
+            });
+        });
+
+    </script>
+
 </body>
 
 </html>

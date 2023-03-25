@@ -22,3 +22,15 @@ body {
     font-size: 60px;
     text-align: center;
 }
+
+@media (max-height: 480px) {
+    .title {
+        padding-top: 100px;
+    }
+}
+
+@media (max-height: 400px) {
+    .title {
+        padding-top: 150px;
+    }
+}

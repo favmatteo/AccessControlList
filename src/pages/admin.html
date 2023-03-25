@@ -1,12 +1,13 @@
-<?php 
+<?php
 include("../scripts/php/lang.php");
 
 # Check if user is logged, and if not, redirect to login page
 use Kreait\Firebase\Exception\Auth\FailedToVerifySessionCookie;
-include ('../scripts/php/dbcon.php');
+
+include('../scripts/php/dbcon.php');
 include("../scripts/php/mysqlcon.php");
 
-if(!isset($_SESSION['session-cookie'])){
+if (!isset($_SESSION['session-cookie'])) {
     die(header("location: login.html"));
 } else {
     $sessionCookieString = $_SESSION['session-cookie'];
@@ -26,7 +27,7 @@ if(!isset($_SESSION['session-cookie'])){
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     $role = $row['name'];
-    if($role != "admin"){
+    if ($role != "admin") {
         die(header("location: dashboard.html"));
     }
 }
@@ -38,19 +39,23 @@ if(!isset($_SESSION['session-cookie'])){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard</title>
+    <title>
+        <?php echo _('ADMIN_PAGE') ?>
+    </title>
 
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap"
         rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdn.statically.io/gh/Loopple/loopple-public-assets/main/asteria-dashboard/css/nucleo-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+
     <link rel="stylesheet" href="../css/theme.css">
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/admin.css">
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../scripts/js/ajax/admin.js"></script>
+    <script src="../scripts/js/admin.js"></script>
 </head>
 
 <body class="g-sidenav-show">
@@ -89,22 +94,30 @@ if(!isset($_SESSION['session-cookie'])){
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1"><?php echo _('DASHBOARD') ?></span>
+                        <span class="nav-link-text ms-1">
+                            <?php echo _('DASHBOARD') ?>
+                        </span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="javascript:;">
                         <div
                             class="icon icon-shape icon-sm p-0 text-center me-2 d-flex align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
-                                <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-patch-check-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1"><?php echo _('ADMIN_PAGE') ?></span>
+                        <span class="nav-link-text ms-1">
+                            <?php echo _('ADMIN_PAGE') ?>
+                        </span>
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder"><?php echo _('ACCOUNT_PAGES') ?></h6>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder">
+                        <?php echo _('ACCOUNT_PAGES') ?>
+                    </h6>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="profile.html">
@@ -133,7 +146,9 @@ if(!isset($_SESSION['session-cookie'])){
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1"><?php echo _('PROFILE') ?></span>
+                        <span class="nav-link-text ms-1">
+                            <?php echo _('PROFILE') ?>
+                        </span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -160,7 +175,9 @@ if(!isset($_SESSION['session-cookie'])){
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1"><?php echo _('LOGOUT') ?></span>
+                        <span class="nav-link-text ms-1">
+                            <?php echo _('LOGOUT') ?>
+                        </span>
                     </a>
                 </li>
             </ul>
@@ -199,58 +216,59 @@ if(!isset($_SESSION['session-cookie'])){
         </nav>
         <main class="content">
             <div class="container-fluid pt-3">
-                <?php
-                    include("../scripts/php/mysqlcon.php");
-                    $sql = "SELECT * FROM acl.user";
-                    $result = $conn->query($sql);
+                <div class="table-responsive">
+                    <table class="table" id="user-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <?php echo _('NAME') ?>
+                                </th>
+                                <th>
+                                    <?php echo _('ROLE') ?>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                        include("../scripts/php/mysqlcon.php");
+                        $sql = "SELECT * FROM acl.user";
+                        $result = $conn->query($sql);
 
-                    $sql2 = "SELECT * FROM acl.roles";
-                    $result2 = $conn->query($sql2);
+                        $sql2 = "SELECT * FROM acl.roles";
+                        $result2 = $conn->query($sql2);
 
-                    $counter = 0;
 
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo '<div class="container-fluid pb-5">';
-                            echo '<form id="form' . $counter . '">';
-                            echo "
-                            <div class='row removable'>
-                                <div class='col-lg-6'>
-                                    <div class='form-group'>
-                                        <div class='input-group'>
-                                            <span type='text'>
-                                            {$row['name']} {$row['surname']}
-                                            </span>
-                                            <p style='display:none' id='user{$counter}'>{$row['id_user']}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            "; 
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<tr><td>';
+                                echo "{$row['name']} {$row['surname']}";
+                                echo '</td>';
 
-                            $sql2 = "SELECT * FROM acl.roles";
-                            $result2 = $conn->query($sql2);
-                            if ($result2->num_rows > 0) {
-                                echo "<div class='col-lg-6'>
-                                    <select class='form-select' name='role{$counter}' id='role{$counter}'>";
-                                while ($row2 = $result2->fetch_assoc()) {
-                                    if($row['id_role'] == $row2['id_role'])
-                                        echo "<option selected value='{$row2['id_role']}'>{$row2['name']}</option>";
-                                    else
-                                        echo "<option " . ($uid == $row['id_user'] ? 'disabled' : '') . " value='{$row2['id_role']}'>{$row2['name']}</option>";
-                                
+                                $sql2 = "SELECT * FROM acl.roles";
+                                $result2 = $conn->query($sql2);
+                                if ($result2->num_rows > 0) {
+                                    echo "<td>
+                                            <select class='form-select' onchange='onRolesChange({id: \"" . $row['id_user'] . "\", role: this.value})'>";
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                        if ($row['id_role'] == $row2['id_role'])
+                                            echo "<option selected value='{$row2['id_role']}'>{$row2['name']}</option>";
+                                        else
+                                            echo "<option " . ($uid == $row['id_user'] ? 'disabled' : '') . " value='{$row2['id_role']}'>{$row2['name']}</option>";
+                                    }
                                 }
+                                echo "</select>
+                                        </td></tr>";
                             }
-                            echo "</select>
-                                </div>
-                            </div>";
-
-                            echo '<input type="button" ' . ($uid == $row['id_user'] ? 'disabled' : '') . ' class="btn btn-primary w-100 form-button" name="submit" id="submit' . $counter . '"
-                                        value="' . _("UPDATE") . '" onclick="submitForm(' . $counter . ')">';
-                            echo '</form></div>';
-                            $counter++;
                         }
-                    }
-                    ?>
+                        
+
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+                <input type="button" class="btn btn-primary w-100 form-button" name="submit" id="submit"
+                    value="<?php echo _('UPDATE') ?>" onclick="submitForm()">
+                </form>
 
             </div>
         </main>
@@ -270,8 +288,8 @@ if(!isset($_SESSION['session-cookie'])){
     <script
         src="https://rawcdn.githack.com/Loopple/loopple-public-assets/f5029eba0dafd952ecdbf8fbbdd0aa9ae0d0abc1/asteria-dashboard/js/plugins/swiper.min.js"></script>
     <script src="https://loopple.s3.eu-west-3.amazonaws.com/asteria-dashboard/js/asteria-dashboard.min.js"></script>
-
-
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
 </body>
 

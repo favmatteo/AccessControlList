@@ -1,2 +1,4 @@
 .token
 .vscode/
+src/scripts/php/.mysql-password
+src/scripts/php/.credentials.json

@@ -30,7 +30,6 @@ try {
   $sessionCookieString = $auth->createSessionCookie($token, $oneWeek);
   $_SESSION['session-cookie'] = $sessionCookieString;
   echo "success";
-
 } catch (FailedToSignIn $e) {
   echo "<div class=\"alert alert-danger\" role=\"alert\">
             Wrong email or password

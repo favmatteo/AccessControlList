@@ -194,12 +194,18 @@ msgid "NEW_DESCRIPTION"
 msgstr "Nuova descrizione"
 
 msgid "ACCOUNT_PAGES"
-msgstr "Pagine account"
+msgstr "Pagina account"
 
 msgid "LINK_PHOTO"
 msgstr "Link foto"
 
-# Lingue
+msgid "RESET_PASSWORD"
+msgstr "Reimposta password"
+
+msgid "ROLE"
+msgstr "Ruolo"
+
+# Languages
 msgid "ENGLISH"
 msgstr "🇬🇧Inglese🇬🇧"
 

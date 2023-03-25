@@ -198,7 +198,13 @@ msgstr "Account Pages"
 msgid "LINK_PHOTO"
 msgstr "Link Photo"
 
-# Lingue
+msgid "RESET_PASSWORD"
+msgstr "Reset Password"
+
+msgid "ROLE"
+msgstr "Role"
+
+# Languages
 msgid "ENGLISH"
 msgstr "🇬🇧English🇬🇧"
 

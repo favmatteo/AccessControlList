@@ -15,7 +15,7 @@ include("../scripts/php/lang.php");
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../scripts/js/ajax/change-language.js"></script>
+    <script src="../scripts/js/change-language.js"></script>
 </head>
 
 <body>
@@ -32,43 +32,43 @@ include("../scripts/php/lang.php");
                 <div class="d-flex align-items-center">
                     <div id="registration">
                         <a class="btn btn-warning" href="login.html">
-                            <?php echo _('LOGIN')?>
+                            <?php echo _('LOGIN') ?>
                         </a>
                         <a class="btn btn-warning" href="signup.html">
-                            <?php echo _('SIGNUP')?>
+                            <?php echo _('SIGNUP') ?>
                         </a>
                     </div>
 
                     <div id="dashboard" style="display: none;">
                         <a class="btn btn-warning" href="dashboard.html">
-                            <?php echo _('DASHBOARD')?>
+                            <?php echo _('DASHBOARD') ?>
                         </a>
                         <a class="btn btn-warning" role='button' id="logout-btn">
-                            <?php echo _('LOGOUT')?>
+                            <?php echo _('LOGOUT') ?>
                         </a>
                     </div>
 
                     <div class="ms-3">
                         <select class='form-control' id="languageSelector" onchange="changeLanguage()">
                             <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='en_US.utf8'
-                                ? 'selected' : '' )?> value="en_US.utf8">
-                                <?php echo _('ENGLISH')?>
+                                ? 'selected' : '' ) ?> value="en_US.utf8">
+                                <?php echo _('ENGLISH') ?>
                             </option>
                             <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='it_IT.utf8'
-                                ? 'selected' : '' )?> value="it_IT.utf8">
-                                <?php echo _('ITALIAN')?>
+                                ? 'selected' : '' ) ?> value="it_IT.utf8">
+                                <?php echo _('ITALIAN') ?>
                             </option>
                             <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='es_ES.utf8'
-                                ? 'selected' : '' )?> value="es_ES.utf8">
-                                <?php echo _('SPANISH')?>
+                                ? 'selected' : '' ) ?> value="es_ES.utf8">
+                                <?php echo _('SPANISH') ?>
                             </option>
                             <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='fr_FR.utf8'
-                                ? 'selected' : '' )?> value="fr_FR.utf8">
-                                <?php echo _('FRENCH')?>
+                                ? 'selected' : '' ) ?> value="fr_FR.utf8">
+                                <?php echo _('FRENCH') ?>
                             </option>
                             <option <?php echo (isset($_SESSION['language']) && $_SESSION['language']=='de_DE.utf8'
-                                ? 'selected' : '' )?> value="de_DE.utf8">
-                                <?php echo _('GERMAN')?>
+                                ? 'selected' : '' ) ?> value="de_DE.utf8">
+                                <?php echo _('GERMAN') ?>
                             </option>
                         </select>
                     </div>
@@ -127,10 +127,9 @@ include("../scripts/php/lang.php");
             data: {
                 language: lang,
             },
-            success: function (res) {
-            }
+            success: function (res) { }
         });
-    }) 
+    })
 </script>
 
 </html>

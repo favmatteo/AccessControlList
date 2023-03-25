@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include ('dbcon.php');
+include('dbcon.php');
 
 $email = $_POST['email'];
 
