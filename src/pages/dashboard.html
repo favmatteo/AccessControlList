@@ -37,6 +37,17 @@ if (!isset($_SESSION['session-cookie'])) {
     $_SESSION['photoProfile'] = $row['photo'];
 
     $_SESSION['isCarouselActive'] = true;
+
+    // get crud permission
+    $sql = "select p.pcreate, p.pread, p.pdelete, p.pupdate
+    from user u
+    inner join dispose d on u.id_role = d.id_role
+    inner join permission p on d.id_permission = p.id_permission
+    where u.id_user = '". $_SESSION['user']->uid . "'";
+
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $_SESSION['permission'] = $row;
 }
 ?>
 
@@ -236,8 +247,8 @@ if (!isset($_SESSION['session-cookie'])) {
                                     data-bs-ride="carousel">
                                     <div class="carousel-inner min-height-300 h-100">
                                         <?php
-                                        $role = $_SESSION['role'];
-                                        if ($role == 'admin' || $role == "commercial") {
+                                        // CREATE INVOICE
+                                        if ($_SESSION['permission']['pcreate']) {
                                             $activate = $_SESSION['isCarouselActive'];
                                             $_SESSION['isCarouselActive'] = false;
                                             echo '<div class="carousel-item min-height-300 h-100 bg-cover ' . ($activate ? "active" : "") . '" role="button"
@@ -253,9 +264,8 @@ if (!isset($_SESSION['session-cookie'])) {
                                         }
                                         ?>
                                         <?php
-                                        $role = $_SESSION['role'];
-
-                                        if ($role == 'admin' || $role == "commercial" || $role == 'Area manager') {
+                                        // SHOW INVOICE
+                                        if ($_SESSION['permission']['pread']) {
                                             $activate = $_SESSION['isCarouselActive'];
                                             $_SESSION['isCarouselActive'] = false;
                                             echo '<div class="carousel-item min-height-300 h-100 bg-cover ' . ($activate ? "active" : "") . '" data-bs-interval="3000"
@@ -271,9 +281,8 @@ if (!isset($_SESSION['session-cookie'])) {
                                         }
                                         ?>
                                         <?php
-                                        $role = $_SESSION['role'];
-
-                                        if ($role == 'admin' || $role == "commercial" || $role == 'Area manager' || $role == "Administration") {
+                                        // UPDATE INVOICE
+                                        if ($_SESSION['permission']['pupdate']) {
                                             $activate = $_SESSION['isCarouselActive'];
                                             $_SESSION['isCarouselActive'] = false;
                                             echo '<div class="carousel-item min-height-300 h-100 bg-cover' . ($activate ? "active" : "") . '" data-bs-interval="3000"
@@ -460,6 +469,7 @@ if (!isset($_SESSION['session-cookie'])) {
                                 <tbody>
                                     <?php
                                     include("../scripts/php/mysqlcon.php");
+                                
                                     if($_SESSION['role'] == 'commercial'){
                                         $sql = "SELECT * FROM acl.invoice WHERE invoice.id_user = '" . $_SESSION['user']->uid . "'";
                                     }else{
@@ -561,10 +571,16 @@ if (!isset($_SESSION['session-cookie'])) {
                                                 ?>
                                             </select>
                                         </div>
-                                        <div class="col-lg-2">
-                                            <input type="button" class="btn btn-danger w-100" id="delete-invoice-btn"
-                                                value="<?php echo _('DELETE') ?>">
-                                        </div>
+                                        <?php
+                                        if($_SESSION['permission']['pdelete']){
+                                            echo '
+                                            <div class="col-lg-2">
+                                                <input type="button" class="btn btn-danger w-100" id="delete-invoice-btn"
+                                                    value="' . _('DELETE') . '">
+                                            </div>
+                                            ';
+                                        }
+                                        ?>
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-lg-6">
