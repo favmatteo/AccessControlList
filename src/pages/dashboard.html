@@ -382,24 +382,41 @@ if (!isset($_SESSION['session-cookie'])) {
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group">
-                                            <label for="invoice-customer" class="form-control-label">
-                                                <?php echo _('USER_ASSIGNED_INVOICE') ?>
-                                            </label>
-                                            <select class="form-select" id="invoice-customer">
-                                                <?php
-                                                include("../scripts/php/mysqlcon.php");
-                                                $sql = "SELECT * FROM acl.customer";
-                                                $result = $conn->query($sql);
-                                                if ($result->num_rows > 0) {
-                                                    while ($row = $result->fetch_assoc()) {
-                                                        echo "<option value='" . $row['id_customer'] . "'>" . ($row['first_name'] . " " . $row['surname'] . " - " . $row['email'])  . "</option>";
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="invoice-customer" class="form-control-label">
+                                                    <?php echo _('USER_ASSIGNED_INVOICE') ?>
+                                                </label>
+                                                <select class="form-select" id="invoice-customer">
+                                                    <?php
+                                                    include("../scripts/php/mysqlcon.php");
+                                                    $sql = "SELECT * FROM acl.customer";
+                                                    $result = $conn->query($sql);
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value='" . $row['id_customer'] . "'>" . ($row['first_name'] . " " . $row['surname'] . " - " . $row['email'])  . "</option>";
+                                                        }
+                                                    } else {
+                                                        echo "<option value='null'>----</option>";
                                                     }
-                                                } else {
-                                                    echo "<option value='null'>----</option>";
-                                                }
-                                                ?>
-                                            </select>
+                                                    ?>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="invoice-zone" class="form-control-label">
+                                                    <?php echo _('ZONE_INVOICE') ?>
+                                                </label>
+                                                <select class="form-select" id="invoice-zone">
+                                                    <option value="north-east"><?php echo _('NORTH_EAST') ?></option>
+                                                    <option value="north-west"><?php echo _('NORTH_WEST') ?></option>
+                                                    <option value="center"><?php echo _('CENTER') ?></option>
+                                                    <option value="southern"><?php echo _('SOUTHERN') ?></option>
+                                                </select>
+
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -712,7 +729,8 @@ if (!isset($_SESSION['session-cookie'])) {
                     invoice_type: $("#invoice-type").val(),
                     invoice_date: $("#invoice-date").val(),
                     invoice_customer: $("#invoice-customer").val(),
-                    invoice_description: $("#invoice-description").val()
+                    invoice_description: $("#invoice-description").val(),
+                    invoice_zone: $("#invoice-zone").val()
                 },
                 success: (res) => {
                     hideAll();

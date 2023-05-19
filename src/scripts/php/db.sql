@@ -1,3 +1,6 @@
+# Obsolete database
+#!TODO: update this file @Riccardo Pellarin or @Alex Grandi
+
 USE acl;
 
 CREATE TABLE

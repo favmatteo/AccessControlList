@@ -204,6 +204,18 @@ msgstr "Réinitialiser le mot de passe"
 msgid "ROLE"
 msgstr "Rôle"
 
+msgid "NORTH_EAST"
+msgstr "Nord Est"
+
+msgid "NORTH_WEST"
+msgstr "Nord Ouest"
+
+msgid "CENTER"
+msgstr "Centre"
+
+msgid "SOUTHERN"
+msgstr "Sud"
+
 # Languages
 msgid "ENGLISH"
 msgstr "🇬🇧Anglais🇬🇧"

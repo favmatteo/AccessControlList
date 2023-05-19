@@ -4,9 +4,9 @@ $password_file = fopen(__DIR__ . '/.mysql-password', 'r');
 $pass = trim(fgets($password_file));
 fclose($password_file);
 
-$host = 'dev.favmatteo.me';
-$user = 'root';
-$port = 9906;
+$host = 'database-do-user-13540651-0.b.db.ondigitalocean.com';
+$user = 'doadmin';
+$port = 25060;
 $db = 'acl';
 $conn = new mysqli($host, $user, $pass, $db, $port);
 

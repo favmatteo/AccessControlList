@@ -16,13 +16,16 @@ $title = $_POST['invoice_title'];
 $typology = $_POST['invoice_type'];
 $description = $_POST['invoice_description'];
 $invoice_customer = $_POST['invoice_customer'];
+$zone = $_POST['invoice_zone'];
 
 $user = $_SESSION['user'];
 // Convert data dd-mm-yyyy to mysql date
 $date = str_replace('/', '-', $date);
 $date = date("Y-m-d", strtotime($date));
 
-$SQL = "INSERT INTO acl.invoice (date, amount, title, typology, description, id_user, id_customer) VALUES ('$date', '$amount', '$title', '$typology', '$description', '$user->uid', $invoice_customer);";
+
+
+$SQL = "INSERT INTO acl.invoice (date, amount, title, typology, description, zone, id_user, id_customer) VALUES ('$date', '$amount', '$title', '$typology', '$description', '$zone', '$user->uid', $invoice_customer);";
 $result = $conn->query($SQL);
 if ($result) {
     echo "Invoice created";

@@ -204,6 +204,18 @@ msgstr "Reset Password"
 msgid "ROLE"
 msgstr "Role"
 
+msgid "NORTH_EAST"
+msgstr "North East"
+
+msgid "NORTH_WEST"
+msgstr "North West"
+
+msgid "CENTER"
+msgstr "Center"
+
+msgid "SOUTHERN"
+msgstr "Southern"
+
 # Languages
 msgid "ENGLISH"
 msgstr "🇬🇧English🇬🇧"

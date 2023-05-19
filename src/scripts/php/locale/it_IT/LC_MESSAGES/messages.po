@@ -205,6 +205,21 @@ msgstr "Reimposta password"
 msgid "ROLE"
 msgstr "Ruolo"
 
+msgid "ZONE_INVOICE"
+msgstr "Zona fattura"
+
+msgid "NORTH_EAST"
+msgstr "Nord Est"
+
+msgid "NORTH_WEST"
+msgstr "Nord Ovest"
+
+msgid "CENTER"
+msgstr "Centro"
+
+msgid "SOUTHERN"
+msgstr "Sud"
+
 # Languages
 msgid "ENGLISH"
 msgstr "🇬🇧Inglese🇬🇧"
