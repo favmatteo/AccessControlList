@@ -226,6 +226,9 @@ if (!isset($_SESSION['session-cookie'])) {
                                 <th>
                                     <?php echo _('ROLE') ?>
                                 </th>
+                                <th>
+                                    <?php echo _('ZONE') ?>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -233,10 +236,6 @@ if (!isset($_SESSION['session-cookie'])) {
                         include("../scripts/php/mysqlcon.php");
                         $sql = "SELECT * FROM acl.user";
                         $result = $conn->query($sql);
-
-                        $sql2 = "SELECT * FROM acl.roles";
-                        $result2 = $conn->query($sql2);
-
 
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
@@ -257,11 +256,23 @@ if (!isset($_SESSION['session-cookie'])) {
                                     }
                                 }
                                 echo "</select>
-                                        </td></tr>";
+                                        </td>";
+
+                                echo "<td><select class='form-select' onchange='onZoneChange({id: \"" . $row['id_user'] . "\", zone: this.value})'>";
+                                $zones = ["north-west", "north-east", "southern", "center", "all"];
+                                foreach ($zones as $zone) {
+                                    if ($row['zone'] == $zone)
+                                        echo "<option selected value='{$zone}'>{$zone}</option>";
+                                    else
+                                        echo "<option value='{$zone}'>{$zone}</option>";
+                                }
+                                
+                                echo $row['zone'];
+                                echo "</select></td>";
+
+                                echo "</tr>";
                             }
                         }
-                        
-
                         ?>
                         </tbody>
                     </table>

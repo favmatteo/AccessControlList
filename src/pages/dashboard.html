@@ -29,6 +29,13 @@ if (!isset($_SESSION['session-cookie'])) {
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     $_SESSION['role'] = $row['name'];
+    
+    # Get the zone of the user
+    $sql = "SELECT zone FROM user WHERE id_user = '$uid'";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $_SESSION['zone'] = $row['zone'];
+
 
     // get the photo
     $sql = "SELECT photo FROM user WHERE id_user = '$uid'";
@@ -407,7 +414,7 @@ if (!isset($_SESSION['session-cookie'])) {
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="invoice-zone" class="form-control-label">
-                                                    <?php echo _('INVOICE_ZONE') ?>
+                                                    <?php echo _('INVOICE') ?>
                                                 </label>
                                                 <select class="form-select" id="invoice-zone">
                                                     <option value="north-east"><?php echo _('NORTH_EAST') ?></option>
@@ -492,6 +499,8 @@ if (!isset($_SESSION['session-cookie'])) {
                                 
                                     if($_SESSION['role'] == 'commercial'){
                                         $sql = "SELECT * FROM acl.invoice WHERE invoice.id_user = '" . $_SESSION['user']->uid . "'";
+                                    }else if($_SESSION['role'] == 'Area manager' && $_SESSION['zone'] != 'all'){
+                                        $sql = "SELECT * FROM acl.invoice WHERE invoice.zone = '" . $_SESSION['zone'] . "'";
                                     }else{
                                         $sql = "SELECT * FROM acl.invoice";
                                     }
