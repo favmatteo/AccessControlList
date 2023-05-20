@@ -407,7 +407,7 @@ if (!isset($_SESSION['session-cookie'])) {
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="invoice-zone" class="form-control-label">
-                                                    <?php echo _('ZONE_INVOICE') ?>
+                                                    <?php echo _('INVOICE_ZONE') ?>
                                                 </label>
                                                 <select class="form-select" id="invoice-zone">
                                                     <option value="north-east"><?php echo _('NORTH_EAST') ?></option>
@@ -476,6 +476,9 @@ if (!isset($_SESSION['session-cookie'])) {
                                             <?php echo _('DESCRIPTION') ?>
                                         </th>
                                         <th scope="col">
+                                            <?php echo _('ZONE') ?>
+                                        </th>
+                                        <th scope="col">
                                             <?php echo _('CUSTOMER') ?>
                                         </th>
                                         <th scope="col">
@@ -502,6 +505,7 @@ if (!isset($_SESSION['session-cookie'])) {
                                             echo "<td>" . $row['title'] . "</td>";
                                             echo "<td>" . $row['typology'] . "</td>";
                                             echo "<td>" . $row['description'] . "</td>";
+                                            echo "<td>" . $row['zone'] . "</td>";
 
                                             // get customer name
                                             $sql2 = "SELECT * FROM acl.customer WHERE id_customer = " . "'" . $row['id_customer'] . "'";

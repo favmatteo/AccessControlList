@@ -204,6 +204,12 @@ msgstr "Passwort zurücksetzen"
 msgid "ROLE"
 msgstr "Rolle"
 
+msgid "INVOICE_ZONE"
+msgstr "Rechnungszone"
+
+msgid "ZONE"
+msgstr "Zone"
+
 msgid "NORTH_EAST"
 msgstr "Nord Osten"
 

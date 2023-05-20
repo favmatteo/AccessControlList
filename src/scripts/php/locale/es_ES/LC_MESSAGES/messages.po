@@ -204,6 +204,12 @@ msgstr "Restablecer la contraseña"
 msgid "ROLE"
 msgstr "Rol"
 
+msgid "INVOICE_ZONE"
+msgstr "Zona de la factura"
+
+msgid "ZONE"
+msgstr "Zone"
+
 msgid "NORTH_EAST"
 msgstr "Nord Est"
 
