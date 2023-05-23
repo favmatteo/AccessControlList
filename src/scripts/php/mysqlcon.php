@@ -4,7 +4,7 @@ $password_file = fopen(__DIR__ . '/.mysql-password', 'r');
 $pass = trim(fgets($password_file));
 fclose($password_file);
 
-$host = 'db-mysql-fra1-04517-do-user-13540651-0.b.db.ondigitalocean.com';
+$host = 'database-do-user-13540651-0.b.db.ondigitalocean.com';
 $user = 'doadmin';
 $port = 25060;
 $db = 'acl';

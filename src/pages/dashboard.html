@@ -29,6 +29,13 @@ if (!isset($_SESSION['session-cookie'])) {
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     $_SESSION['role'] = $row['name'];
+    
+    # Get the zone of the user
+    $sql = "SELECT zone FROM user WHERE id_user = '$uid'";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $_SESSION['zone'] = $row['zone'];
+
 
     // get the photo
     $sql = "SELECT photo FROM user WHERE id_user = '$uid'";
@@ -37,6 +44,17 @@ if (!isset($_SESSION['session-cookie'])) {
     $_SESSION['photoProfile'] = $row['photo'];
 
     $_SESSION['isCarouselActive'] = true;
+
+    // get crud permission
+    $sql = "select p.pcreate, p.pread, p.pdelete, p.pupdate
+    from user u
+    inner join dispose d on u.id_role = d.id_role
+    inner join permission p on d.id_permission = p.id_permission
+    where u.id_user = '". $_SESSION['user']->uid . "'";
+
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $_SESSION['permission'] = $row;
 }
 ?>
 
@@ -236,8 +254,8 @@ if (!isset($_SESSION['session-cookie'])) {
                                     data-bs-ride="carousel">
                                     <div class="carousel-inner min-height-300 h-100">
                                         <?php
-                                        $role = $_SESSION['role'];
-                                        if ($role == 'admin' || $role == "commercial") {
+                                        // CREATE INVOICE
+                                        if ($_SESSION['permission']['pcreate']) {
                                             $activate = $_SESSION['isCarouselActive'];
                                             $_SESSION['isCarouselActive'] = false;
                                             echo '<div class="carousel-item min-height-300 h-100 bg-cover ' . ($activate ? "active" : "") . '" role="button"
@@ -253,9 +271,8 @@ if (!isset($_SESSION['session-cookie'])) {
                                         }
                                         ?>
                                         <?php
-                                        $role = $_SESSION['role'];
-
-                                        if ($role == 'admin' || $role == "commercial" || $role == 'Area manager') {
+                                        // SHOW INVOICE
+                                        if ($_SESSION['permission']['pread']) {
                                             $activate = $_SESSION['isCarouselActive'];
                                             $_SESSION['isCarouselActive'] = false;
                                             echo '<div class="carousel-item min-height-300 h-100 bg-cover ' . ($activate ? "active" : "") . '" data-bs-interval="3000"
@@ -271,9 +288,8 @@ if (!isset($_SESSION['session-cookie'])) {
                                         }
                                         ?>
                                         <?php
-                                        $role = $_SESSION['role'];
-
-                                        if ($role == 'admin' || $role == "commercial" || $role == 'Area manager' || $role == "Administration") {
+                                        // UPDATE INVOICE
+                                        if ($_SESSION['permission']['pupdate']) {
                                             $activate = $_SESSION['isCarouselActive'];
                                             $_SESSION['isCarouselActive'] = false;
                                             echo '<div class="carousel-item min-height-300 h-100 bg-cover' . ($activate ? "active" : "") . '" data-bs-interval="3000"
@@ -373,24 +389,41 @@ if (!isset($_SESSION['session-cookie'])) {
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group">
-                                            <label for="invoice-customer" class="form-control-label">
-                                                <?php echo _('USER_ASSIGNED_INVOICE') ?>
-                                            </label>
-                                            <select class="form-select" id="invoice-customer">
-                                                <?php
-                                                include("../scripts/php/mysqlcon.php");
-                                                $sql = "SELECT * FROM acl.customer";
-                                                $result = $conn->query($sql);
-                                                if ($result->num_rows > 0) {
-                                                    while ($row = $result->fetch_assoc()) {
-                                                        echo "<option value='" . $row['id_customer'] . "'>" . ($row['first_name'] . " " . $row['surname'] . " - " . $row['email'])  . "</option>";
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="invoice-customer" class="form-control-label">
+                                                    <?php echo _('USER_ASSIGNED_INVOICE') ?>
+                                                </label>
+                                                <select class="form-select" id="invoice-customer">
+                                                    <?php
+                                                    include("../scripts/php/mysqlcon.php");
+                                                    $sql = "SELECT * FROM acl.customer";
+                                                    $result = $conn->query($sql);
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value='" . $row['id_customer'] . "'>" . ($row['first_name'] . " " . $row['surname'] . " - " . $row['email'])  . "</option>";
+                                                        }
+                                                    } else {
+                                                        echo "<option value='null'>----</option>";
                                                     }
-                                                } else {
-                                                    echo "<option value='null'>----</option>";
-                                                }
-                                                ?>
-                                            </select>
+                                                    ?>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="invoice-zone" class="form-control-label">
+                                                    <?php echo _('INVOICE') ?>
+                                                </label>
+                                                <select class="form-select" id="invoice-zone">
+                                                    <option value="north-east"><?php echo _('NORTH_EAST') ?></option>
+                                                    <option value="north-west"><?php echo _('NORTH_WEST') ?></option>
+                                                    <option value="center"><?php echo _('CENTER') ?></option>
+                                                    <option value="southern"><?php echo _('SOUTHERN') ?></option>
+                                                </select>
+
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -450,6 +483,9 @@ if (!isset($_SESSION['session-cookie'])) {
                                             <?php echo _('DESCRIPTION') ?>
                                         </th>
                                         <th scope="col">
+                                            <?php echo _('ZONE') ?>
+                                        </th>
+                                        <th scope="col">
                                             <?php echo _('CUSTOMER') ?>
                                         </th>
                                         <th scope="col">
@@ -460,8 +496,11 @@ if (!isset($_SESSION['session-cookie'])) {
                                 <tbody>
                                     <?php
                                     include("../scripts/php/mysqlcon.php");
+                                
                                     if($_SESSION['role'] == 'commercial'){
                                         $sql = "SELECT * FROM acl.invoice WHERE invoice.id_user = '" . $_SESSION['user']->uid . "'";
+                                    }else if($_SESSION['role'] == 'Area manager' && $_SESSION['zone'] != 'all'){
+                                        $sql = "SELECT * FROM acl.invoice WHERE invoice.zone = '" . $_SESSION['zone'] . "'";
                                     }else{
                                         $sql = "SELECT * FROM acl.invoice";
                                     }
@@ -475,6 +514,7 @@ if (!isset($_SESSION['session-cookie'])) {
                                             echo "<td>" . $row['title'] . "</td>";
                                             echo "<td>" . $row['typology'] . "</td>";
                                             echo "<td>" . $row['description'] . "</td>";
+                                            echo "<td>" . $row['zone'] . "</td>";
 
                                             // get customer name
                                             $sql2 = "SELECT * FROM acl.customer WHERE id_customer = " . "'" . $row['id_customer'] . "'";
@@ -561,10 +601,16 @@ if (!isset($_SESSION['session-cookie'])) {
                                                 ?>
                                             </select>
                                         </div>
-                                        <div class="col-lg-2">
-                                            <input type="button" class="btn btn-danger w-100" id="delete-invoice-btn"
-                                                value="<?php echo _('DELETE') ?>">
-                                        </div>
+                                        <?php
+                                        if($_SESSION['permission']['pdelete']){
+                                            echo '
+                                            <div class="col-lg-2">
+                                                <input type="button" class="btn btn-danger w-100" id="delete-invoice-btn"
+                                                    value="' . _('DELETE') . '">
+                                            </div>
+                                            ';
+                                        }
+                                        ?>
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-lg-6">
@@ -696,7 +742,8 @@ if (!isset($_SESSION['session-cookie'])) {
                     invoice_type: $("#invoice-type").val(),
                     invoice_date: $("#invoice-date").val(),
                     invoice_customer: $("#invoice-customer").val(),
-                    invoice_description: $("#invoice-description").val()
+                    invoice_description: $("#invoice-description").val(),
+                    invoice_zone: $("#invoice-zone").val()
                 },
                 success: (res) => {
                     hideAll();
