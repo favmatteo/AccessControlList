@@ -1,3 +1,8 @@
+⚠️ Disclaimer
+
+This repository contains academic code.
+It prioritizes clarity and assignment requirements over scalability, robustness, and production best practices.
+
 # AccessControlList
 
 ## Create the file .mysql-password in /src/scripts/php/
